@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benny Unger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      min-height: 100vh;
+      background: #ffffff;
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+      cursor: none;
+    }
+
+    #canvas {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      cursor: none;
+    }
+
+    #canvas.panning { cursor: none; }
+
+    #custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      width: 48px;
+      height: 48px;
+      transform: translate(-8px, -10px);
+      will-change: left, top;
+    }
+
+    /* Sticker layer — only this gets zoomed */
+    #sticker-layer {
+      position: absolute;
+      inset: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    /* Header — outside sticker-layer, unaffected by zoom */
+    .header-sticker {
+      position: absolute;
+      top: 3vh;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1deg);
+      background: #fff176;
+      padding: clamp(10px, 1.5vh, 14px) clamp(20px, 4vw, 36px) clamp(12px, 1.8vh, 16px);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0px #f9a825, 0 8px 24px rgba(0,0,0,0.15);
+      z-index: 20;
+      white-space: nowrap;
+      cursor: none;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .header-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(22px, 5.5vw, 36px);
+      color: #c1440e;
+      display: block;
+      letter-spacing: -2px;
+    }
+
+    .header-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(9px, 2vw, 14px);
+      color: #e8560a;
+      display: block;
+      letter-spacing: clamp(1px, 0.4vw, 2px);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .header-subtitle-card {
+      position: absolute;
+      top: calc(3vh + 110px);
+      left: 50%;
+      transform: translateX(-50%) rotate(0.5deg);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(9px, 2vw, 13px);
+      color: #e8560a;
+      letter-spacing: clamp(0.5px, 0.3vw, 1.5px);
+      text-transform: uppercase;
+      white-space: nowrap;
+      direction: ltr;
+      z-index: 20;
+      background: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      box-shadow: none;
+    }
+
+    /* Sticker base */
+    .sticker {
+      position: absolute;
+      cursor: none;
+      z-index: 5;
+      transition: filter 0.15s, transform 0.15s;
+    }
+
+    .sticker:active { cursor: none; }
+
+    .sticker.dragging {
+      z-index: 100;
+      filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.18)) !important;
+      transform: scale(1.06) rotate(0deg) !important;
+      transition: none;
+    }
+
+    /* PNG sticker */
+    .sticker-img {
+      width: min(190px, 44vw);
+      height: min(190px, 44vw);
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.10));
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Cursor tooltip */
+    #cursor-tooltip {
+      position: fixed;
+      background: #fff176;
+      color: #e8560a;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 2px 2px 0px #f9a825, 0 4px 12px rgba(0,0,0,0.1);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 9999;
+      transform: translate(-50%, 32px);
+    }
+
+    /* Controls */
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    #zoom-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .ctrl-btn {
+      background: #fff176;
+      border: none;
+      border-radius: 100px;
+      padding: 9px 18px;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #e8560a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: none;
+      box-shadow: 2px 2px 0px #f9a825, 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.15s;
+    }
+
+    .ctrl-btn:hover { transform: translateY(-2px); }
+    .ctrl-btn:active { transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<div id="canvas">
+
+  <!-- Header — not inside sticker-layer, immune to zoom -->
+  <div class="header-sticker">
+    <span class="header-name">Benny Unger</span>
+    <span class="header-title">Product Builder</span>
+  </div>
+  <div class="header-subtitle-card">
+    Play and move around the stickers! just drag and move them.
+  </div>
+
+  <!-- Sticker layer — this gets zoomed -->
+  <div id="sticker-layer">
+
+    <div class="sticker" id="s1" data-label="Design" style="top:22vh; left:54vw; transform:rotate(-3deg)">
+      <img class="sticker-img" src="Designer/small/Design.webp" alt="Design" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s2" data-label="Reading" style="top:22vh; left:24vw; transform:rotate(2deg)">
+      <img class="sticker-img" src="Designer/small/Reading.webp" alt="Reading" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s3" data-label="Yoga" style="top:60vh; left:54vw; transform:rotate(3deg)">
+      <img class="sticker-img" src="Designer/small/Yoga.webp" alt="Yoga" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s4" data-label="Sleeping" style="top:60vh; left:24vw; transform:rotate(-2deg)">
+      <img class="sticker-img" src="Designer/small/Sleeping.webp" alt="Sleeping" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s5" data-label="Chasing" style="top:40vh; left:38vw; transform:rotate(1.5deg)">
+      <img class="sticker-img" src="Designer/small/Chasing.webp" alt="Chasing" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s6" data-label="Thinking" style="top:34vh; left:8vw; transform:rotate(-2deg)">
+      <img class="sticker-img" src="Designer/small/Thinking.webp" alt="Thinking" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s7" data-label="Figma" style="top:32vh; left:70vw; transform:rotate(2.5deg)">
+      <img class="sticker-img" src="Designer/small/Figma.webp" alt="Figma" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s8" data-label="Painting" style="top:72vh; left:12vw; transform:rotate(1deg)">
+      <img class="sticker-img" src="Designer/small/Painting.webp" alt="Painting" draggable="false" />
+    </div>
+
+    <div class="sticker" id="s9" data-label="Conductor" style="top:70vh; left:68vw; transform:rotate(-1.5deg)">
+      <img class="sticker-img" src="Designer/small/Condacting.webp" alt="Conductor" draggable="false" />
+    </div>
+
+  </div><!-- /sticker-layer -->
+
+</div>
+
+<img id="custom-cursor" src="Cursor/SMALL.svg" alt="" />
+<div id="cursor-tooltip"></div>
+<div id="controls">
+  <div id="zoom-btns">
+    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(1.2, window.innerWidth/2, window.innerHeight/2)" style="display:flex;align-items:center;justify-content:center;"><img src="icons/Plus.svg" style="width:14px;height:14px;" /></button>
+    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(0.8, window.innerWidth/2, window.innerHeight/2)" style="display:flex;align-items:center;justify-content:center;"><img src="icons/Minus.svg" style="width:14px;height:14px;" /></button>
+  </div>
+  <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="resetPositions()" style="display:flex;align-items:center;gap:6px;"><img src="icons/Refine.svg" style="width:14px;height:14px;" /> Reset</button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'sticker-positions-v3';
+
+  // ── Zoom state ──
+  let scale = 1, tx = 0, ty = 0;
+  const layer = document.getElementById('sticker-layer');
+
+  function applyTransform() {
+    layer.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  }
+
+  function applyZoom(factor, cx, cy) {
+    const newScale = Math.min(Math.max(scale * factor, 0.3), 3);
+    const r = newScale / scale;
+    tx = cx - (cx - tx) * r;
+    ty = cy - (cy - ty) * r;
+    scale = newScale;
+    applyTransform();
+  }
+
+  // Wheel: pinch → zoom, scroll → pan
+  document.getElementById('canvas').addEventListener('wheel', e => {
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) {
+      applyZoom(e.deltaY < 0 ? 1.1 : 0.9, e.clientX, e.clientY);
+    } else {
+      tx -= e.deltaX;
+      ty -= e.deltaY;
+      applyTransform();
+    }
+  }, { passive: false });
+
+  // ── Coordinate helpers ──
+  // Convert screen px → layer (CSS) px
+  function toLayer(sx, sy) {
+    return { x: (sx - tx) / scale, y: (sy - ty) / scale };
+  }
+
+  // ── Positions ──
+  function savePositions() {
+    const pos = {};
+    document.querySelectorAll('.sticker').forEach(el => {
+      const l = parseFloat(el.style.left);
+      const t = parseFloat(el.style.top);
+      if (!isNaN(l) && !isNaN(t)) {
+        pos[el.id] = {
+          left: (l / window.innerWidth  * 100).toFixed(2) + 'vw',
+          top:  (t / window.innerHeight * 100).toFixed(2) + 'vh',
+          transform: el.style.transform,
+        };
+      }
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(pos));
+  }
+
+  function loadPositions() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const pos = JSON.parse(saved);
+    document.querySelectorAll('.sticker').forEach(el => {
+      if (pos[el.id]) {
+        el.style.left      = pos[el.id].left  || '';
+        el.style.top       = pos[el.id].top   || '';
+        el.style.right     = '';
+        el.style.transform = pos[el.id].transform || '';
+      }
+    });
+  }
+
+  function resetPositions() {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+
+  // ── Pan ──
+  let panning = false;
+  let panStartX = 0, panStartY = 0, panTx = 0, panTy = 0;
+  const canvas = document.getElementById('canvas');
+
+  canvas.addEventListener('mousedown', e => {
+    if (e.target.closest('.sticker')) return;
+    panning = true;
+    panStartX = e.clientX;
+    panStartY = e.clientY;
+    panTx = tx;
+    panTy = ty;
+    canvas.classList.add('panning');
+  });
+
+  // ── Drag ──
+  let dragging = null;
+  let offsetX = 0, offsetY = 0;
+
+  function startDrag(sticker, clientX, clientY) {
+    dragging = sticker;
+    tooltip.style.opacity = '0';
+    sticker.classList.add('dragging');
+    const rect = sticker.getBoundingClientRect();
+    // Offset stays in screen coords
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+    // Convert current screen position to layer coords
+    const lp = toLayer(rect.left, rect.top);
+    sticker.style.left  = lp.x + 'px';
+    sticker.style.right = '';
+    sticker.style.top   = lp.y + 'px';
+  }
+
+  function moveDrag(clientX, clientY) {
+    if (!dragging) return;
+    const lp = toLayer(clientX - offsetX, clientY - offsetY);
+    dragging.style.left = lp.x + 'px';
+    dragging.style.top  = lp.y + 'px';
+  }
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging.classList.remove('dragging');
+    savePositions();
+    dragging = null;
+    customCursor.src = 'Cursor/SMALL.svg';
+  }
+
+  // ── Pinch zoom (mobile) ──
+  let lastPinchDist = null;
+
+  function pinchDist(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  let touchPanStart = null;
+
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length === 2) {
+      lastPinchDist = pinchDist(e.touches);
+      touchPanStart = null;
+    } else if (e.touches.length === 1 && !dragging) {
+      if (!e.target.closest('.sticker')) {
+        touchPanStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, tx, ty };
+      }
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      const dist = pinchDist(e.touches);
+      const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      if (lastPinchDist) applyZoom(dist / lastPinchDist, cx, cy);
+      lastPinchDist = dist;
+    } else if (e.touches.length === 1) {
+      if (dragging) {
+        moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+      } else if (touchPanStart) {
+        tx = touchPanStart.tx + (e.touches[0].clientX - touchPanStart.x);
+        ty = touchPanStart.ty + (e.touches[0].clientY - touchPanStart.y);
+        applyTransform();
+      }
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchend', e => {
+    if (e.touches.length < 2) lastPinchDist = null;
+    if (e.touches.length === 0) { endDrag(); touchPanStart = null; }
+  });
+
+  // ── Tooltip ──
+  const tooltip = document.getElementById('cursor-tooltip');
+
+  document.querySelectorAll('.sticker').forEach(sticker => {
+    sticker.addEventListener('mouseenter', () => {
+      if (dragging) return;
+      tooltip.textContent = sticker.dataset.label || '';
+      tooltip.style.opacity = '1';
+      customCursor.src = 'Cursor/Hand-Moove.svg';
+    });
+    sticker.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+      if (!dragging) customCursor.src = 'Cursor/SMALL.svg';
+    });
+    sticker.addEventListener('mousedown', e => {
+      e.preventDefault();
+      customCursor.src = 'Cursor/Hand-Grab.svg';
+      startDrag(sticker, e.clientX, e.clientY);
+    });
+    sticker.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        e.preventDefault();
+        startDrag(sticker, e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: false });
+  });
+
+  // ── Single unified mousemove via rAF ──
+  let mouseX = 0, mouseY = 0, rafId = null;
+  const customCursor = document.getElementById('custom-cursor');
+
+  function onFrame() {
+    rafId = null;
+    customCursor.style.left = mouseX + 'px';
+    customCursor.style.top  = mouseY + 'px';
+    tooltip.style.left = (mouseX + 16) + 'px';
+    tooltip.style.top  = mouseY + 'px';
+    if (panning) {
+      tx = panTx + (mouseX - panStartX);
+      ty = panTy + (mouseY - panStartY);
+      applyTransform();
+    }
+    if (dragging) {
+      const lp = toLayer(mouseX - offsetX, mouseY - offsetY);
+      dragging.style.left = lp.x + 'px';
+      dragging.style.top  = lp.y + 'px';
+    }
+  }
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!rafId) rafId = requestAnimationFrame(onFrame);
+  });
+
+  document.addEventListener('mouseup', () => {
+    endDrag();
+    panning = false;
+    canvas.classList.remove('panning');
+  });
+
+  loadPositions();
+</script>
+</body>
+</html>
