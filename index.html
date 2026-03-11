@@ -530,10 +530,13 @@
 
   loadPositions();
 
-  // Center sticker layer on mobile
+  // Scale and center sticker layer on mobile
   if (window.innerWidth <= 768) {
-    tx = window.innerWidth * 0.1;
-    ty = -window.innerHeight * 0.05;
+    scale = 0.65;
+    const contentW = window.innerWidth;
+    const contentH = window.innerHeight;
+    tx = contentW * (1 - scale) / 2 - contentW * 0.05;
+    ty = contentH * (1 - scale) / 2 - contentH * 0.05;
     applyTransform();
   }
 </script>
