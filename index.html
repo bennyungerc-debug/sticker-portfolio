@@ -229,12 +229,6 @@
         height: min(130px, 32vw);
       }
 
-      #sticker-layer {
-        transform-origin: center center;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
     }
   </style>
 </head>
@@ -535,6 +529,13 @@
   });
 
   loadPositions();
+
+  // Center sticker layer on mobile
+  if (window.innerWidth <= 768) {
+    tx = window.innerWidth * 0.1;
+    ty = -window.innerHeight * 0.05;
+    applyTransform();
+  }
 </script>
 </body>
 </html>
