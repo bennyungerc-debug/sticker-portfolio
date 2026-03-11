@@ -188,6 +188,37 @@
 
     .ctrl-btn:hover { transform: translateY(-2px); }
     .ctrl-btn:active { transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .header-sticker {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-1deg);
+        z-index: 100;
+      }
+
+      .header-subtitle-card {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%) rotate(0.5deg);
+        white-space: normal;
+        text-align: center;
+        max-width: 80vw;
+        z-index: 100;
+      }
+
+      #controls {
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        align-items: center;
+      }
+
+      #custom-cursor { display: none; }
+    }
   </style>
 </head>
 <body>
