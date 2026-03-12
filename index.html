@@ -274,6 +274,57 @@
       }
 
     }
+
+    /* ── Project Overlay ── */
+    #project-overlay {
+      position: fixed; inset: 0;
+      background: #fff;
+      z-index: 500;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+    #project-overlay.open {
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    #overlay-close {
+      position: fixed; top: 24px; right: 28px;
+      background: #fff176; border: none;
+      border-radius: 50%; width: 44px; height: 44px;
+      font-size: 18px; cursor: pointer;
+      box-shadow: 2px 2px 0 #f9a825;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      z-index: 501; display: none;
+    }
+    #project-overlay.open ~ #overlay-close,
+    #project-overlay.open + * #overlay-close { display: block; }
+    #overlay-inner {
+      max-width: 800px; margin: 0 auto;
+      padding: 80px 32px 80px;
+    }
+    #overlay-sub {
+      font-family: 'Syne', sans-serif; font-weight: 400;
+      font-size: 13px; color: #e8560a;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    #overlay-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(32px, 6vw, 56px);
+      color: #222; line-height: 1.1;
+      margin-bottom: 40px;
+    }
+    #overlay-body p {
+      font-family: 'Heebo', sans-serif;
+      font-size: 16px; color: #444; line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    #overlay-body img {
+      width: 100%; border-radius: 12px; margin-bottom: 24px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -590,9 +641,7 @@
       }, { passive: false });
     } else {
       sticker.style.cursor = 'pointer';
-      sticker.addEventListener('click', () => {
-        if (sticker.dataset.link) window.open(sticker.dataset.link, '_blank');
-      });
+      sticker.addEventListener('click', () => openOverlay(sticker.id));
     }
   });
 
@@ -714,6 +763,69 @@
     ty = contentH * (1 - scale) / 2 - contentH * 0.05;
     applyTransform();
   }
+
+
+  // ── Project Overlay ──
+  const projectData = {
+    s10: {
+      title: 'Papayask',
+      sub: 'UI & Design System · 2024',
+      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+    },
+    s11: {
+      title: 'Jewrist',
+      sub: 'Kosher Tourism App · 2022',
+      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+    },
+    s12: {
+      title: 'ZOOM For Orthodox',
+      sub: 'Feature Redesign · 2022',
+      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+    },
+    s13: {
+      title: 'Post Office Bank',
+      sub: 'UI Prototype · 2022',
+      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+    }
+  };
+
+  const overlay     = document.getElementById('project-overlay');
+  const overlayClose = document.getElementById('overlay-close');
+
+  function openOverlay(id) {
+    const data = projectData[id];
+    if (!data) return;
+    document.getElementById('overlay-title').textContent = data.title;
+    document.getElementById('overlay-sub').textContent   = data.sub;
+    document.getElementById('overlay-body').innerHTML    = data.body;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    overlayClose.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    history.pushState({ overlay: id }, '', '#' + id);
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlayClose.style.display = 'none';
+    document.body.style.overflow = '';
+    if (location.hash) history.back();
+  }
+
+  overlayClose.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+  window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
 </script>
+
+<div id="project-overlay" aria-hidden="true">
+  <div id="overlay-inner">
+    <p id="overlay-sub"></p>
+    <h1 id="overlay-title"></h1>
+    <div id="overlay-body"></div>
+  </div>
+</div>
+<button id="overlay-close" aria-label="Close">✕</button>
+
 </body>
 </html>
