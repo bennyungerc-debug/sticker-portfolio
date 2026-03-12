@@ -372,7 +372,14 @@
 
   function resetPositions() {
     localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+    document.querySelectorAll('.sticker').forEach(s => {
+      if (defaults[s.id]) {
+        s.style.transition = 'none';
+        s.style.left      = defaults[s.id].left;
+        s.style.top       = defaults[s.id].top;
+        s.style.transform = defaults[s.id].transform;
+      }
+    });
   }
 
   // ── Pan ──
@@ -598,6 +605,12 @@
       }, stickers.length * 80 + 600);
     }, 300);
   }
+
+  // Save HTML defaults before loadPositions overwrites them
+  const defaults = {};
+  document.querySelectorAll('.sticker').forEach(s => {
+    defaults[s.id] = { left: s.style.left, top: s.style.top, transform: s.style.transform };
+  });
 
   loadPositions();
   runIntroAnimation();
