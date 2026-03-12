@@ -557,7 +557,6 @@
       s.style.left = cx;
       s.style.top  = cy;
       s.style.transform = `rotate(${jitter}deg) scale(0.85)`;
-      s.style.opacity   = '0.6';
       s.style.zIndex = String(50 + i);
     });
 
@@ -566,13 +565,12 @@
       const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
       stickers.forEach((s, i) => {
         setTimeout(() => {
-          s.style.transition = `left 0.9s ${ease}, top 0.9s ${ease}, transform 0.8s ${ease}, opacity 0.4s ease`;
+          s.style.transition = `left 0.55s ${ease}, top 0.55s ${ease}, transform 0.45s ${ease}`;
           s.style.left      = targets[i].left;
           s.style.top       = targets[i].top;
           s.style.transform = targets[i].transform;
-          s.style.opacity   = '1';
           s.style.zIndex    = '5';
-        }, i * 130);
+        }, i * 80);
       });
 
       // After last sticker lands, clean up
@@ -580,10 +578,9 @@
         stickers.forEach(s => {
           s.style.transition = '';
           s.style.zIndex     = '';
-          s.style.opacity    = '';
         });
         animating = false;
-      }, stickers.length * 130 + 950);
+      }, stickers.length * 80 + 600);
     }, 300);
   }
 
