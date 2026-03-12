@@ -426,6 +426,15 @@
   <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="resetPositions()" style="display:flex;align-items:center;gap:6px;"><img src="Icons/Refine.svg" style="width:14px;height:14px;" /> Reset</button>
 </div>
 
+<div id="project-overlay" aria-hidden="true">
+  <div id="overlay-inner">
+    <p id="overlay-sub"></p>
+    <h1 id="overlay-title"></h1>
+    <div id="overlay-body"></div>
+  </div>
+</div>
+<button id="overlay-close" aria-label="Close">✕</button>
+
 <script>
   const STORAGE_KEY = 'sticker-positions-v3';
 
@@ -817,15 +826,6 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
   window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
 </script>
-
-<div id="project-overlay" aria-hidden="true">
-  <div id="overlay-inner">
-    <p id="overlay-sub"></p>
-    <h1 id="overlay-title"></h1>
-    <div id="overlay-body"></div>
-  </div>
-</div>
-<button id="overlay-close" aria-label="Close">✕</button>
 
 </body>
 </html>
