@@ -135,6 +135,44 @@
       -webkit-user-drag: none;
     }
 
+
+    /* Project card sticker */
+    .sticker-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 10px 14px;
+      box-shadow: 3px 4px 0px rgba(0,0,0,0.13), 0 2px 12px rgba(0,0,0,0.07);
+      width: min(160px, 38vw);
+      cursor: inherit;
+      pointer-events: none;
+    }
+
+    .sticker-card-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .sticker-card-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(11px, 1.8vw, 14px);
+      color: #222;
+      margin-top: 9px;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+
+    .sticker-card-sub {
+      font-family: 'Heebo', sans-serif;
+      font-weight: 400;
+      font-size: clamp(9px, 1.4vw, 11px);
+      color: #888;
+      text-align: center;
+      margin-top: 2px;
+    }
+
     /* Cursor tooltip */
     #cursor-tooltip {
       position: fixed;
@@ -286,6 +324,39 @@
       <img class="sticker-img" src="Designer/Small/Condacting.webp" alt="Conductor" draggable="false" />
     </div>
 
+  
+    <div class="sticker" id="s10" data-label="Papayask" data-link="https://bennyunger.myportfolio.com/papayask" style="top:10vh; left:5vw; transform:rotate(-2deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:#C8E6C9;"></div>
+        <div class="sticker-card-label">Papayask</div>
+        <div class="sticker-card-sub">UI & Design System · 2024</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s11" data-label="Jewrist" data-link="https://bennyunger.myportfolio.com/jewrist" style="top:12vh; left:78vw; transform:rotate(2deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:#BBDEFB;"></div>
+        <div class="sticker-card-label">Jewrist</div>
+        <div class="sticker-card-sub">Kosher Tourism App · 2022</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s12" data-label="ZOOM For Orthodox" data-link="https://bennyunger.myportfolio.com/zoom-for-orthodox" style="top:78vh; left:5vw; transform:rotate(1.5deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:#FFE0B2;"></div>
+        <div class="sticker-card-label">ZOOM For Orthodox</div>
+        <div class="sticker-card-sub">Feature Redesign · 2022</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s13" data-label="Post Office Bank" data-link="https://bennyunger.myportfolio.com/post-office-bank" style="top:78vh; left:78vw; transform:rotate(-2.5deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:#E8EAF6;"></div>
+        <div class="sticker-card-label">Post Office Bank</div>
+        <div class="sticker-card-sub">UI Prototype · 2022</div>
+      </div>
+    </div>
+
   </div><!-- /sticker-layer -->
 
 </div>
@@ -401,10 +472,15 @@
   // ── Drag ──
   let dragging = null;
   let offsetX = 0, offsetY = 0;
+  let dragMoved = false;
+  let dragStartX = 0, dragStartY = 0;
 
   function startDrag(sticker, clientX, clientY) {
     if (animating) return;
     dragging = sticker;
+    dragMoved = false;
+    dragStartX = clientX;
+    dragStartY = clientY;
     tooltip.style.opacity = '0';
     sticker.classList.add('dragging');
     const rect = sticker.getBoundingClientRect();
@@ -420,6 +496,7 @@
 
   function moveDrag(clientX, clientY) {
     if (!dragging) return;
+    if (Math.abs(clientX - dragStartX) > 4 || Math.abs(clientY - dragStartY) > 4) dragMoved = true;
     const lp = toLayer(clientX - offsetX, clientY - offsetY);
     dragging.style.left = lp.x + 'px';
     dragging.style.top  = lp.y + 'px';
@@ -427,10 +504,12 @@
 
   function endDrag() {
     if (!dragging) return;
+    const s = dragging;
     dragging.classList.remove('dragging');
     savePositions();
     dragging = null;
     customCursor.src = 'Cursor/SMALL.svg';
+    if (!dragMoved && s.dataset.link) window.open(s.dataset.link, '_blank');
   }
 
   // ── Pinch zoom (mobile) ──
