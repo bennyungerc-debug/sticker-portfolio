@@ -345,11 +345,11 @@
   <!-- Sticker layer — this gets zoomed -->
   <div id="sticker-layer">
 
-    <div class="sticker" id="s1" data-label="Design" style="top:22vh; left:54vw; transform:rotate(-3deg)">
+    <div class="sticker" id="s1" data-label="Design" style="top:26vh; left:54vw; transform:rotate(-3deg)">
       <img class="sticker-img" src="Designer/Small/Design.webp" alt="Design" draggable="false" />
     </div>
 
-    <div class="sticker" id="s2" data-label="Reading" style="top:22vh; left:24vw; transform:rotate(2deg)">
+    <div class="sticker" id="s2" data-label="Reading" style="top:26vh; left:24vw; transform:rotate(2deg)">
       <img class="sticker-img" src="Designer/Small/Reading.webp" alt="Reading" draggable="false" />
     </div>
 
@@ -365,19 +365,19 @@
       <img class="sticker-img" src="Designer/Small/Chasing.webp" alt="Chasing" draggable="false" />
     </div>
 
-    <div class="sticker" id="s6" data-label="Thinking" style="top:34vh; left:8vw; transform:rotate(-2deg)">
+    <div class="sticker" id="s6" data-label="Thinking" style="top:34vh; left:18vw; transform:rotate(-2deg)">
       <img class="sticker-img" src="Designer/Small/Thinking.webp" alt="Thinking" draggable="false" />
     </div>
 
-    <div class="sticker" id="s7" data-label="Figma" style="top:32vh; left:70vw; transform:rotate(2.5deg)">
+    <div class="sticker" id="s7" data-label="Figma" style="top:32vh; left:60vw; transform:rotate(2.5deg)">
       <img class="sticker-img" src="Designer/Small/Figma.webp" alt="Figma" draggable="false" />
     </div>
 
-    <div class="sticker" id="s8" data-label="Painting" style="top:72vh; left:12vw; transform:rotate(1deg)">
+    <div class="sticker" id="s8" data-label="Painting" style="top:72vh; left:22vw; transform:rotate(1deg)">
       <img class="sticker-img" src="Designer/Small/Painting.webp" alt="Painting" draggable="false" />
     </div>
 
-    <div class="sticker" id="s9" data-label="Conductor" style="top:70vh; left:68vw; transform:rotate(-1.5deg)">
+    <div class="sticker" id="s9" data-label="Conductor" style="top:70vh; left:58vw; transform:rotate(-1.5deg)">
       <img class="sticker-img" src="Designer/Small/Condacting.webp" alt="Conductor" draggable="false" />
     </div>
 
@@ -736,23 +736,21 @@
     setTimeout(() => {
       const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
       stickers.forEach((s, i) => {
-        setTimeout(() => {
-          s.style.transition = `left 0.55s ${ease}, top 0.55s ${ease}, transform 0.45s ${ease}`;
-          s.style.left      = targets[i].left;
-          s.style.top       = targets[i].top;
-          s.style.transform = targets[i].transform;
-          s.style.zIndex    = '5';
-        }, i * 80);
+        s.style.transition = `left 0.55s ${ease}, top 0.55s ${ease}, transform 0.45s ${ease}`;
+        s.style.left      = targets[i].left;
+        s.style.top       = targets[i].top;
+        s.style.transform = targets[i].transform;
+        s.style.zIndex    = '5';
       });
 
-      // After last sticker lands, clean up
+      // After stickers land, clean up
       setTimeout(() => {
         stickers.forEach(s => {
           s.style.transition = '';
           s.style.zIndex     = '';
         });
         animating = false;
-      }, stickers.length * 80 + 600);
+      }, 650);
     }, 300);
   }
 
