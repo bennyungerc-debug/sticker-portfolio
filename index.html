@@ -305,6 +305,7 @@
 
   // ── Zoom state ──
   let scale = 1, tx = 0, ty = 0;
+  let animating = false;
   const layer = document.getElementById('sticker-layer');
 
   function applyTransform() {
@@ -380,6 +381,7 @@
   const canvas = document.getElementById('canvas');
 
   canvas.addEventListener('mousedown', e => {
+    if (animating) return;
     if (e.target.closest('.sticker')) return;
     panning = true;
     panStartX = e.clientX;
@@ -394,6 +396,7 @@
   let offsetX = 0, offsetY = 0;
 
   function startDrag(sticker, clientX, clientY) {
+    if (animating) return;
     dragging = sticker;
     tooltip.style.opacity = '0';
     sticker.classList.add('dragging');
@@ -530,7 +533,59 @@
     canvas.classList.remove('panning');
   });
 
+
+  // ── Intro animation ──
+  function runIntroAnimation() {
+    animating = true;
+    const stickers = [...document.querySelectorAll('.sticker')];
+
+    // Store final positions (set by loadPositions or HTML defaults)
+    const targets = stickers.map(s => ({
+      left: s.style.left,
+      top: s.style.top,
+      transform: s.style.transform
+    }));
+
+    // Pile: center of viewport
+    const cx = (window.innerWidth  / 2 - 80) + 'px';
+    const cy = (window.innerHeight / 2 - 80) + 'px';
+
+    // Stack all stickers in a pile at center
+    stickers.forEach((s, i) => {
+      const jitter = (i - stickers.length / 2) * 4;
+      s.style.transition = 'none';
+      s.style.left = cx;
+      s.style.top  = cy;
+      s.style.transform = `rotate(${jitter}deg) scale(0.85)`;
+      s.style.zIndex = String(50 + i);
+    });
+
+    // Small pause so pile renders, then scatter
+    setTimeout(() => {
+      const ease = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+      stickers.forEach((s, i) => {
+        setTimeout(() => {
+          s.style.transition = `left 0.65s ${ease}, top 0.65s ${ease}, transform 0.55s ${ease}`;
+          s.style.left      = targets[i].left;
+          s.style.top       = targets[i].top;
+          s.style.transform = targets[i].transform;
+          s.style.zIndex    = '5';
+        }, i * 110);
+      });
+
+      // After last sticker lands, clean up
+      setTimeout(() => {
+        stickers.forEach(s => {
+          s.style.transition = '';
+          s.style.zIndex     = '';
+        });
+        animating = false;
+      }, stickers.length * 110 + 700);
+    }, 350);
+  }
+
   loadPositions();
+  runIntroAnimation();
 
   // Scale and center sticker layer on mobile
   if (window.innerWidth <= 768) {
