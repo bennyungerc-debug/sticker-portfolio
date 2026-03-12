@@ -539,14 +539,29 @@
     animating = true;
     const stickers = [...document.querySelectorAll('.sticker')];
 
-    // Store final positions (set by loadPositions or HTML defaults)
+    // Convert vw/vh → px so CSS can animate between units
+    function toPx(val) {
+      if (!val) return '0px';
+      if (val.endsWith('vw')) return (parseFloat(val) / 100 * window.innerWidth)  + 'px';
+      if (val.endsWith('vh')) return (parseFloat(val) / 100 * window.innerHeight) + 'px';
+      return val;
+    }
+
+    // Store final positions in px
     const targets = stickers.map(s => ({
-      left: s.style.left,
-      top: s.style.top,
+      left: toPx(s.style.left),
+      top:  toPx(s.style.top),
       transform: s.style.transform
     }));
 
-    // Pile: center of viewport
+    // Pre-set stickers to their px targets (no transition) so the pile can animate back
+    stickers.forEach((s, i) => {
+      s.style.transition = 'none';
+      s.style.left = targets[i].left;
+      s.style.top  = targets[i].top;
+    });
+
+    // Pile: center of viewport (px)
     const cx = (window.innerWidth  / 2 - 80) + 'px';
     const cy = (window.innerHeight / 2 - 80) + 'px';
 
