@@ -331,6 +331,34 @@
       width: 100%; border-radius: 12px; margin-bottom: 24px;
       display: block;
     }
+    .img-carousel {
+      position: relative; width: 100%; margin-bottom: 32px;
+      background: #f8f8f8; border-radius: 12px; overflow: hidden;
+    }
+    .carousel-track {
+      display: flex; transition: transform 0.3s ease;
+    }
+    .carousel-track img {
+      min-width: 100%; width: 100%; height: 400px;
+      object-fit: contain; border-radius: 0; margin: 0;
+      display: block;
+    }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.92); border: none; border-radius: 50%;
+      width: 40px; height: 40px; font-size: 22px; line-height: 1;
+      cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      z-index: 2; color: #e8560a; font-family: sans-serif;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    .carousel-counter {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.45); color: #fff;
+      font-size: 12px; padding: 3px 10px; border-radius: 10px;
+      font-family: 'Syne', sans-serif; pointer-events: none;
+    }
     #overlay-body h3 {
       font-family: 'Syne', sans-serif; font-weight: 700;
       font-size: 18px; color: #e8560a;
@@ -994,6 +1022,7 @@
     document.getElementById('overlay-title').textContent = data.title;
     document.getElementById('overlay-sub').textContent   = data.sub;
     document.getElementById('overlay-body').innerHTML    = data.body;
+    initCarousels(document.getElementById('overlay-body'));
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
     overlayClose.style.display = 'block';
@@ -1012,6 +1041,57 @@
   overlayClose.addEventListener('click', closeOverlay);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
   window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
+
+  function initCarousels(container) {
+    const nodes = Array.from(container.childNodes);
+    let group = [], insertBefore = [];
+    nodes.forEach(node => {
+      if (node.nodeType === 1 && node.tagName === 'IMG') {
+        group.push(node);
+      } else {
+        if (group.length) { insertBefore.push({ ref: node, imgs: [...group] }); group = []; }
+      }
+    });
+    if (group.length) insertBefore.push({ ref: null, imgs: [...group] });
+
+    insertBefore.forEach(({ ref, imgs }) => {
+      const car = buildCarousel(imgs);
+      imgs.forEach(img => container.removeChild(img));
+      if (ref) container.insertBefore(car, ref);
+      else container.appendChild(car);
+    });
+  }
+
+  function buildCarousel(imgs) {
+    const wrap = document.createElement('div');
+    if (imgs.length === 1) {
+      imgs[0].style.borderRadius = '12px';
+      wrap.style.marginBottom = '24px';
+      wrap.appendChild(imgs[0]);
+      return wrap;
+    }
+    wrap.className = 'img-carousel';
+    const track = document.createElement('div');
+    track.className = 'carousel-track';
+    imgs.forEach(img => { img.style.cssText = ''; track.appendChild(img); });
+    const counter = document.createElement('div');
+    counter.className = 'carousel-counter';
+    let cur = 0;
+    function goTo(n) {
+      cur = (n + imgs.length) % imgs.length;
+      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+      counter.textContent = (cur + 1) + ' / ' + imgs.length;
+    }
+    const prev = document.createElement('button');
+    prev.className = 'carousel-btn prev'; prev.innerHTML = '&#8249;';
+    prev.onclick = () => goTo(cur - 1);
+    const next = document.createElement('button');
+    next.className = 'carousel-btn next'; next.innerHTML = '&#8250;';
+    next.onclick = () => goTo(cur + 1);
+    counter.textContent = '1 / ' + imgs.length;
+    wrap.append(track, prev, next, counter);
+    return wrap;
+  }
 
 </script>
 
