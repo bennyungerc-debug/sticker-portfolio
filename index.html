@@ -779,22 +779,49 @@
     s10: {
       title: 'Papayask',
       sub: 'UI & Design System · 2024',
-      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+      body: `
+        <p>A platform for freelancers and customers from all around the world — only professionals allowed. When signing up, providers go through a vetting process to ensure they are professional and experienced.</p>
+        <h3>Design System</h3>
+        <p>Built using atomic design principles:</p>
+        <p><strong>⚛️ Atoms</strong> — Icons, colors, typography, layout, illustrations, elevation, roundness, spacing.<br>
+        <strong>🧬 Molecules</strong> — Logo, controllers, avatars, category chips, input fields, pagination, buttons.<br>
+        <strong>🦠 Organisms</strong> — Header, message, footer, inbox, section, card, filters & status.</p>
+        <h3>Templates</h3>
+        <p>Landing page · Joining form · Sign in/up · User profile · Exploring · Searching · Filters · Advisor · Requests</p>
+      `
     },
     s11: {
       title: 'Jewrist',
       sub: 'Kosher Tourism App · 2022',
-      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+      body: `
+        <p>Jewish people who keep Kosher laws find it hard to plan trips abroad. Jewrist gathers accurate, up-to-date information about kosher resources around the world.</p>
+        <h3>Research</h3>
+        <p>Surveys and interviews with kosher travelers revealed that users needed: a list of kosher products per country, rated restaurant lists, and proximity to synagogues and Jewish community centers.</p>
+        <h3>Process</h3>
+        <p>Empathize → Define → Ideate → Prototype → Test. Competitive analysis, personas, user journeys, wireframes, and two rounds of usability testing.</p>
+        <h3>Key Iterations</h3>
+        <p>Removed confusing map/list toggle and consolidated navigation to three primary tabs: Explore, Saved, and Kashrut Info.</p>
+      `
     },
     s12: {
       title: 'ZOOM For Orthodox',
       sub: 'Feature Redesign · 2022',
-      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+      body: `
+        <p>A redesign of ZOOM's screen-sharing feature to make it accessible to Orthodox Jewish users who primarily speak Hebrew and heavily rely on ZOOM for learning and Torah study.</p>
+        <h3>Problem</h3>
+        <p>The English-only interface caused confusion and anxiety — users feared accidentally sharing private content without fully understanding the options.</p>
+        <h3>Solution</h3>
+        <p>Added custom illustrations, replaced warning text with visual guides, simplified the cancel button, and reduced cognitive load through better visual hierarchy.</p>
+        <h3>Results</h3>
+        <p><strong>91% success rate</strong> — participants understood the screen-sharing feature, their confidence grew, and overall satisfaction increased significantly.</p>
+      `
     },
     s13: {
       title: 'Post Office Bank',
       sub: 'UI Prototype · 2022',
-      body: '<p>תוכן הפרויקט יתווסף בקרוב.</p>'
+      body: `
+        <p>A UI prototype for Post Office Bank — redesigning the banking experience within a familiar, accessible environment.</p>
+      `
     }
   };
 
@@ -826,10 +853,6 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
   window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
 
-  // ── About FAB cursor ──
-  const aboutFab = document.getElementById('about-fab');
-  aboutFab.addEventListener('mouseenter', () => { customCursor.src = 'Cursor/Hand-Press.svg'; });
-  aboutFab.addEventListener('mouseleave', () => { customCursor.src = 'Cursor/SMALL.svg'; });
 </script>
 
 <style>
@@ -895,6 +918,15 @@
     <img src="Favicon/Favicon.svg" alt="Favicon" />
   </span>
 </a>
+
+<script>
+  (function() {
+    const fab = document.getElementById('about-fab');
+    const cur = document.getElementById('custom-cursor');
+    fab.addEventListener('mouseenter', () => { cur.src = 'Cursor/Hand-Press.svg'; });
+    fab.addEventListener('mouseleave', () => { cur.src = 'Cursor/SMALL.svg'; });
+  })();
+</script>
 
 </body>
 </html>
