@@ -1177,14 +1177,22 @@
     top: 0; left: 0;
     animation: fab-spin 9s linear infinite;
     pointer-events: none;
-    overflow: visible;
+    display: block;
   }
-  .fab-ring text {
+  .fab-ring span {
+    position: absolute;
+    top: 0; left: 0;
+    width: 92px; height: 92px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2px;
+    transform-origin: 46px 46px;
     font-family: 'Syne', sans-serif;
-    font-size: 11.5px;
-    font-weight: 700;
-    fill: #e8560a;
-    letter-spacing: 2.5px;
+    font-size: 9px;
+    font-weight: 800;
+    color: #e8560a;
+    line-height: 1;
   }
   @keyframes fab-spin {
     from { transform: rotate(0deg); }
@@ -1201,12 +1209,7 @@
   <span class="fab-label">About me</span>
   <span class="fab-icon">
     <img src="Favicon/Favicon.svg" alt="Favicon" />
-    <svg class="fab-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <path id="fab-circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/>
-      </defs>
-      <text><textPath href="#fab-circle" startOffset="0%">MY STORY ✦ MY STORY ✦ </textPath></text>
-    </svg>
+    <span class="fab-ring" aria-hidden="true"></span>
   </span>
 </a>
 
@@ -1262,13 +1265,31 @@
 
 <script>
   (function() {
-    const fab = document.getElementById('about-fab');
+    // ── Circular text ring ──
+    const ring = document.querySelector('.fab-ring');
+    if (ring) {
+      const text = "MY STORY ✦ MY STORY ✦ ";
+      const chars = [...text];
+      const n = chars.length;
+      chars.forEach((ch, i) => {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        s.style.transform = `rotate(${(360 / n * i).toFixed(2)}deg)`;
+        ring.appendChild(s);
+      });
+    }
+
+    // ── Hand-press cursor on all interactive elements ──
     const cur = document.getElementById('custom-cursor');
-    fab.addEventListener('mouseenter', () => { cur.src = 'Cursor/Hand-Press.svg'; });
-    fab.addEventListener('mouseleave', () => { cur.src = 'Cursor/SMALL.svg'; });
-    document.querySelectorAll('.social-btn').forEach(btn => {
-      btn.addEventListener('mouseenter', () => { cur.src = 'Cursor/Hand-Press.svg'; });
-      btn.addEventListener('mouseleave', () => { cur.src = 'Cursor/SMALL.svg'; });
+    const targets = [
+      document.getElementById('about-fab'),
+      document.getElementById('overlay-close'),
+      ...document.querySelectorAll('.social-btn'),
+      ...document.querySelectorAll('button'),
+    ].filter(Boolean);
+    targets.forEach(el => {
+      el.addEventListener('mouseenter', () => { cur.src = 'Cursor/Hand-Press.svg'; });
+      el.addEventListener('mouseleave', () => { cur.src = 'Cursor/SMALL.svg'; });
     });
   })();
 </script>
