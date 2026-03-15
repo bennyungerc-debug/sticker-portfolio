@@ -827,5 +827,71 @@
   window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
 </script>
 
+<style>
+  #about-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  #about-fab .fab-label {
+    background: #fff176;
+    color: #222;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 2px 2px 0 #f9a825;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+
+  #about-fab .fab-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 3px 3px 0 #ccc, 0 4px 16px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+
+  #about-fab .fab-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  #about-fab:hover .fab-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #about-fab:hover .fab-icon {
+    transform: scale(1.12) rotate(-4deg);
+    box-shadow: 4px 4px 0 #bbb, 0 8px 24px rgba(0,0,0,0.16);
+  }
+</style>
+
+<a id="about-fab" href="#about" title="About me">
+  <span class="fab-label">About me</span>
+  <span class="fab-icon">
+    <img src="Favicon/Favicon.svg" alt="Favicon" />
+  </span>
+</a>
+
 </body>
 </html>
