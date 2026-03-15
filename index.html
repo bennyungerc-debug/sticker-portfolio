@@ -1001,8 +1001,35 @@
       body: `
         <p>A UI prototype for Post Office Bank — redesigning the banking experience within a familiar, accessible environment that people already trust.</p>
         <p>This project focused on creating a clean, approachable banking interface that leverages the existing trust users have in the post office brand.</p>
-        <div style="margin-top:40px;">
-          <iframe width="320" height="693" src="https://xd.adobe.com/embed/b70cc473-34f1-401e-b990-1a9c98532091-e25f/?fullscreen" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox" style="display:block; margin:0 auto; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.12); max-width:100%;"></iframe>
+        <div style="margin-top:40px; display:flex; justify-content:center;">
+          <div style="
+            position:relative;
+            width:260px;
+            background:#111;
+            border-radius:44px;
+            padding:14px 10px 18px;
+            box-shadow:0 0 0 2px #333, 0 0 0 4px #1a1a1a, 0 20px 60px rgba(0,0,0,0.4);
+          ">
+            <!-- Side buttons -->
+            <div style="position:absolute;left:-3px;top:90px;width:3px;height:32px;background:#333;border-radius:2px 0 0 2px;"></div>
+            <div style="position:absolute;left:-3px;top:132px;width:3px;height:56px;background:#333;border-radius:2px 0 0 2px;"></div>
+            <div style="position:absolute;left:-3px;top:198px;width:3px;height:56px;background:#333;border-radius:2px 0 0 2px;"></div>
+            <div style="position:absolute;right:-3px;top:120px;width:3px;height:72px;background:#333;border-radius:0 2px 2px 0;"></div>
+            <!-- Screen area -->
+            <div style="border-radius:34px;overflow:hidden;position:relative;background:#000;">
+              <!-- Dynamic Island -->
+              <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:80px;height:26px;background:#111;border-radius:20px;z-index:2;"></div>
+              <iframe
+                width="240" height="520"
+                src="https://xd.adobe.com/embed/b70cc473-34f1-401e-b990-1a9c98532091-e25f/?fullscreen"
+                frameborder="0" allowfullscreen
+                sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-popups allow-popups-to-escape-sandbox"
+                style="display:block;">
+              </iframe>
+            </div>
+            <!-- Home indicator -->
+            <div style="margin-top:10px;width:80px;height:4px;background:#444;border-radius:4px;margin-left:auto;margin-right:auto;"></div>
+          </div>
         </div>
       `
     },
