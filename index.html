@@ -1051,9 +1051,10 @@
     const nodes = Array.from(container.childNodes);
     let group = [], insertBefore = [];
     nodes.forEach(node => {
+      const isWhitespace = node.nodeType === 3 && node.textContent.trim() === '';
       if (node.nodeType === 1 && node.tagName === 'IMG') {
         group.push(node);
-      } else {
+      } else if (!isWhitespace) {
         if (group.length) { insertBefore.push({ ref: node, imgs: [...group] }); group = []; }
       }
     });
