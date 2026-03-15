@@ -1158,11 +1158,11 @@
   }
   .fab-ring {
     position: absolute;
-    width: 88px; height: 88px;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    width: 92px; height: 92px;
+    top: 0; left: 0;
     animation: fab-spin 9s linear infinite;
     pointer-events: none;
+    overflow: visible;
   }
   .fab-ring text {
     font-family: 'Syne', sans-serif;
@@ -1170,14 +1170,22 @@
     font-weight: 700;
     fill: #e8560a;
     letter-spacing: 2.5px;
-    text-transform: uppercase;
   }
   @keyframes fab-spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
   }
   #about-fab .fab-icon {
     position: relative;
+    width: 92px; height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+  #about-fab .fab-icon img {
+    position: relative;
+    z-index: 1;
   }
 </style>
 
