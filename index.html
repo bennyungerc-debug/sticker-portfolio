@@ -858,21 +858,17 @@
   }
 
   #about-fab .fab-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 3px 3px 0 #ccc, 0 4px 16px rgba(0,0,0,0.12);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    overflow: hidden;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    filter: drop-shadow(3px 3px 4px rgba(0,0,0,0.22));
   }
 
   #about-fab .fab-icon img {
-    width: 34px;
-    height: 34px;
+    width: 48px;
+    height: 48px;
+    display: block;
   }
 
   #about-fab:hover .fab-label {
@@ -882,7 +878,7 @@
 
   #about-fab:hover .fab-icon {
     transform: scale(1.12) rotate(-4deg);
-    box-shadow: 4px 4px 0 #bbb, 0 8px 24px rgba(0,0,0,0.16);
+    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
   }
 </style>
 
