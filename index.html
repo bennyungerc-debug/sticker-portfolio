@@ -632,7 +632,7 @@
       if (dragging) return;
       tooltip.textContent = sticker.dataset.label || '';
       tooltip.style.opacity = '1';
-      customCursor.src = 'Cursor/Hand-Moove.svg';
+      customCursor.src = sticker.dataset.static ? 'Cursor/Hand-Press.svg' : 'Cursor/Hand-Moove.svg';
     });
     sticker.addEventListener('mouseleave', () => {
       tooltip.style.opacity = '0';
@@ -825,6 +825,11 @@
   overlayClose.addEventListener('click', closeOverlay);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
   window.addEventListener('popstate', () => { if (!location.hash) closeOverlay(); });
+
+  // ── About FAB cursor ──
+  const aboutFab = document.getElementById('about-fab');
+  aboutFab.addEventListener('mouseenter', () => { customCursor.src = 'Cursor/Hand-Press.svg'; });
+  aboutFab.addEventListener('mouseleave', () => { customCursor.src = 'Cursor/SMALL.svg'; });
 </script>
 
 <style>
