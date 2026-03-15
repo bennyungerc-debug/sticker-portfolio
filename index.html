@@ -473,6 +473,7 @@
 
 <div id="project-overlay" aria-hidden="true">
   <div id="overlay-inner">
+    <div id="overlay-hero" style="display:none; text-align:center; margin-bottom:28px;"></div>
     <p id="overlay-sub"></p>
     <h1 id="overlay-title"></h1>
     <div id="overlay-body"></div>
@@ -1029,6 +1030,14 @@
     document.getElementById('overlay-sub').textContent   = data.sub;
     document.getElementById('overlay-body').innerHTML    = data.body;
     initCarousels(document.getElementById('overlay-body'));
+    const hero = document.getElementById('overlay-hero');
+    if (data.hero) {
+      hero.innerHTML = data.hero;
+      hero.style.display = 'block';
+    } else {
+      hero.innerHTML = '';
+      hero.style.display = 'none';
+    }
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
     overlayClose.style.display = 'block';
