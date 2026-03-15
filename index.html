@@ -1056,8 +1056,7 @@
 
     insertBefore.forEach(({ ref, imgs }) => {
       const car = buildCarousel(imgs);
-      imgs.forEach(img => container.removeChild(img));
-      if (ref) container.insertBefore(car, ref);
+      if (ref && ref.parentNode === container) container.insertBefore(car, ref);
       else container.appendChild(car);
     });
   }
