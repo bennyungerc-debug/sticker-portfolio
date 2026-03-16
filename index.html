@@ -283,6 +283,33 @@
         height: min(130px, 32vw);
       }
 
+      .sticker-card {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        width: min(90px, 24vw);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .sticker-card-thumb {
+        width: min(80px, 22vw);
+        height: min(80px, 22vw);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        box-shadow: 3px 4px 0px rgba(0,0,0,0.13), 0 2px 12px rgba(0,0,0,0.07);
+      }
+
+      .sticker-card-label {
+        font-size: clamp(9px, 2.5vw, 12px);
+        margin-top: 6px;
+      }
+
+      .sticker-card-sub {
+        display: none;
+      }
+
     }
 
     /* ── Project Overlay ── */
@@ -1118,6 +1145,7 @@
     overlay.setAttribute('aria-hidden', 'false');
     overlayClose.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    document.getElementById('controls').style.display = 'none';
     history.pushState({ overlay: id }, '', '#' + id);
   }
 
@@ -1126,6 +1154,7 @@
     overlay.setAttribute('aria-hidden', 'true');
     overlayClose.style.display = 'none';
     document.body.style.overflow = '';
+    document.getElementById('controls').style.display = '';
     if (location.hash) history.back();
   }
 
