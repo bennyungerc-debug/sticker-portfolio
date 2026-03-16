@@ -465,7 +465,7 @@
       </div>
     </div>
 
-    <div class="sticker" id="s11" data-label="Jewrist" data-link="https://bennyunger.myportfolio.com/jewrist" data-static="true" style="top:4vh; left:78vw; transform:rotate(2deg)">
+    <div class="sticker" id="s11" data-label="Jewrist" data-link="https://bennyunger.myportfolio.com/jewrist" data-static="true" style="top:4vh; left:87vw; transform:rotate(2deg)">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:#BBDEFB;">✈️</div>
         <div class="sticker-card-label">Jewrist</div>
@@ -481,7 +481,7 @@
       </div>
     </div>
 
-    <div class="sticker" id="s13" data-label="Post Office Bank" data-link="https://bennyunger.myportfolio.com/post-office-bank" data-static="true" style="top:58vh; left:78vw; transform:rotate(-2.5deg)">
+    <div class="sticker" id="s13" data-label="Post Office Bank" data-link="https://bennyunger.myportfolio.com/post-office-bank" data-static="true" style="top:58vh; left:87vw; transform:rotate(-2.5deg)">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:#E8EAF6;">🏦</div>
         <div class="sticker-card-label">Post Office Bank</div>
@@ -850,6 +850,16 @@
     tx = contentW * (1 - scale) / 2 - contentW * 0.05;
     ty = contentH * (1 - scale) / 2 - contentH * 0.05;
     applyTransform();
+
+    // Reposition project cards for mobile layout
+    ['s10', 's11'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.top = '24vh';   // below fixed header (~160px)
+    });
+    ['s12', 's13'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.top = '75vh';   // closer to bottom
+    });
   }
 
 
@@ -1107,11 +1117,12 @@
       sub: 'Benny Unger — Product Builder (Senior Product Designer)',
       hero: `<img src="assets/benny.webp" alt="Benny Unger" style="width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center top;display:block;margin:0 auto;" />`,
       body: `
-        <p>Illustration and fine art background → product design and UX. I design things that are both rigorous and beautiful.</p>
-        <p>I build for people who get overlooked — a kosher tourism app for Jewish travelers, an accessibility redesign of Zoom for Hebrew-speaking Orthodox users. The best UX comes from genuine closeness to the people you're designing for.</p>
-        <p>Right now I'm deep in AI + product design. I use Claude Code to ship directly from Figma — this portfolio is one of them.</p>
-        <h3>Tools &amp; Skills</h3>
-        <p>Figma · Claude Code · Design systems · UX research · Illustration · Adobe suite</p>
+        <p>I started with a paintbrush. Fine art, illustration — the kind of work where you stare at something for three hours and no one's going to tell you to ship it.</p>
+        <p>Then I discovered that design is the same obsession, just with a deadline. Turns out that suits me fine.</p>
+        <p>I'm a senior product designer with a bias toward work that's both rigorous and beautiful. The art background isn't decoration — it's how I think. Visually first, then functionally. That order matters.</p>
+        <p>A lot of my work has been for communities that tend to get overlooked in tech: a kosher tourism app built around the real logistics of Jewish travel, an accessibility redesign of Zoom for Hebrew-speaking Orthodox users. The best UX I've done came from sitting with people and understanding how they actually live — not from personas.</p>
+        <p>Lately I've been deep in AI + product design. I use Claude Code to ship directly from Figma — this portfolio is one of them. Something clicked when I realized I could have a conversation with my tools and they'd build things back. That's not automation. That's collaboration.</p>
+        <p>I'm building in public. If you're curious about the intersection of design craft and AI, I'm probably already thinking about what you're thinking about.</p>
         <p style="margin-top:32px;">
           <a href="mailto:bennyungerc@gmail.com" style="color:#e8560a;font-weight:700;">bennyungerc@gmail.com</a>
           &nbsp;&nbsp;·&nbsp;&nbsp;
