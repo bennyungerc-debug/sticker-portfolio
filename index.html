@@ -142,8 +142,8 @@
 
 
     /* Project card sticker — behind character stickers */
-    #s10, #s11, #s12, #s13 { z-index: 8; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease; }
-    #s10:hover, #s11:hover, #s12:hover, #s13:hover { transform: translateY(-6px) scale(1.04) rotate(0deg) !important; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15)); }
+    #s10, #s11, #s12, #s13, #s14, #s15, #s16, #s17 { z-index: 8; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease; }
+    #s10:hover, #s11:hover, #s12:hover, #s13:hover, #s14:hover, #s15:hover, #s16:hover, #s17:hover { transform: translateY(-6px) scale(1.04) rotate(0deg) !important; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15)); }
 
     /* Project card sticker */
     .sticker-card {
@@ -164,6 +164,18 @@
       align-items: center;
       justify-content: center;
       font-size: clamp(28px, 5vw, 40px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sticker-card-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
     }
 
     .sticker-card-label {
@@ -513,6 +525,50 @@
         <div class="sticker-card-thumb" style="background:#E8EAF6;">🏦</div>
         <div class="sticker-card-label">Post Office Bank</div>
         <div class="sticker-card-sub">UI Prototype · 2022</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s14" data-label="Gabizon App" data-static="true"
+      style="top:30vh; left:28vw; transform:rotate(-1deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#e3f0ff,#c5d8f5);">
+          <img src="assets/project-gabizon.png" alt="Gabizon App" />
+        </div>
+        <div class="sticker-card-label">Gabizon App</div>
+        <div class="sticker-card-sub">Complex System Design · 2024</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s15" data-label="Mecomics" data-static="true"
+      style="top:30vh; left:58vw; transform:rotate(2deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#ede7ff,#c9b8f7);">
+          <img src="assets/project-mecomics.png" alt="Mecomics" />
+        </div>
+        <div class="sticker-card-label">Mecomics</div>
+        <div class="sticker-card-sub">Platform (web/mobile app) · 2025</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s16" data-label="Snipcritics.com" data-static="true"
+      style="top:72vh; left:28vw; transform:rotate(1deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#fce4f5,#f0b8e8);">
+          <img src="assets/project-snipcritics.png" alt="Snipcritics.com" />
+        </div>
+        <div class="sticker-card-label">Snipcritics.com</div>
+        <div class="sticker-card-sub">Platform (web/mobile) · 2022</div>
+      </div>
+    </div>
+
+    <div class="sticker" id="s17" data-label="Illustration" data-static="true"
+      style="top:72vh; left:58vw; transform:rotate(-2deg)">
+      <div class="sticker-card">
+        <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#fff8e1,#ffe082);">
+          <img src="assets/project-illustration.png" alt="Illustration" />
+        </div>
+        <div class="sticker-card-label">Illustration</div>
+        <div class="sticker-card-sub">UI Illustrations</div>
       </div>
     </div>
 
@@ -887,6 +943,14 @@
       const el = document.getElementById(id);
       if (el) el.style.top = '75vh';   // closer to bottom
     });
+    ['s14', 's15'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.top = '130vh';
+    });
+    ['s16', 's17'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.top = '190vh';
+    });
   }
 
 
@@ -1157,6 +1221,30 @@
           <a href="https://wa.me/972533401522" target="_blank" rel="noopener" style="color:#e8560a;font-weight:700;">WhatsApp</a>
         </p>
       `
+    },
+    s14: {
+      title: 'Gabizon App',
+      sub: 'Complex System Design · 2024',
+      hero: `<img src="assets/project-gabizon.png" alt="Gabizon App" style="width:100%;border-radius:12px;" />`,
+      body: `<p>Complex system design project for Gabizon App — a large-scale product involving intricate information architecture, multi-role flows, and sophisticated UI patterns.</p>`
+    },
+    s15: {
+      title: 'Mecomics',
+      sub: 'Platform (web/mobile app) · 2025',
+      hero: `<img src="assets/project-mecomics.png" alt="Mecomics" style="width:100%;border-radius:12px;" />`,
+      body: `<p>AI-powered comic creation platform — enabling users to write, illustrate, and publish comics using a web and mobile app. Covers the full end-to-end creator experience.</p>`
+    },
+    s16: {
+      title: 'Snipcritics.com',
+      sub: 'Platform (web/mobile) · 2022',
+      hero: `<img src="assets/project-snipcritics.png" alt="Snipcritics.com" style="width:100%;border-radius:12px;" />`,
+      body: `<p>A reviews and critics platform for web and mobile — designed to make cultural criticism shareable, discoverable, and fun. Covers design system, component library, and full product flows.</p>`
+    },
+    s17: {
+      title: 'Illustration',
+      sub: 'UI Illustrations',
+      hero: `<img src="assets/project-illustration.png" alt="Illustration" style="width:100%;border-radius:12px;" />`,
+      body: `<p>A UI illustration and icon library — custom-designed visual assets used across products. Includes spot illustrations, icon sets, and character designs for onboarding and empty states.</p>`
     }
   };
 
