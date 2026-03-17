@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benny Unger — CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #e8560a;
+      --text: #111;
+      --muted: #666;
+      --rule: #e0e0e0;
+      --page-w: 794px; /* A4 width at 96dpi */
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+      background: #f2f2f2;
+    }
+
+    .page {
+      width: var(--page-w);
+      min-height: 1123px; /* A4 height */
+      margin: 40px auto;
+      background: #fff;
+      padding: 56px 60px;
+    }
+
+    /* ── Header ── */
+    .cv-header {
+      margin-bottom: 36px;
+    }
+
+    .cv-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .cv-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .cv-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .cv-contact a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .cv-contact a:hover {
+      color: var(--orange);
+    }
+
+    .cv-contact-sep {
+      color: var(--rule);
+    }
+
+    /* ── Section ── */
+    .cv-section {
+      margin-bottom: 30px;
+    }
+
+    .cv-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      border-bottom: 1.5px solid var(--orange);
+      padding-bottom: 5px;
+      margin-bottom: 16px;
+    }
+
+    /* ── Summary ── */
+    .cv-summary p {
+      color: #333;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── Skills ── */
+    .cv-skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+
+    .cv-skill-group {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .cv-skill-label {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+      white-space: nowrap;
+      min-width: 120px;
+    }
+
+    .cv-skill-items {
+      font-size: 13px;
+      color: #444;
+    }
+
+    /* ── Experience / Projects ── */
+    .cv-entry {
+      margin-bottom: 20px;
+    }
+
+    .cv-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .cv-entry-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .cv-entry-date {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    .cv-entry-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .cv-entry-sub a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .cv-entry-body {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .cv-entry-body ul {
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+
+    .cv-entry-body li {
+      margin-bottom: 2px;
+    }
+
+    /* ── Placeholder ── */
+    .placeholder {
+      background: #fff8f5;
+      border: 1.5px dashed #f0b08a;
+      border-radius: 4px;
+      padding: 10px 14px;
+      color: #b05020;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; padding: 40px 48px; box-shadow: none; }
+      a { color: inherit !important; }
+      .placeholder { border-color: #ccc; background: #fafafa; color: #888; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="cv-header">
+    <div class="cv-name">Benny Unger</div>
+    <div class="cv-title">Senior Product Designer · Product Builder</div>
+    <div class="cv-contact">
+      <a href="mailto:bennyungerc@gmail.com">bennyungerc@gmail.com</a>
+      <span class="cv-contact-sep">·</span>
+      <a href="https://www.linkedin.com/in/binyamin-unger-gd" target="_blank">linkedin.com/in/binyamin-unger-gd</a>
+      <span class="cv-contact-sep">·</span>
+      <a href="https://wa.me/972533401522" target="_blank">WhatsApp +972 53 340 1522</a>
+      <span class="cv-contact-sep">·</span>
+      <a href="https://bennyunger.myportfolio.com" target="_blank">bennyunger.myportfolio.com</a>
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <section class="cv-section cv-summary">
+    <div class="cv-section-title">Summary</div>
+    <p>Senior product designer who leads with UX — functionality, clarity, and how people actually use things come first. Fine art and illustration background that earns its place when it makes flows legible and reduces cognitive load. Increasingly focused on AI-assisted product design: using tools like Claude Code to ship directly from Figma, treating AI as a collaborator rather than automation.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="cv-section">
+    <div class="cv-section-title">Skills</div>
+    <div class="cv-skills-grid">
+      <div class="cv-skill-group">
+        <span class="cv-skill-label">UX / Product Design</span>
+        <span class="cv-skill-items">User research, flows, wireframing, prototyping</span>
+      </div>
+      <div class="cv-skill-group">
+        <span class="cv-skill-label">Visual Design</span>
+        <span class="cv-skill-items">UI design, design systems, illustration</span>
+      </div>
+      <div class="cv-skill-group">
+        <span class="cv-skill-label">Research</span>
+        <span class="cv-skill-items">User interviews, surveys, usability testing</span>
+      </div>
+      <div class="cv-skill-group">
+        <span class="cv-skill-label">Tools</span>
+        <span class="cv-skill-items">Figma, HTML / CSS / JS, Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="cv-section">
+    <div class="cv-section-title">Experience</div>
+    <div class="placeholder">
+      Experience section — please share your existing CV and I will fill in roles, companies, and dates.
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="cv-section">
+    <div class="cv-section-title">Selected Projects</div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-header">
+        <span class="cv-entry-title">Papayask</span>
+        <span class="cv-entry-date">2024</span>
+      </div>
+      <div class="cv-entry-sub">
+        <a href="https://bennyunger.myportfolio.com/papayask" target="_blank">bennyunger.myportfolio.com/papayask</a>
+      </div>
+      <div class="cv-entry-body">
+        A platform connecting freelancers and customers worldwide — professionals only. Designed the full onboarding and vetting experience for service providers, plus the end-to-end customer journey from discovery to hire. Built atomic component library (Atoms → Molecules → Organisms) in Figma.
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-header">
+        <span class="cv-entry-title">Jewrist</span>
+        <span class="cv-entry-date">2022</span>
+      </div>
+      <div class="cv-entry-sub">
+        <a href="https://bennyunger.myportfolio.com/jewrist" target="_blank">bennyunger.myportfolio.com/jewrist</a>
+      </div>
+      <div class="cv-entry-body">
+        Kosher travel app for observant Jewish travelers. Led end-to-end UX: survey (Facebook &amp; WhatsApp groups), user interviews, persona definition, user journey mapping, and high-fidelity Figma prototype. Key features: kosher restaurant discovery, barcode scanning, community-updatable content, and saved lists.
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-header">
+        <span class="cv-entry-title">ZOOM for Orthodox</span>
+        <span class="cv-entry-date">2022</span>
+      </div>
+      <div class="cv-entry-sub">
+        <a href="https://bennyunger.myportfolio.com/zoom-for-orthodox" target="_blank">bennyunger.myportfolio.com/zoom-for-orthodox</a>
+      </div>
+      <div class="cv-entry-body">
+        UX redesign of video-conferencing for Orthodox Jewish users — addressing Shabbat and Yom Tov constraints, gender-separation features, and modesty settings while preserving core productivity functionality.
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-header">
+        <span class="cv-entry-title">Post Office Bank</span>
+        <span class="cv-entry-date">2022</span>
+      </div>
+      <div class="cv-entry-sub">
+        <a href="https://bennyunger.myportfolio.com/post-office-bank" target="_blank">bennyunger.myportfolio.com/post-office-bank</a>
+      </div>
+      <div class="cv-entry-body">
+        Banking app UX design for Israel's Post Office Bank — focused on accessibility, clarity of financial data, and reducing friction in everyday banking tasks.
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="cv-section">
+    <div class="cv-section-title">Education</div>
+    <div class="placeholder">
+      Education section — please share your existing CV and I will fill in institution, degree, and dates.
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
