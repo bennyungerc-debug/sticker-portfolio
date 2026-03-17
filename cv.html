@@ -193,11 +193,11 @@
     /* ── Print ── */
     @page {
       size: A4;
-      margin: 18mm 16mm;
+      margin: 12mm 14mm;
     }
 
     @media print {
-      body { background: #fff; }
+      body { background: #fff; font-size: 12.5px; }
       .page {
         width: 100%;
         margin: 0;
@@ -205,6 +205,13 @@
         box-shadow: none;
         min-height: unset;
       }
+      .cv-header { margin-bottom: 20px; }
+      .cv-section { margin-bottom: 16px; }
+      .cv-section-title { margin-bottom: 10px; padding-bottom: 3px; }
+      .cv-entry { margin-bottom: 10px; }
+      .cv-summary p { font-size: 12.5px; line-height: 1.5; }
+      .cv-entry-body { font-size: 12px; line-height: 1.5; }
+      .cv-skills-grid { gap: 6px 24px; }
       a { color: inherit !important; }
       .placeholder { border-color: #ccc; background: #fafafa; color: #888; }
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
