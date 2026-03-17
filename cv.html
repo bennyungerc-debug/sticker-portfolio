@@ -191,11 +191,23 @@
     }
 
     /* ── Print ── */
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+
     @media print {
       body { background: #fff; }
-      .page { margin: 0; padding: 40px 48px; box-shadow: none; }
+      .page {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        min-height: unset;
+      }
       a { color: inherit !important; }
       .placeholder { border-color: #ccc; background: #fafafa; color: #888; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
