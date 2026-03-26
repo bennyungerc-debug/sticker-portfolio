@@ -449,6 +449,17 @@
       margin: 40px 0 12px;
     }
     #overlay-body a { color: #e8560a; }
+
+    /* Image fade-in on load */
+    .sticker-card-thumb img,
+    .carousel-track img {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .sticker-card-thumb img.img-loaded,
+    .carousel-track img.img-loaded {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -506,7 +517,9 @@
   
     <div class="sticker" id="s10" data-label="Papayask" data-link="https://bennyunger.myportfolio.com/papayask" data-static="true" style="top:4vh; left:5vw; transform:rotate(-2deg)">
       <div class="sticker-card">
-        <div class="sticker-card-thumb" style="background:#C8E6C9;">🎨</div>
+        <div class="sticker-card-thumb" style="background:#C8E6C9;">
+          <img src="assets/project-papayask.webp" alt="Papayask" loading="lazy" />
+        </div>
         <div class="sticker-card-label">Papayask</div>
         <div class="sticker-card-sub">UI & Design System · 2024</div>
       </div>
@@ -514,7 +527,9 @@
 
     <div class="sticker" id="s11" data-label="Jewrist" data-link="https://bennyunger.myportfolio.com/jewrist" data-static="true" style="top:4vh; left:82vw; transform:rotate(2deg)">
       <div class="sticker-card">
-        <div class="sticker-card-thumb" style="background:#BBDEFB;">✈️</div>
+        <div class="sticker-card-thumb" style="background:#BBDEFB;">
+          <img src="assets/project-jewrist.webp" alt="Jewrist" loading="lazy" />
+        </div>
         <div class="sticker-card-label">Jewrist</div>
         <div class="sticker-card-sub">Kosher Tourism App · 2022</div>
       </div>
@@ -522,7 +537,9 @@
 
     <div class="sticker" id="s12" data-label="ZOOM For Orthodox" data-link="https://bennyunger.myportfolio.com/zoom-for-orthodox" data-static="true" style="top:58vh; left:5vw; transform:rotate(1.5deg)">
       <div class="sticker-card">
-        <div class="sticker-card-thumb" style="background:#FFE0B2;">📹</div>
+        <div class="sticker-card-thumb" style="background:#FFE0B2;">
+          <img src="assets/project-zoom.webp" alt="ZOOM For Orthodox" loading="lazy" />
+        </div>
         <div class="sticker-card-label">ZOOM For Orthodox</div>
         <div class="sticker-card-sub">Feature Redesign · 2022</div>
       </div>
@@ -530,7 +547,9 @@
 
     <div class="sticker" id="s13" data-label="Post Office Bank" data-link="https://bennyunger.myportfolio.com/post-office-bank" data-static="true" style="top:58vh; left:82vw; transform:rotate(-2.5deg)">
       <div class="sticker-card">
-        <div class="sticker-card-thumb" style="background:#E8EAF6;">🏦</div>
+        <div class="sticker-card-thumb" style="background:#E8EAF6;">
+          <img src="assets/project-postoffice.webp" alt="Post Office Bank" loading="lazy" />
+        </div>
         <div class="sticker-card-label">Post Office Bank</div>
         <div class="sticker-card-sub">UI Prototype · 2022</div>
       </div>
@@ -540,7 +559,7 @@
       style="top:5vh; left:30vw; transform:rotate(-2deg); display:none">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#e3f0ff,#c5d8f5);">🏗️
-          <img src="assets/project-gabizon.png" alt="Gabizon App" onerror="this.style.display='none'" />
+          <img src="assets/project-gabizon.png" alt="Gabizon App" loading="lazy" onerror="this.style.display='none'" />
         </div>
         <div class="sticker-card-label">Gabizon App</div>
         <div class="sticker-card-sub">Complex System Design · 2024</div>
@@ -551,7 +570,7 @@
       style="top:5vh; left:57vw; transform:rotate(1.5deg); display:none">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#ede7ff,#c9b8f7);">🎭
-          <img src="assets/project-mecomics.png" alt="Mecomics" onerror="this.style.display='none'" />
+          <img src="assets/project-mecomics.png" alt="Mecomics" loading="lazy" onerror="this.style.display='none'" />
         </div>
         <div class="sticker-card-label">Mecomics</div>
         <div class="sticker-card-sub">Platform (web/mobile app) · 2025</div>
@@ -562,7 +581,7 @@
       style="top:80vh; left:28vw; transform:rotate(1.5deg); display:none">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#fce4f5,#f0b8e8);">⭐
-          <img src="assets/project-snipcritics.png" alt="Snipcritics.com" onerror="this.style.display='none'" />
+          <img src="assets/project-snipcritics.png" alt="Snipcritics.com" loading="lazy" onerror="this.style.display='none'" />
         </div>
         <div class="sticker-card-label">Snipcritics.com</div>
         <div class="sticker-card-sub">Platform (web/mobile) · 2022</div>
@@ -573,7 +592,7 @@
       style="top:80vh; left:58vw; transform:rotate(-2deg); display:none">
       <div class="sticker-card">
         <div class="sticker-card-thumb" style="background:linear-gradient(135deg,#fff8e1,#ffe082);">🖌️
-          <img src="assets/project-illustration.png" alt="Illustration" onerror="this.style.display='none'" />
+          <img src="assets/project-illustration.png" alt="Illustration" loading="lazy" onerror="this.style.display='none'" />
         </div>
         <div class="sticker-card-label">Illustration</div>
         <div class="sticker-card-sub">UI Illustrations</div>
@@ -973,86 +992,86 @@
         <h3>⚛️ Atoms</h3>
         <p>Icons and colors / Typography / Layout / Illustrations, elevation, roundness, spacing / Lines and size / Logo, controllers, avatars &amp; category</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a35e875e-7d27-4985-975d-8085e5976d94_rw_600.png?h=02728757a789f082c9c92bb33cf43cdc" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/9bf1a884-29d5-4d17-b492-8820fe36bbe3_rw_600.png?h=dcdb2729640a7d3a744518a38ecd9b29" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/621a60eb-b73d-4f7d-89fc-af8984bbadec_rw_1200.png?h=373ab0d039630fced4c77c9ea2d57840" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/5c3ed91b-fcd9-4e01-9eeb-18c10d66e259_rw_1200.png?h=c069e15d05ab99994f494ff0e3b470df" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f6292f7d-90df-4b7f-a5aa-1ed06e3ae843_rw_1200.png?h=544b7afaaefe4f8ecdb335384901fe96" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d229e711-a0b2-43c8-9e96-01d4be715d60_rw_600.png?h=01f0c507ee9bac206dbdd0b814fc0ef3" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e11c3ee2-68bb-4fcd-a670-c657eb73f529_rw_600.png?h=619784bb34fa15fe8269fde622d94108" loading="eager" alt="Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3e2eb206-dcda-42b0-97c4-b2eb949ee002_rw_600.png?h=2e8755e2dca8733ffbec0acfb1776e4e" loading="eager" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a35e875e-7d27-4985-975d-8085e5976d94_rw_600.png?h=02728757a789f082c9c92bb33cf43cdc" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/9bf1a884-29d5-4d17-b492-8820fe36bbe3_rw_600.png?h=dcdb2729640a7d3a744518a38ecd9b29" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/621a60eb-b73d-4f7d-89fc-af8984bbadec_rw_1200.png?h=373ab0d039630fced4c77c9ea2d57840" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/5c3ed91b-fcd9-4e01-9eeb-18c10d66e259_rw_1200.png?h=c069e15d05ab99994f494ff0e3b470df" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f6292f7d-90df-4b7f-a5aa-1ed06e3ae843_rw_1200.png?h=544b7afaaefe4f8ecdb335384901fe96" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d229e711-a0b2-43c8-9e96-01d4be715d60_rw_600.png?h=01f0c507ee9bac206dbdd0b814fc0ef3" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e11c3ee2-68bb-4fcd-a670-c657eb73f529_rw_600.png?h=619784bb34fa15fe8269fde622d94108" loading="lazy" alt="Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3e2eb206-dcda-42b0-97c4-b2eb949ee002_rw_600.png?h=2e8755e2dca8733ffbec0acfb1776e4e" loading="lazy" alt="Atoms" />
         </div>
 
         <h3>🧬 Molecules</h3>
         <p>Inputs field &amp; pagination / Buttons / Header, message, footer, and inbox</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/240faf9d-c222-4737-91d2-156d9969a3ca_rw_600.png?h=299d56abb8ee43e1edd33f882d50147f" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3282c6b1-fdbc-4365-bb3b-a096cb4d9647_rw_600.png?h=5315f14df90cb6f95ec4813f3a8a64b4" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/357a8caa-c060-4859-9605-b2728ecc7ac7_rw_600.png?h=48e8acce4e2befe1b6ac388732ed9598" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d9ef1ebd-5ad0-462f-aa15-ce696409253b_rw_1200.png?h=5ebfe20a762a25a614097a57d690235a" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/dcf29efc-9563-46f9-bd16-1d15f482651e_rw_1200.png?h=e499b86285c1e01d39ffbf8882d9bf73" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f20809da-0078-4499-b064-ef404b71b9a5_rw_1200.png?h=d0e2bce4affeb3d7fc7b9db32d5d9272" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/8866ef98-25d1-4baf-b2a2-e8bdbf2631d9_rw_1200.png?h=7396beca59871bfbceea6e3ad6481a04" loading="eager" alt="Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/39e56f88-acc2-432d-a7a1-f97bf08b15d0_rw_1200.png?h=116004bace1c08886ba6f114299fa9e0" loading="eager" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/240faf9d-c222-4737-91d2-156d9969a3ca_rw_600.png?h=299d56abb8ee43e1edd33f882d50147f" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3282c6b1-fdbc-4365-bb3b-a096cb4d9647_rw_600.png?h=5315f14df90cb6f95ec4813f3a8a64b4" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/357a8caa-c060-4859-9605-b2728ecc7ac7_rw_600.png?h=48e8acce4e2befe1b6ac388732ed9598" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d9ef1ebd-5ad0-462f-aa15-ce696409253b_rw_1200.png?h=5ebfe20a762a25a614097a57d690235a" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/dcf29efc-9563-46f9-bd16-1d15f482651e_rw_1200.png?h=e499b86285c1e01d39ffbf8882d9bf73" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f20809da-0078-4499-b064-ef404b71b9a5_rw_1200.png?h=d0e2bce4affeb3d7fc7b9db32d5d9272" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/8866ef98-25d1-4baf-b2a2-e8bdbf2631d9_rw_1200.png?h=7396beca59871bfbceea6e3ad6481a04" loading="lazy" alt="Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/39e56f88-acc2-432d-a7a1-f97bf08b15d0_rw_1200.png?h=116004bace1c08886ba6f114299fa9e0" loading="lazy" alt="Molecules" />
         </div>
 
         <h3>🦠 Organism</h3>
         <p>Section, card, filters &amp; status</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fae4f991-565d-498d-99e8-b123642bd599_rw_1920.png?h=9213c94bc5f9fd261bc764acfa347549" loading="eager" alt="Organism" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6658bd17-e939-4f14-898f-d5d4ca80b316_rw_1920.png?h=e2e6ab38f72dc61a91a50fcb6db0d2be" loading="eager" alt="Organism" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fae4f991-565d-498d-99e8-b123642bd599_rw_1920.png?h=9213c94bc5f9fd261bc764acfa347549" loading="lazy" alt="Organism" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6658bd17-e939-4f14-898f-d5d4ca80b316_rw_1920.png?h=e2e6ab38f72dc61a91a50fcb6db0d2be" loading="lazy" alt="Organism" />
         </div>
 
         <h3>Templates — Sign In/Up</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ad7a43d9-82b8-4623-8179-4ebb27e6bfd7_rw_600.png?h=638e8cc656a131876aebfd6281fbef10" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ad9e4e29-2222-4595-b956-1de3084960a5_rw_600.png?h=fbd6c4cec44949ac532461f772f90371" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3f2c811e-a68b-41bc-b6ed-6741d998280a_rw_600.png?h=c8809427d2a151800aca909aab54aee9" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/bd4c23f8-f065-4915-b1ab-6132c5953a47_rw_600.png?h=b389f1d097aa88b22830cff5008ac44a" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/942f9a6b-87d7-4de0-8b2f-09b129691812_rw_600.png?h=6b4422dac7da8b810c1542de2e238006" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/907427f2-34ad-4ae6-b5d7-5a114e6d9e03_rw_600.png?h=aa4171a0285aeb073cb20ad470f8555a" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/61d41c5f-a2e2-42bf-8ca5-e672250b8dc6_rw_600.png?h=57b971e2e001e6b2d226e93452ad9995" loading="eager" alt="Sign In/Up" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/2f4a253d-c369-4227-8141-d5f780d9e655_rw_600.png?h=6319cfd2431358cafe89178a06bd694d" loading="eager" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ad7a43d9-82b8-4623-8179-4ebb27e6bfd7_rw_600.png?h=638e8cc656a131876aebfd6281fbef10" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ad9e4e29-2222-4595-b956-1de3084960a5_rw_600.png?h=fbd6c4cec44949ac532461f772f90371" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3f2c811e-a68b-41bc-b6ed-6741d998280a_rw_600.png?h=c8809427d2a151800aca909aab54aee9" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/bd4c23f8-f065-4915-b1ab-6132c5953a47_rw_600.png?h=b389f1d097aa88b22830cff5008ac44a" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/942f9a6b-87d7-4de0-8b2f-09b129691812_rw_600.png?h=6b4422dac7da8b810c1542de2e238006" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/907427f2-34ad-4ae6-b5d7-5a114e6d9e03_rw_600.png?h=aa4171a0285aeb073cb20ad470f8555a" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/61d41c5f-a2e2-42bf-8ca5-e672250b8dc6_rw_600.png?h=57b971e2e001e6b2d226e93452ad9995" loading="lazy" alt="Sign In/Up" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/2f4a253d-c369-4227-8141-d5f780d9e655_rw_600.png?h=6319cfd2431358cafe89178a06bd694d" loading="lazy" alt="Sign In/Up" />
         </div>
 
         <h3>Templates — User Profile</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e9af1efa-9efb-42e1-b177-3c85f66f63bf_rw_1920.png?h=6804d1dff39615a71cf7543753bfa903" loading="eager" alt="User Profile" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6c0c8e8f-12d0-4f2b-8c23-769a4b96650f_rw_1920.png?h=5dec24ff3f475f70c974e555c994abf1" loading="eager" alt="User Profile" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/58b1e74d-2dcb-4098-a061-e78eb28db3d1_rw_1920.png?h=6dcdb5033a863b34b3b21293ce6103ea" loading="eager" alt="User Profile" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e9af1efa-9efb-42e1-b177-3c85f66f63bf_rw_1920.png?h=6804d1dff39615a71cf7543753bfa903" loading="lazy" alt="User Profile" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6c0c8e8f-12d0-4f2b-8c23-769a4b96650f_rw_1920.png?h=5dec24ff3f475f70c974e555c994abf1" loading="lazy" alt="User Profile" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/58b1e74d-2dcb-4098-a061-e78eb28db3d1_rw_1920.png?h=6dcdb5033a863b34b3b21293ce6103ea" loading="lazy" alt="User Profile" />
         </div>
 
         <h3>Templates — Searching</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6967b086-ffef-427d-b7db-41a88e720851_rw_1200.png?h=370bb32d8a84f594d8fb1200015e9ebd" loading="eager" alt="Searching" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/346e36aa-a876-43d2-bbf7-5da24f3aca91_rw_1200.png?h=71d92365e3ffc814ddfb1e11ac91ab9f" loading="eager" alt="Searching" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/83cc395e-1bd2-45e5-aee9-f2587e4cd985_rw_1200.png?h=312ebed18ebb319b280d9f6f21577c75" loading="eager" alt="Searching" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6967b086-ffef-427d-b7db-41a88e720851_rw_1200.png?h=370bb32d8a84f594d8fb1200015e9ebd" loading="lazy" alt="Searching" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/346e36aa-a876-43d2-bbf7-5da24f3aca91_rw_1200.png?h=71d92365e3ffc814ddfb1e11ac91ab9f" loading="lazy" alt="Searching" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/83cc395e-1bd2-45e5-aee9-f2587e4cd985_rw_1200.png?h=312ebed18ebb319b280d9f6f21577c75" loading="lazy" alt="Searching" />
         </div>
 
         <h3>Templates — Filters</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/49e96adc-1068-4172-8422-6d541e1c8e40_rw_1920.png?h=6139f6719e96c0620429825e407b58ee" loading="eager" alt="Filters" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f7b60b99-2c70-41e2-9b2f-ee8cb8f6a61b_rw_1920.png?h=f13b87a2645dd3bfbe504f932ce1e119" loading="eager" alt="Filters" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a546657e-0a18-4c41-9c8e-f5fc314bae38_rw_1200.png?h=01c3fad52caa111456714178a1dfac19" loading="eager" alt="Filters" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/0931520e-7839-48b2-bec7-6b828a0ddd3e_rw_1200.png?h=6f587f7478d5cb58ec17423c36d73a7f" loading="eager" alt="Filters" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/49e96adc-1068-4172-8422-6d541e1c8e40_rw_1920.png?h=6139f6719e96c0620429825e407b58ee" loading="lazy" alt="Filters" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f7b60b99-2c70-41e2-9b2f-ee8cb8f6a61b_rw_1920.png?h=f13b87a2645dd3bfbe504f932ce1e119" loading="lazy" alt="Filters" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a546657e-0a18-4c41-9c8e-f5fc314bae38_rw_1200.png?h=01c3fad52caa111456714178a1dfac19" loading="lazy" alt="Filters" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/0931520e-7839-48b2-bec7-6b828a0ddd3e_rw_1200.png?h=6f587f7478d5cb58ec17423c36d73a7f" loading="lazy" alt="Filters" />
         </div>
 
         <h3>Templates — Advisor</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/853d1af7-2c99-4ea8-8d9f-283cd5902ba5_rw_1920.png?h=5536574775efd1f9d1c48306c07d5ca5" loading="eager" alt="Advisor" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/853d1af7-2c99-4ea8-8d9f-283cd5902ba5_rw_1920.png?h=5536574775efd1f9d1c48306c07d5ca5" loading="lazy" alt="Advisor" />
         </div>
 
         <h3>Templates — Requests</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a16afec4-3cb9-4aea-b681-f024c96bf93b_rw_1920.png?h=08191fe15d260f9cb46ccec96b35c656" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f49e5936-441b-4780-87f7-9f97ee9bef39_rw_1920.png?h=eab85d4ec99577f979da313b33daa7d3" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/bf3a8ec2-a01f-40bd-b856-92d85dabc496_rw_1920.png?h=044c66ae52d463a8124abaa24670fb7c" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/80ef1590-6576-4375-b2a8-1b30d1cd8487_rw_1920.png?h=aaff40495f97036f3d12bd3d8bd6905b" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e8b74938-f2e3-4dfb-ae8e-7999170df7e4_rw_1920.png?h=2854b5c714c56ad50dd976e19d1e2510" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/8cdaf774-4bac-4a65-a293-094d07b5072c_rw_1920.png?h=2194987f25a1b2b6e5013fcdb01f100e" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d57a1987-290b-45af-9b95-68679fec7d3c_rw_1920.png?h=c0a6edc0d25081a621a9415339b3b64c" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/18b188d4-3cbc-4afc-aff2-8d43b3e029a2_rw_1920.png?h=6629ccfbb32bd9f44e4a99a7e611b225" loading="eager" alt="Requests" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e530ff85-85aa-428e-9ad3-9899aa68de5e_rw_1920.png?h=6c5db250ac7d3426e00394b6ca7e9688" loading="eager" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a16afec4-3cb9-4aea-b681-f024c96bf93b_rw_1920.png?h=08191fe15d260f9cb46ccec96b35c656" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f49e5936-441b-4780-87f7-9f97ee9bef39_rw_1920.png?h=eab85d4ec99577f979da313b33daa7d3" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/bf3a8ec2-a01f-40bd-b856-92d85dabc496_rw_1920.png?h=044c66ae52d463a8124abaa24670fb7c" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/80ef1590-6576-4375-b2a8-1b30d1cd8487_rw_1920.png?h=aaff40495f97036f3d12bd3d8bd6905b" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e8b74938-f2e3-4dfb-ae8e-7999170df7e4_rw_1920.png?h=2854b5c714c56ad50dd976e19d1e2510" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/8cdaf774-4bac-4a65-a293-094d07b5072c_rw_1920.png?h=2194987f25a1b2b6e5013fcdb01f100e" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d57a1987-290b-45af-9b95-68679fec7d3c_rw_1920.png?h=c0a6edc0d25081a621a9415339b3b64c" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/18b188d4-3cbc-4afc-aff2-8d43b3e029a2_rw_1920.png?h=6629ccfbb32bd9f44e4a99a7e611b225" loading="lazy" alt="Requests" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e530ff85-85aa-428e-9ad3-9899aa68de5e_rw_1920.png?h=6c5db250ac7d3426e00394b6ca7e9688" loading="lazy" alt="Requests" />
         </div>
       `
     },
@@ -1068,67 +1087,67 @@
         <p><strong>Survey findings:</strong> Most respondents travel at least once a year. Kosher restaurants and kosher hotels are equally popular. People prefer destinations with a Jewish community or Bet Chabad. Kosher vacations are usually not organized by a single app. People are not very interested in local Jewish-history sites.</p>
         <p><strong>Key features requested:</strong> Price comparisons and user ratings / Kosher restaurants by destination / Kosher product photos and kashrut info / Filtering restaurants by location / Barcode scanning for kosher products</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/601a8dd2-8839-4d57-aadf-683690acf4ff_rw_1200.png?h=6b17f1e1a8fa9e9f4575db03ffb181ff" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ddcfaac1-324d-400e-a5d8-5527045acb96_rw_1200.png?h=00a83f862ad5f1ab37e4832184fe52c9" loading="eager" alt="Survey results" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/4cb2a622-6318-4adb-9448-b7850313dbe8_rw_1200.png?h=a484936056c0edd6dc861f42270a4a4c" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/b4f8fc1d-28fb-4b19-a719-f895a0877200_rw_1200.png?h=281db09b8f4d53b5ac2881fcfbe8aebe" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e5e34192-7084-4d24-9318-0be9bb011bee_rw_1200.png?h=0b1a906d7ba03a4c7dfbffaceab6ba77" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f5402cc7-4675-4f07-8980-a7c2758249b8_rw_1200.png?h=3315dc18f6dc76a90ad85f99ae58e589" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/466a88b7-8f2c-424f-8e15-d92c2975110a_rw_1200.png?h=7a689457d90d4108132cd1b1bc6ba80c" loading="eager" alt="Survey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/b5735698-77d9-4aca-a0ea-730f63c14fb1_rw_1200.png?h=0026e292b5c2725d3e9d8bafd5f6d7e8" loading="eager" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/601a8dd2-8839-4d57-aadf-683690acf4ff_rw_1200.png?h=6b17f1e1a8fa9e9f4575db03ffb181ff" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ddcfaac1-324d-400e-a5d8-5527045acb96_rw_1200.png?h=00a83f862ad5f1ab37e4832184fe52c9" loading="lazy" alt="Survey results" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/4cb2a622-6318-4adb-9448-b7850313dbe8_rw_1200.png?h=a484936056c0edd6dc861f42270a4a4c" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/b4f8fc1d-28fb-4b19-a719-f895a0877200_rw_1200.png?h=281db09b8f4d53b5ac2881fcfbe8aebe" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e5e34192-7084-4d24-9318-0be9bb011bee_rw_1200.png?h=0b1a906d7ba03a4c7dfbffaceab6ba77" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f5402cc7-4675-4f07-8980-a7c2758249b8_rw_1200.png?h=3315dc18f6dc76a90ad85f99ae58e589" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/466a88b7-8f2c-424f-8e15-d92c2975110a_rw_1200.png?h=7a689457d90d4108132cd1b1bc6ba80c" loading="lazy" alt="Survey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/b5735698-77d9-4aca-a0ea-730f63c14fb1_rw_1200.png?h=0026e292b5c2725d3e9d8bafd5f6d7e8" loading="lazy" alt="Survey" />
         </div>
 
         <h3>🎤 Interviews</h3>
         <p>I conducted interviews with kosher observant people who travel abroad with their families. Beyond the quantitative survey data, I gained qualitative and in-depth information — a better understanding of users' pain points.</p>
         <p><strong>Conclusions:</strong> Need a list of kosher products (including unmarked ones) / Kosher restaurants list / Small private places and B&Bs / Community-updatable content / Save for later functionality</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/c027f55f-8996-4d1f-a5cf-c2fa52f52c73_rw_1920.png?h=8b2613cc63a20be5dd7cf8944ee60c44" loading="eager" alt="Interview notes" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/483086be-f21a-4b6e-b8c7-9ef9833acd83_rw_1920.png?h=d9a63eb6462efc6ecaebafae30f3973f" loading="eager" alt="Interview notes" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/c027f55f-8996-4d1f-a5cf-c2fa52f52c73_rw_1920.png?h=8b2613cc63a20be5dd7cf8944ee60c44" loading="lazy" alt="Interview notes" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/483086be-f21a-4b6e-b8c7-9ef9833acd83_rw_1920.png?h=d9a63eb6462efc6ecaebafae30f3973f" loading="lazy" alt="Interview notes" />
         </div>
 
         <h3>🎯 Define — Persona, User Story &amp; User Journey</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3be4d4ba-f147-4311-b808-804ab1ecbef9_rw_600.png?h=2f6c3ee6887a1dec8903c5e682e72521" loading="eager" alt="Persona" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e4deb412-5e1b-43ac-a235-07c02d984d40_rw_1200.png?h=25bdb9c619cbe01b009de42e63e24315" loading="eager" alt="User Journey" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/72e06167-c2e3-4407-a721-9c637345255e_rw_1200.png?h=cca98103c10323fe526dc384f3b8ea06" loading="eager" alt="User Story" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ea99ad52-6fa8-470c-9322-beee36d3535e_rw_1200.png?h=5fc4497c9896272397264183ce377945" loading="eager" alt="Empathy Map" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/9b5ea7c7-bed3-41c0-a058-802829ee3d2a_rw_1920.png?h=d1da3a7aaaca876d65b7776935f4ae8b" loading="eager" alt="Define" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3be4d4ba-f147-4311-b808-804ab1ecbef9_rw_600.png?h=2f6c3ee6887a1dec8903c5e682e72521" loading="lazy" alt="Persona" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e4deb412-5e1b-43ac-a235-07c02d984d40_rw_1200.png?h=25bdb9c619cbe01b009de42e63e24315" loading="lazy" alt="User Journey" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/72e06167-c2e3-4407-a721-9c637345255e_rw_1200.png?h=cca98103c10323fe526dc384f3b8ea06" loading="lazy" alt="User Story" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/ea99ad52-6fa8-470c-9322-beee36d3535e_rw_1200.png?h=5fc4497c9896272397264183ce377945" loading="lazy" alt="Empathy Map" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/9b5ea7c7-bed3-41c0-a058-802829ee3d2a_rw_1920.png?h=d1da3a7aaaca876d65b7776935f4ae8b" loading="lazy" alt="Define" />
         </div>
 
         <h3>💡 Ideate — Competitive Analysis, User Flow &amp; Wireframes</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/cfdbfd26-eb94-4930-9a06-d668846b497d_rw_600.png?h=7e9fff96b42e9f1709db9c3418392cc6" loading="eager" alt="Competitive Analysis" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/cb3f30b0-57ca-44bc-bd2a-5d00a1f4598d_rw_1920.png?h=ec517ef447fdf989289bc6e1c77cb8c7" loading="eager" alt="Wireframes" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fcd88752-7671-4164-8382-0a0657d5fd34_rw_1920.png?h=ef145e4dea2feb4aad66079c2803b1a6" loading="eager" alt="Wireframes" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fdfd135e-f8fd-4c4a-b232-0f1e94525f85_rw_1920.png?h=972e8574b9d6be75d3761e3d20be2fab" loading="eager" alt="Wireframes" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/cfdbfd26-eb94-4930-9a06-d668846b497d_rw_600.png?h=7e9fff96b42e9f1709db9c3418392cc6" loading="lazy" alt="Competitive Analysis" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/cb3f30b0-57ca-44bc-bd2a-5d00a1f4598d_rw_1920.png?h=ec517ef447fdf989289bc6e1c77cb8c7" loading="lazy" alt="Wireframes" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fcd88752-7671-4164-8382-0a0657d5fd34_rw_1920.png?h=ef145e4dea2feb4aad66079c2803b1a6" loading="lazy" alt="Wireframes" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fdfd135e-f8fd-4c4a-b232-0f1e94525f85_rw_1920.png?h=972e8574b9d6be75d3761e3d20be2fab" loading="lazy" alt="Wireframes" />
         </div>
 
         <h3>📱 Prototype, UI &amp; User Testing #1</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/907abb60-d549-4df4-b2b8-bec3faa40d8c_rw_600.png?h=74cfc55688391fe44e3b9a5b5ed1a595" loading="eager" alt="Prototype v1" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/52e16f67-7bf1-40a6-8919-25839ddb84bd_rw_600.png?h=1f351f499a07f96c23fe28a2b84fbf68" loading="eager" alt="Prototype v1" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/63f96fd3-4a42-42a5-9d59-ad927cb40bca_rw_600.png?h=bce7c09647fe2a5e8a71885d3c595684" loading="eager" alt="Prototype v1" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/24fa2455-c1fa-4bf2-8508-63e2adf429ff_rw_600.png?h=4a47553c9c48b8c6d9ca63ab0b897fdd" loading="eager" alt="Prototype v1" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/45d3538e-a186-4075-8c1c-cc8276b22d08_rw_600.png?h=a9d97710db0220b00ffa3c12b0e33180" loading="eager" alt="Prototype v1" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/907abb60-d549-4df4-b2b8-bec3faa40d8c_rw_600.png?h=74cfc55688391fe44e3b9a5b5ed1a595" loading="lazy" alt="Prototype v1" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/52e16f67-7bf1-40a6-8919-25839ddb84bd_rw_600.png?h=1f351f499a07f96c23fe28a2b84fbf68" loading="lazy" alt="Prototype v1" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/63f96fd3-4a42-42a5-9d59-ad927cb40bca_rw_600.png?h=bce7c09647fe2a5e8a71885d3c595684" loading="lazy" alt="Prototype v1" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/24fa2455-c1fa-4bf2-8508-63e2adf429ff_rw_600.png?h=4a47553c9c48b8c6d9ca63ab0b897fdd" loading="lazy" alt="Prototype v1" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/45d3538e-a186-4075-8c1c-cc8276b22d08_rw_600.png?h=a9d97710db0220b00ffa3c12b0e33180" loading="lazy" alt="Prototype v1" />
         </div>
         <p><strong>Problems found in testing:</strong> Users didn't understand the map/list view toggle. The 'to-stay' &amp; 'to-eat' tabs were confused with planning/saving. Users wanted to see both accommodations and restaurants together.</p>
         <p><strong>Key insight:</strong> Remove the map/list toggle buttons. Consolidate to 3 tabs.</p>
 
         <h3>🤹 Interaction Design</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3ac4acc8-1d73-461f-b5c2-a17b7c1ce087_rw_1200.gif?h=0908d18ee2a100e6c793235f33fdfdeb" loading="eager" alt="Interaction - Splash" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/0b893ceb-6625-48bf-876f-0d49532f2f09_rw_1200.gif?h=f9105bde00af9a2693f6dff2142acad6" loading="eager" alt="Interaction - Password" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a08cfacd-225f-4599-b7ad-15ebaa03bf0d_rw_1200.gif?h=328391ee70174046af8eac34dfae7491" loading="eager" alt="Interaction - Sidebar" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e48505df-d0fc-4324-831c-354f0d9493a6_rw_1200.gif?h=852561d20306ba585c4f99f2e0adef95" loading="eager" alt="Interaction - Map/List" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/4353511b-0c7c-4808-901a-da5a18846dbd_rw_1200.gif?h=f050fa0f71f4a18b9a5d09209ae854d8" loading="eager" alt="Interaction - Pin" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6880a73c-0cd7-429c-9152-8f56ebcb8919_rw_1200.gif?h=3a3a3a45df8a233c9d904176bf809e1d" loading="eager" alt="Interaction - Item page" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/3ac4acc8-1d73-461f-b5c2-a17b7c1ce087_rw_1200.gif?h=0908d18ee2a100e6c793235f33fdfdeb" loading="lazy" alt="Interaction - Splash" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/0b893ceb-6625-48bf-876f-0d49532f2f09_rw_1200.gif?h=f9105bde00af9a2693f6dff2142acad6" loading="lazy" alt="Interaction - Password" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a08cfacd-225f-4599-b7ad-15ebaa03bf0d_rw_1200.gif?h=328391ee70174046af8eac34dfae7491" loading="lazy" alt="Interaction - Sidebar" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/e48505df-d0fc-4324-831c-354f0d9493a6_rw_1200.gif?h=852561d20306ba585c4f99f2e0adef95" loading="lazy" alt="Interaction - Map/List" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/4353511b-0c7c-4808-901a-da5a18846dbd_rw_1200.gif?h=f050fa0f71f4a18b9a5d09209ae854d8" loading="lazy" alt="Interaction - Pin" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/6880a73c-0cd7-429c-9152-8f56ebcb8919_rw_1200.gif?h=3a3a3a45df8a233c9d904176bf809e1d" loading="lazy" alt="Interaction - Item page" />
         </div>
 
         <h3>🎨 Design System</h3>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/569548ba-e7ea-41e0-be46-62f612ed269f_rw_1920.png?h=7f58ba4ce3f95b0008365f6ed321c7e8" loading="eager" alt="Design System - Atoms" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/02980020-31e0-4c60-a546-ed2105ccc9f3_rw_1920.png?h=a8ddd774bfdbe39a4ae296af5a356b9a" loading="eager" alt="Design System - Molecules" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/1f21bdd1-0b6f-457f-a8bb-b81fb73fc9fb_rw_1920.png?h=4ad7cf1c2ffdc08857a99581c94f37f7" loading="eager" alt="Design System - Mockup" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/569548ba-e7ea-41e0-be46-62f612ed269f_rw_1920.png?h=7f58ba4ce3f95b0008365f6ed321c7e8" loading="lazy" alt="Design System - Atoms" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/02980020-31e0-4c60-a546-ed2105ccc9f3_rw_1920.png?h=a8ddd774bfdbe39a4ae296af5a356b9a" loading="lazy" alt="Design System - Molecules" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/1f21bdd1-0b6f-457f-a8bb-b81fb73fc9fb_rw_1920.png?h=4ad7cf1c2ffdc08857a99581c94f37f7" loading="lazy" alt="Design System - Mockup" />
         </div>
 
         <p style="text-align:center;margin-top:40px;">thank you for reading ❤️</p>
@@ -1143,16 +1162,16 @@
         <h3>● Problem</h3>
         <p>The English-only interface caused fear and confusion. Users were afraid of accidentally sharing private content instead of relevant documents.</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a6b2b90d-1ca9-438b-9926-492b83b62d48_rw_1200.png?h=f220abfbcdda0873d0c7c6ccb0a03c6e" loading="eager" alt="Research" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/72ecb9a1-eefc-4404-afbd-340f827d38a5_rw_1200.png?h=b42872e82c14861fd4b7b378e02010f0" loading="eager" alt="Research" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/a6b2b90d-1ca9-438b-9926-492b83b62d48_rw_1200.png?h=f220abfbcdda0873d0c7c6ccb0a03c6e" loading="lazy" alt="Research" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/72ecb9a1-eefc-4404-afbd-340f827d38a5_rw_1200.png?h=b42872e82c14861fd4b7b378e02010f0" loading="lazy" alt="Research" />
         </div>
 
         <h3>🔍 Research — Empathize &amp; Define</h3>
         <p>User interviews revealed that ultra-Orthodox students love ZOOM — it saves them time and money. The main pain point was screen sharing: unclear options caused anxiety about accidentally sharing personal information.</p>
         <p><strong>Opportunities found:</strong> More visual explanations / Onboarding animations / Hebrew language support / Clearer Cancel button</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f0a5fdf8-aae6-45d9-8c4a-044b385cbb1d_rw_1920.png?h=a234acb6e1d0eeb6cc05d24f046a6501" loading="eager" alt="User Research" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fd3b5424-885c-4682-9fd2-85fa244b3aa4_rw_1200.png?h=9a852b926dd46e9d995d21ca11e413e8" loading="eager" alt="Design Thinking Process" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/f0a5fdf8-aae6-45d9-8c4a-044b385cbb1d_rw_1920.png?h=a234acb6e1d0eeb6cc05d24f046a6501" loading="lazy" alt="User Research" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/fd3b5424-885c-4682-9fd2-85fa244b3aa4_rw_1200.png?h=9a852b926dd46e9d995d21ca11e413e8" loading="lazy" alt="Design Thinking Process" />
         </div>
 
         <h3>📊 Competitive Analysis</h3>
@@ -1164,9 +1183,9 @@
         <h3>🎨 UI Design + 2nd Usability Testing</h3>
         <p>Designed following ZOOM's visual guidelines. Key elements: warning message, informative illustration, actions split into 2 sections (device + external apps), bold Cancel button.</p>
         <div data-carousel>
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d06e3261-ca32-491c-9571-712df5c6c62b_rw_600.png?h=2e395c562674e3405946e95182497e01" loading="eager" alt="UI Design" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/af7fe9b1-bc50-4294-961b-2691a9ca0ef1_rw_600.png?h=c6e3f2184b76b989005d0088cf650e6a" loading="eager" alt="UI Design" />
-          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/75f05dda-b5f8-4062-9e31-3dc94e5e1a77_rw_600.png?h=4f42615a5c2fc126bdd287b8939cd4fa" loading="eager" alt="Final UI" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/d06e3261-ca32-491c-9571-712df5c6c62b_rw_600.png?h=2e395c562674e3405946e95182497e01" loading="lazy" alt="UI Design" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/af7fe9b1-bc50-4294-961b-2691a9ca0ef1_rw_600.png?h=c6e3f2184b76b989005d0088cf650e6a" loading="lazy" alt="UI Design" />
+          <img src="https://cdn.myportfolio.com/918cecb4-4b61-4903-a07a-9e3017e81acf/75f05dda-b5f8-4062-9e31-3dc94e5e1a77_rw_600.png?h=4f42615a5c2fc126bdd287b8939cd4fa" loading="lazy" alt="Final UI" />
         </div>
 
         <h3>🎉 Results</h3>
@@ -1497,6 +1516,15 @@
 </div>
 
 <script>
+  // ── Fade-in images on load ──
+  document.querySelectorAll('.sticker-card-thumb img, .carousel-track img').forEach(img => {
+    if (img.complete) {
+      img.classList.add('img-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('img-loaded'));
+    }
+  });
+
   (function() {
     // ── Circular text ring ──
     const ring = document.querySelector('.fab-ring');
