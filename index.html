@@ -181,7 +181,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 8px;
       display: block;
     }
@@ -1285,6 +1285,10 @@
     document.getElementById('overlay-sub').textContent   = data.sub;
     document.getElementById('overlay-body').innerHTML    = data.body;
     initCarousels(document.getElementById('overlay-body'));
+    document.querySelectorAll('#overlay-body img, #overlay-hero img').forEach(img => {
+      if (img.complete) { img.classList.add('img-loaded'); }
+      else { img.addEventListener('load', () => img.classList.add('img-loaded')); }
+    });
     const lazyIframe = document.querySelector('#overlay-body iframe[data-src]');
     if (lazyIframe) lazyIframe.src = lazyIframe.dataset.src;
     const hero = document.getElementById('overlay-hero');
