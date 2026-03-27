@@ -2,3 +2,5 @@
 Designer/*.png
 CLAUDE.md
 .vercel
+.claude/
+Projects/*.png
