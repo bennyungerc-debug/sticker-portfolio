@@ -938,13 +938,18 @@
 
       // After stickers land, clean up
       setTimeout(() => {
-        stickers.forEach(s => {
+        stickers.forEach((s, i) => {
           s.style.transition = '';
           s.style.zIndex     = '';
+          // Restore vw/vh for static cards so they remain responsive on resize
+          if (targets[i].isStatic) {
+            s.style.left = targets[i].origLeft;
+            s.style.top  = targets[i].origTop;
+          }
         });
         animating = false;
       }, 650);
-    }, 300);
+    }, 1300);
   }
 
   // Save HTML defaults before loadPositions overwrites them
