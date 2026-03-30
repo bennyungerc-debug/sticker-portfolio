@@ -894,11 +894,14 @@
       return val;
     }
 
-    // Store final positions in px
+    // Store final positions in px (plus original units for static cards)
     const targets = stickers.map(s => ({
-      left: toPx(s.style.left),
-      top:  toPx(s.style.top),
-      transform: s.style.transform
+      left:      toPx(s.style.left),
+      top:       toPx(s.style.top),
+      transform: s.style.transform,
+      origLeft:  s.style.left,
+      origTop:   s.style.top,
+      isStatic:  !!s.dataset.static
     }));
 
     // Pre-set stickers to their px targets (no transition) so the pile can animate back
