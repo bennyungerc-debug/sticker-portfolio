@@ -884,7 +884,7 @@
   // ── Intro animation ──
   function runIntroAnimation() {
     animating = true;
-    const stickers = [...document.querySelectorAll('.sticker')].filter(s => !s.dataset.static);
+    const stickers = [...document.querySelectorAll('.sticker')].filter(s => s.style.display !== 'none');
 
     // Convert vw/vh → px so CSS can animate between units
     function toPx(val) {
