@@ -30,6 +30,8 @@
       width: 100%;
       height: 100%;
       background: #ffffff;
+      background-image: radial-gradient(circle, #d0d0d0 1px, transparent 1px);
+      background-size: 28px 28px;
       overflow: hidden;
       user-select: none;
       touch-action: none;
@@ -101,22 +103,22 @@
 
 
     .header-subtitle-card {
-      position: absolute;
-      top: calc(3vh + 90px);
+      position: fixed;
+      top: calc(3vh + 100px);
       left: 50%;
-      transform: translateX(-50%) rotate(0.5deg);
+      transform: translateX(-50%) rotate(0.4deg);
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: clamp(9px, 2vw, 13px);
-      color: #e8560a;
-      letter-spacing: clamp(0.5px, 0.3vw, 1.5px);
-      text-transform: uppercase;
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 0.5px;
       white-space: nowrap;
       direction: ltr;
       z-index: 20;
-      background: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 22px;
+      border-radius: 24px;
+      border: 1px solid #e8e8e8;
       box-shadow: none;
     }
 
@@ -232,37 +234,69 @@
     /* Controls */
     #controls {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
       gap: 8px;
       z-index: 1000;
+      background: #fff;
+      border-radius: 24px;
+      padding: 8px 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1), 0 0 0 1px #e0e0e0;
     }
 
     #zoom-btns {
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #zoom-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: #666;
+      min-width: 36px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .ctrl-divider {
+      width: 1px;
+      height: 20px;
+      background: #e0e0e0;
+      margin: 0 4px;
     }
 
     .ctrl-btn {
+      width: 36px;
+      height: 36px;
       background: #fff176;
       border: none;
-      border-radius: 100px;
-      padding: 9px 18px;
+      border-radius: 50%;
       font-family: 'Syne', sans-serif;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 700;
       color: #e8560a;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: inherit;
-      box-shadow: 2px 2px 0px #f9a825, 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #f9a825;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform 0.15s;
     }
 
-    .ctrl-btn:hover { transform: translateY(-2px); }
-    .ctrl-btn:active { transform: translateY(0); }
+    .ctrl-btn.reset-btn {
+      background: rgba(255,255,255,0.6);
+      box-shadow: none;
+    }
+
+    .ctrl-btn:hover { transform: scale(1.1); }
+    .ctrl-btn.reset-btn:hover { transform: scale(1.1) rotate(45deg); }
+    .ctrl-btn:active { transform: scale(1); }
 
     @media (max-width: 768px) {
       .header-sticker {
@@ -341,17 +375,22 @@
       }
 
       #social-btns {
-        left: 50%;
-        top: auto;
-        bottom: 80px;
-        transform: translateX(-50%);
-        flex-direction: row;
-        gap: 8px;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-direction: column;
+        gap: 10px;
       }
 
       .social-btn {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
+      }
+
+      .header-subtitle-card {
+        white-space: normal;
+        text-align: center;
+        max-width: 200px;
       }
 
       body {
@@ -472,9 +511,7 @@
     <span class="header-name">Benny Unger</span>
     <span class="header-title">Product Builder</span>
   </div>
-  <div class="header-subtitle-card">
-    Play around and move the stickers!
-  </div>
+  <div class="header-subtitle-card">Drag stickers · Scroll to zoom · Open a project</div>
 
   <!-- Sticker layer — this gets zoomed -->
   <div id="sticker-layer">
@@ -608,10 +645,12 @@
 <div id="cursor-tooltip"></div>
 <div id="controls">
   <div id="zoom-btns">
-    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(1.2, window.innerWidth/2, window.innerHeight/2)" style="display:flex;align-items:center;justify-content:center;"><img src="Icons/Plus.svg" style="width:14px;height:14px;" /></button>
-    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(0.8, window.innerWidth/2, window.innerHeight/2)" style="display:flex;align-items:center;justify-content:center;"><img src="Icons/Minus.svg" style="width:14px;height:14px;" /></button>
+    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(0.8, window.innerWidth/2, window.innerHeight/2)"><img src="Icons/Minus.svg" style="width:16px;height:16px;" /></button>
+    <span id="zoom-label">100%</span>
+    <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="applyZoom(1.2, window.innerWidth/2, window.innerHeight/2)"><img src="Icons/Plus.svg" style="width:16px;height:16px;" /></button>
   </div>
-  <button class="ctrl-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="resetPositions()" style="display:flex;align-items:center;gap:6px;"><img src="Icons/Refine.svg" style="width:14px;height:14px;" /> Reset</button>
+  <div class="ctrl-divider"></div>
+  <button class="ctrl-btn reset-btn" onmouseenter="customCursor.src='Cursor/Hand-Press.svg'" onmouseleave="customCursor.src='Cursor/SMALL.svg'" onclick="resetPositions()" title="Reset view"><img src="Icons/Refine.svg" style="width:16px;height:16px;" /></button>
 </div>
 
 <div id="project-overlay" aria-hidden="true">
@@ -632,8 +671,10 @@
   let animating = false;
   const layer = document.getElementById('sticker-layer');
 
+  const zoomLabel = document.getElementById('zoom-label');
   function applyTransform() {
     layer.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    if (zoomLabel) zoomLabel.textContent = Math.round(scale * 100) + '%';
   }
 
   function applyZoom(factor, cx, cy) {
@@ -648,13 +689,7 @@
   // Wheel: pinch → zoom, scroll → pan
   document.getElementById('canvas').addEventListener('wheel', e => {
     e.preventDefault();
-    if (e.ctrlKey || e.metaKey) {
-      applyZoom(e.deltaY < 0 ? 1.1 : 0.9, e.clientX, e.clientY);
-    } else {
-      tx -= e.deltaX;
-      ty -= e.deltaY;
-      applyTransform();
-    }
+    applyZoom(e.deltaY < 0 ? 1.1 : 0.9, e.clientX, e.clientY);
   }, { passive: false });
 
   // ── Coordinate helpers ──
@@ -963,29 +998,52 @@
 
   // Scale and center sticker layer on mobile
   if (window.innerWidth <= 768) {
-    scale = 0.85;
-    const contentW = window.innerWidth;
-    const contentH = window.innerHeight;
-    tx = contentW * (1 - scale) / 2 - contentW * 0.05;
-    ty = contentH * (1 - scale) / 2 - contentH * 0.05;
+    scale = 1;
+    tx = 0;
+    ty = 0;
     applyTransform();
 
-    // Reposition project cards for mobile layout
-    ['s10', 's11'].forEach(id => {
+    // Reposition project cards for mobile layout — 4 corners
+    const topCard = '160px';
+    const bottomCard = (window.innerHeight - 220) + 'px';
+
+    const s10 = document.getElementById('s10');
+    const s11 = document.getElementById('s11');
+    const s12 = document.getElementById('s12');
+    const s13 = document.getElementById('s13');
+
+    if (s10) { s10.style.top = topCard;    s10.style.left = '8px'; }
+    if (s11) { s11.style.top = topCard;    s11.style.right = '8px'; s11.style.left = 'auto'; }
+    if (s12) { s12.style.top = bottomCard; s12.style.left = '8px'; }
+    if (s13) { s13.style.top = bottomCard; s13.style.right = '8px'; s13.style.left = 'auto'; }
+
+    // Reposition character stickers to middle area
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    const mid = H * 0.35;
+    const charPositions = {
+      s6: { top: mid,          left: W * 0.12 },
+      s2: { top: mid,          left: W * 0.38 },
+      s7: { top: mid,          left: W * 0.62 },
+      s5: { top: mid + 130,    left: W * 0.38 },
+      s4: { top: mid + 240,    left: W * 0.10 },
+      s8: { top: mid + 260,    left: W * 0.35 },
+      s3: { top: mid + 240,    left: W * 0.60 },
+      s1: { top: mid + 130,    left: W * 0.62 },
+      s9: { top: mid + 130,    left: W * 0.12 },
+    };
+    Object.entries(charPositions).forEach(([id, pos]) => {
       const el = document.getElementById(id);
-      if (el) el.style.top = '18vh';   // below fixed header (~160px)
+      if (el) { el.style.top = pos.top + 'px'; el.style.left = pos.left + 'px'; }
     });
-    ['s12', 's13'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.style.top = '75vh';   // closer to bottom
-    });
+
     ['s14', 's15'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.top = '130vh';
+      if (el) el.style.top = (window.innerHeight + 100) + 'px';
     });
     ['s16', 's17'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.top = '190vh';
+      if (el) el.style.top = (window.innerHeight + 400) + 'px';
     });
   }
 
