@@ -677,13 +677,32 @@
     if (zoomLabel) zoomLabel.textContent = Math.round(scale * 100) + '%';
   }
 
-  function applyZoom(factor, cx, cy) {
-    const newScale = Math.min(Math.max(scale * factor, 0.3), 3);
-    const r = newScale / scale;
-    tx = cx - (cx - tx) * r;
-    ty = cy - (cy - ty) * r;
-    scale = newScale;
+  // Smooth zoom via lerp targets
+  let targetScale = 1, targetTx = 0, targetTy = 0;
+  let zoomRafId = null;
+
+  function smoothZoomLoop() {
+    const lerp = 0.14;
+    scale += (targetScale - scale) * lerp;
+    tx    += (targetTx - tx) * lerp;
+    ty    += (targetTy - ty) * lerp;
     applyTransform();
+    if (Math.abs(targetScale - scale) > 0.0004 || Math.abs(targetTx - tx) > 0.3 || Math.abs(targetTy - ty) > 0.3) {
+      zoomRafId = requestAnimationFrame(smoothZoomLoop);
+    } else {
+      scale = targetScale; tx = targetTx; ty = targetTy;
+      applyTransform();
+      zoomRafId = null;
+    }
+  }
+
+  function applyZoom(factor, cx, cy) {
+    const newScale = Math.min(Math.max(targetScale * factor, 0.3), 3);
+    const r = newScale / targetScale;
+    targetTx = cx - (cx - targetTx) * r;
+    targetTy = cy - (cy - targetTy) * r;
+    targetScale = newScale;
+    if (!zoomRafId) zoomRafId = requestAnimationFrame(smoothZoomLoop);
   }
 
   // Wheel: pinch → zoom, scroll → pan
