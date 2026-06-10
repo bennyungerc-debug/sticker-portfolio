@@ -4,3 +4,5 @@ CLAUDE.md
 .vercel
 .claude/
 Projects/*.png
+node_modules/
+out/
