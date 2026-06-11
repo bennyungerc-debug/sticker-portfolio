@@ -1701,9 +1701,11 @@ const overlay     = document.getElementById('project-overlay');
     }
     const prev = document.createElement('button');
     prev.className = 'carousel-btn prev'; prev.innerHTML = '&#8249;';
+    prev.setAttribute('aria-label', 'Previous image');
     prev.onclick = () => goTo(cur - 1);
     const next = document.createElement('button');
     next.className = 'carousel-btn next'; next.innerHTML = '&#8250;';
+    next.setAttribute('aria-label', 'Next image');
     next.onclick = () => goTo(cur + 1);
     counter.textContent = '1 / ' + imgs.length;
     wrap.append(track, prev, next, counter);
