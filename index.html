@@ -622,6 +622,49 @@
     .carousel-track img.img-loaded {
       opacity: 1;
     }
+
+    /* Skip link */
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff176;
+      color: #a12d00;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 20px;
+      border-radius: 20px;
+      box-shadow: 2px 2px 0 #f9a825;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .sticker:not([data-static]):not(.dragging) .sticker-img {
+        animation: none;
+      }
+      #project-overlay {
+        transition: none;
+      }
+      .header-sticker {
+        animation: none;
+      }
+      .header-subtitle-card {
+        animation: none;
+        opacity: 1;
+        transform: translateX(-50%) rotate(0.4deg);
+      }
+      #about-fab .fab-ring {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
