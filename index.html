@@ -454,22 +454,23 @@
         background: none;
         box-shadow: none;
         padding: 0;
-        width: min(110px, 28vw);
+        width: min(92px, 23vw);
         display: flex;
         flex-direction: column;
         align-items: center;
       }
 
       .sticker-card-thumb {
-        width: min(90px, 25vw);
-        height: min(90px, 25vw);
+        width: min(70px, 18vw);
+        height: min(70px, 18vw);
         aspect-ratio: 1;
         border-radius: 50%;
         box-shadow: 3px 4px 0px rgba(0,0,0,0.13), 0 2px 12px rgba(0,0,0,0.07);
       }
 
       .sticker-card-label {
-        font-size: clamp(9px, 2.5vw, 12px);
+        font-size: clamp(9px, 2.5vw, 11px);
+        line-height: 1.2;
         margin-top: 6px;
       }
 
@@ -1484,27 +1485,26 @@
 
     const W = window.innerWidth;
     const H = window.innerHeight;
-    const topCard = 150;
+    const topCard = 140;
     const barTop = H - 76;
 
-    // Project cards — 4 corners
+    // Project cards — one row of 4 under the header
     const s10 = document.getElementById('s10');
-    const cardH = s10 ? s10.offsetHeight : 115;
-    const bottomCard = Math.max(topCard + cardH + 120, barTop - 12 - cardH);
-    const corners = { s10: [topCard, 'left'], s11: [topCard, 'right'], s12: [bottomCard, 'left'], s13: [bottomCard, 'right'] };
-    Object.entries(corners).forEach(([id, [top, side]]) => {
+    const cardH = s10 ? s10.offsetHeight : 100;
+    const cardW = s10 ? s10.offsetWidth : 90;
+    ['s10', 's11', 's12', 's13'].forEach((id, i) => {
       const el = document.getElementById(id);
       if (!el) return;
-      el.style.top = top + 'px';
-      el.style.left  = side === 'left'  ? '8px' : 'auto';
-      el.style.right = side === 'right' ? '8px' : '';
+      el.style.top   = topCard + 'px';
+      el.style.left  = Math.round(W * (2 * i + 1) / 8 - cardW / 2) + 'px';
+      el.style.right = '';
     });
 
-    // Character stickers — 3×3 grid between the card rows (slight overlap with card labels is OK)
-    const from = topCard + cardH * 0.85;
-    const to   = bottomCard + cardH * 0.15;
+    // Character stickers — 3×3 grid below the cards, above the About button + bottom bar
+    const from = topCard + cardH + 8;
+    const to   = barTop - 82;
     const rowH = (to - from) / 3;
-    const size = Math.round(Math.max(78, Math.min(rowH * 1.15, 130, W * 0.32)));
+    const size = Math.round(Math.max(78, Math.min(rowH * 1.1, 130, W * 0.32)));
     document.documentElement.style.setProperty('--m-sticker', size + 'px');
 
     MOBILE_GRID.forEach((row, r) => {
@@ -1856,15 +1856,16 @@ const overlay     = document.getElementById('project-overlay');
       width: 44px;
       height: 44px;
       flex-shrink: 0;
+      box-shadow: none;
+      filter: none;
     }
     #controls .ctrl-btn { flex-shrink: 0; }
 
     #about-fab {
-      right: auto;
-      left: 50%;
+      right: 8px;
       bottom: calc(76px + env(safe-area-inset-bottom));
-      transform: translateX(-50%) scale(0.72);
-      transform-origin: 50% 100%;
+      transform: scale(0.72);
+      transform-origin: 100% 100%;
     }
     #about-fab .fab-label { display: none; }
 
