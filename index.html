@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Benny Unger | Senior Product Designer & Product Builder</title>
   <meta name="description" content="Portfolio of Benny Unger, a Senior Product Designer & Product Builder specializing in high-end UI/UX design, interactive systems, and digital product creation." />
   <meta name="keywords" content="Benny Unger, Product Designer, Product Builder, UI/UX Design, Design Systems, Interaction Design, Web Development" />
@@ -37,6 +37,7 @@
     "email": "bennyungerc@gmail.com",
     "sameAs": [
       "https://www.linkedin.com/in/binyamin-unger-gd",
+      "https://www.instagram.com/unger_benny",
       "https://wa.me/972533401522",
       "mailto:bennyungerc@gmail.com"
     ],
@@ -86,7 +87,7 @@
     gtag('config', 'G-ZFD6W60QB9');
   </script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; cursor: url("Cursor/SMALL%20-%20Cursor.svg") 10 8, auto !important; }
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: url("Cursor/SMALL%20-%20Cursor.svg") 10 8, auto !important; -webkit-tap-highlight-color: transparent; }
 
     html {
       width: 100%;
@@ -110,6 +111,7 @@
       position: relative;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
     }
 
     #canvas.panning { cursor: url("Cursor/Hand-Grab.svg") 10 16, auto !important; }
@@ -217,6 +219,7 @@
       box-shadow: none;
       animation: float-up-subtitle 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
     }
+    .header-subtitle-card .hint-mobile { display: none; }
 
     /* Sticker base */
     .sticker {
@@ -275,7 +278,9 @@
     }
 
     #s10, #s11, #s12, #s13, #s14, #s15, #s16, #s17 { z-index: 8; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease; }
-    #s10:hover, #s11:hover, #s12:hover, #s13:hover, #s14:hover, #s15:hover, #s16:hover, #s17:hover { transform: translateY(-6px) scale(1.04) rotate(0deg) !important; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15)); }
+    @media (hover: hover) {
+      #s10:hover, #s11:hover, #s12:hover, #s13:hover, #s14:hover, #s15:hover, #s16:hover, #s17:hover { transform: translateY(-6px) scale(1.04) rotate(0deg) !important; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15)); }
+    }
 
     /* Project card sticker */
     .sticker-card {
@@ -423,57 +428,41 @@
     @media (max-width: 768px) {
       .header-sticker {
         position: fixed;
-        top: 16px;
-        left: 50%;
-        transform: translateX(-50%) rotate(var(--header-rotate));
+        top: calc(16px + env(safe-area-inset-top));
         z-index: 100;
       }
 
       .header-name { font-size: clamp(28px, 8vw, 42px); }
       .header-title { font-size: clamp(12px, 3vw, 16px); }
-      .header-sticker { box-shadow: 4px 4px 0px #f9a825; }
 
       .header-subtitle-card {
-        position: fixed;
-        top: 110px;
-        left: 50%;
+        top: calc(100px + env(safe-area-inset-top));
         --subtitle-rotate: 0.5deg;
-        transform: translateX(-50%) rotate(var(--subtitle-rotate));
-        white-space: normal;
-        text-align: center;
-        max-width: 80vw;
-        font-size: clamp(9px, 2.2vw, 11px);
+        padding: 6px 16px;
+        font-size: 11px;
         z-index: 100;
       }
-
-      #controls {
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: row;
-        align-items: center;
-      }
-
-      #custom-cursor { display: none; }
+      .header-subtitle-card .hint-desktop { display: none; }
+      .header-subtitle-card .hint-mobile { display: inline; }
 
       .sticker-img {
-        width: min(130px, 32vw);
-        height: min(130px, 32vw);
+        width: var(--m-sticker, min(130px, 32vw));
+        height: var(--m-sticker, min(130px, 32vw));
       }
 
       .sticker-card {
         background: none;
         box-shadow: none;
         padding: 0;
-        width: min(90px, 24vw);
+        width: min(110px, 28vw);
         display: flex;
         flex-direction: column;
         align-items: center;
       }
 
       .sticker-card-thumb {
-        width: min(80px, 22vw);
-        height: min(80px, 22vw);
+        width: min(90px, 25vw);
+        height: min(90px, 25vw);
         aspect-ratio: 1;
         border-radius: 50%;
         box-shadow: 3px 4px 0px rgba(0,0,0,0.13), 0 2px 12px rgba(0,0,0,0.07);
@@ -484,42 +473,7 @@
         margin-top: 6px;
       }
 
-      .sticker-card-sub {
-        display: none;
-      }
-
-      .sticker-card {
-        width: min(110px, 28vw);
-      }
-
-      .sticker-card-thumb {
-        width: min(90px, 25vw);
-        height: min(90px, 25vw);
-      }
-
-      #social-btns {
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .social-btn {
-        width: 42px;
-        height: 42px;
-      }
-
-      .header-subtitle-card {
-        white-space: normal;
-        text-align: center;
-        max-width: 200px;
-      }
-
-      body {
-        overflow-x: hidden;
-      }
-
+      .sticker-card-sub { display: none; }
     }
 
     /* ── Project Overlay ── */
@@ -678,7 +632,7 @@
     <h1 class="header-name">Benny Unger</h1>
     <span class="header-title">Product Builder</span>
   </header>
-  <div class="header-subtitle-card">Drag stickers · Scroll to zoom · Open a project</div>
+  <div class="header-subtitle-card"><span class="hint-desktop">Drag stickers · Scroll to zoom · Open a project</span><span class="hint-mobile">Drag stickers · Tap a project</span></div>
 
   <!-- Sticker layer — this gets zoomed -->
   <div id="sticker-layer">
@@ -1096,6 +1050,8 @@
           &nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="https://www.linkedin.com/in/binyamin-unger-gd" target="_blank" rel="noopener" style="color:#a12d00;font-weight:700;">LinkedIn</a>
           &nbsp;&nbsp;·&nbsp;&nbsp;
+          <a href="https://www.instagram.com/unger_benny" target="_blank" rel="noopener" style="color:#a12d00;font-weight:700;">Instagram</a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="https://wa.me/972533401522" target="_blank" rel="noopener" style="color:#a12d00;font-weight:700;">WhatsApp</a>
         </p>
       </div>
@@ -1512,56 +1468,83 @@
 
   loadPositions();
 
-  // Scale and center sticker layer on mobile
-  if (window.innerWidth <= 768) {
-    scale = 1;
-    tx = 0;
-    ty = 0;
+  // ── Mobile layout: fit cards + characters to the actual screen height ──
+  const MOBILE_MAX = 768;
+  const MOBILE_GRID = [
+    ['s6', 's2', 's7'],
+    ['s9', 's5', 's1'],
+    ['s4', 's8', 's3'],
+  ];
+
+  function layoutMobile() {
+    scale = targetScale = 1;
+    tx = targetTx = 0;
+    ty = targetTy = 0;
     applyTransform();
 
-    // Reposition project cards for mobile layout — 4 corners
-    const topCard = '160px';
-    const bottomCard = (window.innerHeight - 220) + 'px';
-
-    const s10 = document.getElementById('s10');
-    const s11 = document.getElementById('s11');
-    const s12 = document.getElementById('s12');
-    const s13 = document.getElementById('s13');
-
-    if (s10) { s10.style.top = topCard;    s10.style.left = '8px'; }
-    if (s11) { s11.style.top = topCard;    s11.style.right = '8px'; s11.style.left = 'auto'; }
-    if (s12) { s12.style.top = bottomCard; s12.style.left = '8px'; }
-    if (s13) { s13.style.top = bottomCard; s13.style.right = '8px'; s13.style.left = 'auto'; }
-
-    // Reposition character stickers to middle area
     const W = window.innerWidth;
     const H = window.innerHeight;
-    const mid = H * 0.35;
-    const charPositions = {
-      s6: { top: mid,          left: W * 0.12 },
-      s2: { top: mid,          left: W * 0.38 },
-      s7: { top: mid,          left: W * 0.62 },
-      s5: { top: mid + 130,    left: W * 0.38 },
-      s4: { top: mid + 240,    left: W * 0.10 },
-      s8: { top: mid + 260,    left: W * 0.35 },
-      s3: { top: mid + 240,    left: W * 0.60 },
-      s1: { top: mid + 130,    left: W * 0.62 },
-      s9: { top: mid + 130,    left: W * 0.12 },
-    };
-    Object.entries(charPositions).forEach(([id, pos]) => {
+    const topCard = 150;
+    const barTop = H - 76;
+
+    // Project cards — 4 corners
+    const s10 = document.getElementById('s10');
+    const cardH = s10 ? s10.offsetHeight : 115;
+    const bottomCard = Math.max(topCard + cardH + 120, barTop - 12 - cardH);
+    const corners = { s10: [topCard, 'left'], s11: [topCard, 'right'], s12: [bottomCard, 'left'], s13: [bottomCard, 'right'] };
+    Object.entries(corners).forEach(([id, [top, side]]) => {
       const el = document.getElementById(id);
-      if (el) { el.style.top = pos.top + 'px'; el.style.left = pos.left + 'px'; }
+      if (!el) return;
+      el.style.top = top + 'px';
+      el.style.left  = side === 'left'  ? '8px' : 'auto';
+      el.style.right = side === 'right' ? '8px' : '';
+    });
+
+    // Character stickers — 3×3 grid between the card rows (slight overlap with card labels is OK)
+    const from = topCard + cardH * 0.85;
+    const to   = bottomCard + cardH * 0.15;
+    const rowH = (to - from) / 3;
+    const size = Math.round(Math.max(78, Math.min(rowH * 1.15, 130, W * 0.32)));
+    document.documentElement.style.setProperty('--m-sticker', size + 'px');
+
+    MOBILE_GRID.forEach((row, r) => {
+      row.forEach((id, c) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const cx = W * (1 + 2 * c) / 6;
+        const cy = from + rowH * (r + 0.5) + (c === 1 ? 8 : 0);
+        el.style.left  = Math.round(cx - size / 2) + 'px';
+        el.style.top   = Math.round(cy - size / 2) + 'px';
+        el.style.right = '';
+        // Reset (↻) returns to this mobile layout, not the desktop vw/vh one
+        if (defaults[id]) { defaults[id].left = el.style.left; defaults[id].top = el.style.top; }
+      });
     });
 
     ['s14', 's15'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.top = (window.innerHeight + 100) + 'px';
+      if (el) el.style.top = (H + 100) + 'px';
     });
     ['s16', 's17'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.top = (window.innerHeight + 400) + 'px';
+      if (el) el.style.top = (H + 400) + 'px';
     });
   }
+
+  if (window.innerWidth <= MOBILE_MAX) layoutMobile();
+
+  // Re-layout on rotation only (width change) — not when the mobile address bar shows/hides
+  let lastLayoutWidth = window.innerWidth;
+  let relayoutTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(relayoutTimer);
+    relayoutTimer = setTimeout(() => {
+      if (window.innerWidth === lastLayoutWidth) return;
+      lastLayoutWidth = window.innerWidth;
+      if (window.innerWidth <= MOBILE_MAX) layoutMobile();
+    }, 200);
+  });
+
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     animating = false;
@@ -1841,14 +1824,61 @@ const overlay     = document.getElementById('project-overlay');
     transition: transform 0.2s ease, filter 0.2s ease;
     text-decoration: none;
   }
-  .social-btn:hover {
-    transform: scale(1.12) rotate(-4deg);
-    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
+  @media (hover: hover) {
+    .social-btn:hover {
+      transform: scale(1.12) rotate(-4deg);
+      filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
+    }
   }
   .social-btn img {
     display: block;
     width: 24px;
     height: 24px;
+  }
+
+  /* ── Mobile: single bottom bar (social + reset), compact About, overlay ── */
+  @media (max-width: 768px) {
+    #controls {
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      padding: 6px 10px;
+      gap: 6px;
+      max-width: calc(100vw - 24px);
+    }
+    #zoom-btns { display: none; }
+    #controls .ctrl-divider { margin: 0 2px; }
+    #controls #social-btns {
+      position: static;
+      transform: none;
+      flex-direction: row;
+      gap: 6px;
+    }
+    #controls .social-btn {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    #controls .ctrl-btn { flex-shrink: 0; }
+
+    #about-fab {
+      right: auto;
+      left: 50%;
+      bottom: calc(76px + env(safe-area-inset-bottom));
+      transform: translateX(-50%) scale(0.72);
+      transform-origin: 50% 100%;
+    }
+    #about-fab .fab-label { display: none; }
+
+    #overlay-inner { padding: 72px 20px 48px; }
+    #overlay-close {
+      top: calc(12px + env(safe-area-inset-top));
+      right: 12px;
+    }
+    .carousel-track img { height: 260px; }
+  }
+
+  @media (max-width: 359px) {
+    #controls .social-btn { width: 38px; height: 38px; }
+    #controls .ctrl-btn { width: 38px; height: 38px; }
   }
 </style>
 
@@ -1856,6 +1886,11 @@ const overlay     = document.getElementById('project-overlay');
   <a class="social-btn" href="https://www.linkedin.com/in/binyamin-unger-gd" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn profile">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M18 2C20.2091 2 22 3.79086 22 6V18C22 20.14 20.3194 21.8879 18.2061 21.9951L18 22H6L5.79395 21.9951C3.7488 21.8913 2.10865 20.2512 2.00488 18.2061L2 18V6C2 3.79086 3.79086 2 6 2H18ZM6.70801 9.89941V17.5H9.2627V9.89941H6.70801ZM16.2891 9.89941C14.2452 9.39302 13.3086 10.9553 13.0957 11.7998V9.89941H10.54V17.5H13.0957V13.6992C13.0959 12.9998 13.6676 12.4327 14.373 12.4326C15.0785 12.4326 15.6502 12.9998 15.6504 13.6992V17.5H18.2061V12.4326C18.2076 12.4067 18.32 10.4028 16.2891 9.89941ZM7.98535 6C7.27981 6 6.70811 6.56706 6.70801 7.2666C6.70801 7.96623 7.27975 8.5332 7.98535 8.5332C8.69085 8.53308 9.2627 7.96615 9.2627 7.2666C9.2626 6.56714 8.69079 6.00012 7.98535 6Z" fill="#e8560a"/>
+    </svg>
+  </a>
+  <a class="social-btn" href="https://www.instagram.com/unger_benny" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram profile">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 2C19.5376 2 22 4.46243 22 7.5V16.5C22 19.5376 19.5376 22 16.5 22H7.5C4.46243 22 2 19.5376 2 16.5V7.5C2 4.46243 4.46243 2 7.5 2H16.5ZM12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9ZM17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5Z" fill="#e8560a"/>
     </svg>
   </a>
   <a class="social-btn" href="https://www.fiverr.com/bennyungerc/build-a-professional-design-system-in-figma-for-your-product" target="_blank" rel="noopener" title="Fiverr" aria-label="Fiverr gig — Design System in Figma">
@@ -1884,6 +1919,13 @@ const overlay     = document.getElementById('project-overlay');
       img.addEventListener('load', () => img.classList.add('img-loaded'));
     }
   });
+
+  // ── Mobile: social buttons join the bottom bar (before reset) ──
+  if (window.innerWidth <= 768) {
+    const controlsEl = document.getElementById('controls');
+    const socialEl = document.getElementById('social-btns');
+    if (controlsEl && socialEl) controlsEl.prepend(socialEl);
+  }
 
   (function() {
     // ── Circular text ring ──
