@@ -1414,34 +1414,40 @@
     uiEls.forEach(el => el.classList.add('intro-hidden'));
     document.body.classList.add('intro-animating');
 
-    // Phase 0 — all stickers at center, huge, invisible
-    const cxPx = (window.innerWidth  / 2) + 'px';
-    const cyPx = (window.innerHeight / 2) + 'px';
+    // Phase 0 — spread stickers across full viewport, huge, invisible
+    // 3×3 grid covering the whole screen
+    const spread = [
+      {x: 0.17, y: 0.18}, {x: 0.50, y: 0.14}, {x: 0.83, y: 0.18},
+      {x: 0.14, y: 0.50}, {x: 0.50, y: 0.50}, {x: 0.86, y: 0.50},
+      {x: 0.17, y: 0.82}, {x: 0.50, y: 0.86}, {x: 0.83, y: 0.82},
+    ];
+    const W = window.innerWidth, H = window.innerHeight;
     stickers.forEach((s, i) => {
+      const pos = spread[i % spread.length];
       const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
       s.style.transition = 'none';
-      s.style.left  = cxPx;
+      s.style.left  = (pos.x * W) + 'px';
       s.style.right = '';
-      s.style.top   = cyPx;
+      s.style.top   = (pos.y * H) + 'px';
       s.style.zIndex = String(1000 + i);
-      s.style.transform = `translate(-50%, -50%) ${rot} scale(6)`;
+      s.style.transform = `translate(-50%, -50%) ${rot} scale(5)`;
       s.style.opacity = '0';
     });
 
-    // Phase 1 — burst in (all at once, next frame)
+    // Phase 1 — burst in (all at once, next frame), still spread large
     requestAnimationFrame(() => requestAnimationFrame(() => {
       stickers.forEach((s, i) => {
         const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
-        s.style.transition = 'transform 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease';
+        s.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease-out';
         s.style.opacity = '1';
-        s.style.transform = `translate(-50%, -50%) ${rot} scale(1.4)`;
+        s.style.transform = `translate(-50%, -50%) ${rot} scale(1.5)`;
       });
 
       // Phase 3 — shuffle after hold
-      const SCATTER_DELAY = 450 + 180;
-      const SCATTER_DUR   = 700;
-      const SCATTER_STAGGER = 50;
-      const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+      const SCATTER_DELAY = 600 + 200;
+      const SCATTER_DUR   = 850;
+      const SCATTER_STAGGER = 55;
+      const ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
       finals.forEach(({ el, leftPx, topPx, transform }, i) => {
         setTimeout(() => {
