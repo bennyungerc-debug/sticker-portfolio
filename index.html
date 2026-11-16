@@ -1515,27 +1515,32 @@
       }
 
       // Start UI fade-in while overlay is still fading (cross-dissolve, no dead pause)
-      // Set explicit start state via inline styles, then double-rAF to trigger transition
       setTimeout(() => {
         document.body.classList.remove('intro-animating');
         const all = [...uiEls, ...projectCards];
+        // Preserve each element's existing inline transform; compose translateY onto it
         all.forEach(el => {
-          el.style.opacity   = '0';
-          el.style.transform = 'translateY(28px)';
+          const base = el.style.transform || '';
+          el.dataset.introBase = base;
+          el.style.opacity    = '0';
+          el.style.transform  = base ? `${base} translateY(28px)` : 'translateY(28px)';
           el.style.transition = 'none';
           el.classList.remove('intro-hidden');
         });
         requestAnimationFrame(() => requestAnimationFrame(() => {
           all.forEach((el, i) => {
+            const base = el.dataset.introBase || '';
             el.style.transition = `opacity 420ms ease ${i * 30}ms, transform 420ms ease ${i * 30}ms`;
             el.style.opacity    = '1';
-            el.style.transform  = 'translateY(0)';
+            el.style.transform  = base ? `${base} translateY(0px)` : 'translateY(0)';
           });
           setTimeout(() => {
             all.forEach(el => {
+              const base = el.dataset.introBase;
               el.style.removeProperty('opacity');
               el.style.removeProperty('transition');
-              el.style.removeProperty('transform');
+              if (base) { el.style.transform = base; } else { el.style.removeProperty('transform'); }
+              delete el.dataset.introBase;
             });
             animating = false;
           }, 420 + all.length * 30 + 50);
