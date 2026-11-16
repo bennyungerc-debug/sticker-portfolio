@@ -1381,82 +1381,122 @@
 
   // ── Intro animation ──
   function runIntroAnimation() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     animating = true;
-    const stickers = [...document.querySelectorAll('.sticker:not([data-static])')].filter(s => s.style.display !== 'none');
 
-    // Convert vw/vh → px so CSS can animate between units
+    const stickers = [...document.querySelectorAll('.sticker')]
+      .filter(s => s.style.display !== 'none');
+
     function toPx(val, el, axis) {
-      if (val === 'auto') {
+      if (!val || val === 'auto') {
         const rect = el.getBoundingClientRect();
         return (axis === 'left' ? rect.left : rect.top) + 'px';
       }
-      if (!val) return '0px';
-      if (val.endsWith('vw')) return (parseFloat(val) / 100 * window.innerWidth)  + 'px';
+      if (val.endsWith('vw')) return (parseFloat(val) / 100 * window.innerWidth) + 'px';
       if (val.endsWith('vh')) return (parseFloat(val) / 100 * window.innerHeight) + 'px';
       return val;
     }
 
-    // Store final positions in px (plus original units for static cards)
-    const targets = stickers.map(s => ({
-      left:      toPx(s.style.left, s, 'left'),
-      top:       toPx(s.style.top, s, 'top'),
-      transform: s.style.transform,
+    const finals = stickers.map(s => ({
+      el: s,
+      leftPx:    toPx(s.style.left, s, 'left'),
+      topPx:     toPx(s.style.top,  s, 'top'),
+      transform: s.style.transform || '',
       origLeft:  s.style.left,
       origTop:   s.style.top,
-      origRight: s.style.right,
-      isStatic:  !!s.dataset.static
+      isStatic:  !!s.dataset.static,
     }));
 
-    // Pre-set stickers to their px targets (no transition) so the pile can animate back
+    // Hide non-sticker UI
+    const uiEls = [...document.querySelectorAll(
+      '.header-sticker, .header-subtitle-card, #social-btns, #controls, #about-fab'
+    )];
+    uiEls.forEach(el => el.classList.add('intro-hidden'));
+    document.body.classList.add('intro-animating');
+
+    // Phase 0 — all stickers at center, huge, invisible
+    const cxPx = (window.innerWidth  / 2) + 'px';
+    const cyPx = (window.innerHeight / 2) + 'px';
     stickers.forEach((s, i) => {
+      const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
       s.style.transition = 'none';
-      s.style.left = targets[i].left;
+      s.style.left  = cxPx;
       s.style.right = '';
-      s.style.top  = targets[i].top;
+      s.style.top   = cyPx;
+      s.style.zIndex = String(1000 + i);
+      s.style.transform = `translate(-50%, -50%) ${rot} scale(6)`;
+      s.style.opacity = '0';
     });
 
-    // Pile: center of viewport (px)
-    const cx = (window.innerWidth  / 2 - 80) + 'px';
-    const cy = (window.innerHeight / 2 - 80) + 'px';
-
-    // Stack all stickers in a pile at center
-    stickers.forEach((s, i) => {
-      const jitter = (i - stickers.length / 2) * 4;
-      s.style.transition = 'none';
-      s.style.left = cx;
-      s.style.right = '';
-      s.style.top  = cy;
-      s.style.transform = `rotate(${jitter}deg) scale(0.85)`;
-      s.style.zIndex = String(50 + i);
-    });
-
-    // Pause (pile visible for ~1s), then scatter
-    setTimeout(() => {
-      const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    // Phase 1 — burst in (all at once, next frame)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
       stickers.forEach((s, i) => {
-        s.style.transition = `left 1.25s ${ease}, top 1.25s ${ease}, transform 1.1s ${ease}`;
-        s.style.left      = targets[i].left;
-        s.style.right     = '';
-        s.style.top       = targets[i].top;
-        s.style.transform = targets[i].transform;
-        s.style.zIndex    = '5';
+        const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
+        s.style.transition = 'transform 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease';
+        s.style.opacity = '1';
+        s.style.transform = `translate(-50%, -50%) ${rot} scale(1.4)`;
       });
 
-      // After stickers land, clean up
-      setTimeout(() => {
-        stickers.forEach((s, i) => {
-          s.style.transition = '';
-          s.style.zIndex     = '';
-          // Restore vw/vh for static cards so they remain responsive on resize
-          if (targets[i].isStatic) {
-            s.style.left = targets[i].origLeft;
-            s.style.top  = targets[i].origTop;
-            s.style.right = targets[i].origRight;
-          }
-        });
-        animating = false;
-      }, 1450);
-    }, 1000);
+      // Phase 3 — shuffle after hold
+      const SCATTER_DELAY = 450 + 180;
+      const SCATTER_DUR   = 700;
+      const SCATTER_STAGGER = 50;
+      const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+
+      finals.forEach(({ el, leftPx, topPx, transform }, i) => {
+        setTimeout(() => {
+          el.style.transition = [
+            `left ${SCATTER_DUR}ms ${ease}`,
+            `top  ${SCATTER_DUR}ms ${ease}`,
+            `transform ${SCATTER_DUR}ms ${ease}`,
+          ].join(', ');
+          el.style.left  = leftPx;
+          el.style.right = '';
+          el.style.top   = topPx;
+          el.style.transform = transform;
+        }, SCATTER_DELAY + i * SCATTER_STAGGER);
+      });
+
+      // Phase 4 — cleanup + fade in UI
+      const DONE_DELAY = SCATTER_DELAY + stickers.length * SCATTER_STAGGER + SCATTER_DUR + 80;
+      setTimeout(finish, DONE_DELAY);
+    }));
+
+    // Skip on click/tap (small grace period to avoid instant-skip on pageload click)
+    let skipEnabled = false;
+    setTimeout(() => { skipEnabled = true; }, 400);
+    function skipHandler() { if (skipEnabled) finish(); }
+    document.addEventListener('click',      skipHandler, { once: true });
+    document.addEventListener('touchstart', skipHandler, { once: true, passive: true });
+
+    function finish() {
+      document.removeEventListener('click',      skipHandler);
+      document.removeEventListener('touchstart', skipHandler);
+
+      stickers.forEach((s, i) => {
+        s.style.transition = 'none';
+        s.style.left  = finals[i].leftPx;
+        s.style.right = '';
+        s.style.top   = finals[i].topPx;
+        s.style.transform = finals[i].transform;
+        s.style.opacity   = '1';
+        s.style.zIndex    = '';
+        if (finals[i].isStatic) {
+          s.style.left = finals[i].origLeft;
+          s.style.top  = finals[i].origTop;
+        }
+      });
+
+      uiEls.forEach(el => {
+        el.classList.remove('intro-hidden');
+        el.style.transition = 'opacity 450ms ease';
+        el.style.opacity = '1';
+        setTimeout(() => { el.style.removeProperty('opacity'); el.style.removeProperty('transition'); }, 500);
+      });
+
+      document.body.classList.remove('intro-animating');
+      animating = false;
+    }
   }
 
   // Save HTML defaults before loadPositions overwrites them
