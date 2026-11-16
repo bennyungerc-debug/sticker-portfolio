@@ -1407,19 +1407,22 @@
       isStatic:  !!s.dataset.static,
     }));
 
-    // Hide non-sticker UI
+    // Hide non-sticker UI + project cards
     const uiEls = [...document.querySelectorAll(
       '.header-sticker, .header-subtitle-card, #social-btns, #controls, #about-fab'
     )];
+    const projectCards = [...document.querySelectorAll('.sticker[data-static]')]
+      .filter(s => s.style.display !== 'none');
     uiEls.forEach(el => el.classList.add('intro-hidden'));
+    projectCards.forEach(el => el.classList.add('intro-hidden'));
     document.body.classList.add('intro-animating');
 
-    // Phase 0 — spread stickers across full viewport, huge, invisible
-    // 3×3 grid covering the whole screen
+    // Phase 0 — stickers spread + overlapping, filling full viewport, invisible
+    // tight 3×3 so at scale(8) they heavily overlap and cover everything
     const spread = [
-      {x: 0.17, y: 0.18}, {x: 0.50, y: 0.14}, {x: 0.83, y: 0.18},
-      {x: 0.14, y: 0.50}, {x: 0.50, y: 0.50}, {x: 0.86, y: 0.50},
-      {x: 0.17, y: 0.82}, {x: 0.50, y: 0.86}, {x: 0.83, y: 0.82},
+      {x: 0.20, y: 0.22}, {x: 0.50, y: 0.16}, {x: 0.80, y: 0.22},
+      {x: 0.16, y: 0.52}, {x: 0.50, y: 0.50}, {x: 0.84, y: 0.52},
+      {x: 0.20, y: 0.80}, {x: 0.50, y: 0.84}, {x: 0.80, y: 0.80},
     ];
     const W = window.innerWidth, H = window.innerHeight;
     stickers.forEach((s, i) => {
@@ -1430,17 +1433,17 @@
       s.style.right = '';
       s.style.top   = (pos.y * H) + 'px';
       s.style.zIndex = String(1000 + i);
-      s.style.transform = `translate(-50%, -50%) ${rot} scale(5)`;
+      s.style.transform = `translate(-50%, -50%) ${rot} scale(8)`;
       s.style.opacity = '0';
     });
 
-    // Phase 1 — burst in (all at once, next frame), still spread large
+    // Phase 1 — burst in (all at once), scale down to still-large but overlapping
     requestAnimationFrame(() => requestAnimationFrame(() => {
       stickers.forEach((s, i) => {
         const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
         s.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease-out';
         s.style.opacity = '1';
-        s.style.transform = `translate(-50%, -50%) ${rot} scale(1.5)`;
+        s.style.transform = `translate(-50%, -50%) ${rot} scale(2.5)`;
       });
 
       // Phase 3 — shuffle after hold
