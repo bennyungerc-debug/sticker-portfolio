@@ -1498,6 +1498,7 @@
       document.removeEventListener('click',      skipHandler);
       document.removeEventListener('touchstart', skipHandler);
       if (overlay) { overlay.classList.add('done'); setTimeout(() => overlay.remove(), 600); }
+      layer.style.zIndex = '';
 
       stickers.forEach((s, i) => {
         s.style.transition = 'none';
