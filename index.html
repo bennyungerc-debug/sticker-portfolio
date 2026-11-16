@@ -1427,6 +1427,7 @@
     uiEls.forEach(el => el.classList.add('intro-hidden'));
     projectCards.forEach(el => el.classList.add('intro-hidden'));
     document.body.classList.add('intro-animating');
+    layer.style.zIndex = '999';
 
     // Phase 0 — stickers spread + overlapping, filling full viewport, invisible
     // tight 3×3 so at scale(8) they heavily overlap and cover everything
