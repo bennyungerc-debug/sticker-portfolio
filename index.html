@@ -618,6 +618,16 @@
   /* ── intro animation ── */
   .intro-hidden { opacity: 0 !important; transition: none !important; }
   .intro-animating .sticker { animation: none !important; }
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: #fff;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  #intro-overlay.done { opacity: 0; }
   </style>
 </head>
 <body>
