@@ -1479,12 +1479,9 @@
         }, SCATTER_DELAY + i * SCATTER_STAGGER);
       });
 
-      // Phase 4 — fade out overlay, then fade in UI
+      // Phase 4 — scatter done: call finish immediately
       const DONE_DELAY = SCATTER_DELAY + stickers.length * SCATTER_STAGGER + SCATTER_DUR + 80;
-      setTimeout(() => {
-        if (overlay) overlay.classList.add('done');
-        setTimeout(finish, 520);
-      }, DONE_DELAY);
+      setTimeout(finish, DONE_DELAY);
     }));
 
     // Skip on click/tap (small grace period to avoid instant-skip on pageload click)
@@ -1497,9 +1494,9 @@
     function finish() {
       document.removeEventListener('click',      skipHandler);
       document.removeEventListener('touchstart', skipHandler);
-      if (overlay) { overlay.classList.add('done'); setTimeout(() => overlay.remove(), 600); }
-      layer.style.zIndex = '';
 
+      // Snap stickers while overlay still opaque (hides any visual jump)
+      layer.style.zIndex = '';
       stickers.forEach((s, i) => {
         s.style.transition  = 'none';
         s.style.willChange  = '';
@@ -1511,20 +1508,39 @@
         s.style.zIndex      = '';
       });
 
-      [...uiEls, ...projectCards].forEach(el => {
-        el.classList.remove('intro-hidden');
-        el.style.transition = 'opacity 450ms ease, transform 450ms ease';
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        setTimeout(() => {
-          el.style.removeProperty('opacity');
-          el.style.removeProperty('transition');
-          el.style.removeProperty('transform');
-        }, 500);
-      });
+      // Fade out overlay
+      if (overlay) {
+        overlay.classList.add('done');
+        setTimeout(() => overlay.remove(), 600);
+      }
 
-      document.body.classList.remove('intro-animating');
-      animating = false;
+      // Start UI fade-in while overlay is still fading (cross-dissolve, no dead pause)
+      // Set explicit start state via inline styles, then double-rAF to trigger transition
+      setTimeout(() => {
+        document.body.classList.remove('intro-animating');
+        const all = [...uiEls, ...projectCards];
+        all.forEach(el => {
+          el.style.opacity   = '0';
+          el.style.transform = 'translateY(28px)';
+          el.style.transition = 'none';
+          el.classList.remove('intro-hidden');
+        });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          all.forEach((el, i) => {
+            el.style.transition = `opacity 420ms ease ${i * 30}ms, transform 420ms ease ${i * 30}ms`;
+            el.style.opacity    = '1';
+            el.style.transform  = 'translateY(0)';
+          });
+          setTimeout(() => {
+            all.forEach(el => {
+              el.style.removeProperty('opacity');
+              el.style.removeProperty('transition');
+              el.style.removeProperty('transform');
+            });
+            animating = false;
+          }, 420 + all.length * 30 + 50);
+        }));
+      }, 120);
     }
   }
 
