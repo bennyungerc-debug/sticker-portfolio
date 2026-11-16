@@ -1384,7 +1384,7 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     animating = true;
 
-    const stickers = [...document.querySelectorAll('.sticker')]
+    const stickers = [...document.querySelectorAll('.sticker:not([data-static])')]
       .filter(s => s.style.display !== 'none');
 
     function toPx(val, el, axis) {
