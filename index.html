@@ -1478,9 +1478,12 @@
         }, SCATTER_DELAY + i * SCATTER_STAGGER);
       });
 
-      // Phase 4 — cleanup + fade in UI
+      // Phase 4 — fade out overlay, then fade in UI
       const DONE_DELAY = SCATTER_DELAY + stickers.length * SCATTER_STAGGER + SCATTER_DUR + 80;
-      setTimeout(finish, DONE_DELAY);
+      setTimeout(() => {
+        if (overlay) overlay.classList.add('done');
+        setTimeout(finish, 520);
+      }, DONE_DELAY);
     }));
 
     // Skip on click/tap (small grace period to avoid instant-skip on pageload click)
