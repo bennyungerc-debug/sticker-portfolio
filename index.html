@@ -1496,7 +1496,7 @@
         }
       });
 
-      uiEls.forEach(el => {
+      [...uiEls, ...projectCards].forEach(el => {
         el.classList.remove('intro-hidden');
         el.style.transition = 'opacity 450ms ease';
         el.style.opacity = '1';
