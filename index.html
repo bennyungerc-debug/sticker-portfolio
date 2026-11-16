@@ -1438,44 +1438,44 @@
     ];
     const W = window.innerWidth, H = window.innerHeight;
     const overlay = document.getElementById('intro-overlay');
+    const isMobile = W < 768;
+    const BURST_SCALE = isMobile ? 5 : 8;
 
     stickers.forEach((s, i) => {
       const pos = spread[i % spread.length];
       const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
       s.style.transition = 'none';
+      s.style.willChange = 'transform';
       s.style.left  = (pos.x * W) + 'px';
       s.style.right = '';
       s.style.top   = (pos.y * H) + 'px';
       s.style.zIndex = String(1000 + i);
-      s.style.transform = `translate(-50%, -50%) ${rot} scale(8)`;
+      s.style.transform = `translate(0px, 0px) translate(-50%, -50%) ${rot} scale(${BURST_SCALE})`;
       s.style.opacity = '1';
     });
 
-    // Phase 1 — scale down (all at once), overlay still visible underneath
+    // Phase 1 — scale down (transform only, GPU composited)
     requestAnimationFrame(() => requestAnimationFrame(() => {
       stickers.forEach((s, i) => {
         const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
         s.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1)';
-        s.style.transform = `translate(-50%, -50%) ${rot} scale(2.5)`;
+        s.style.transform = `translate(0px, 0px) translate(-50%, -50%) ${rot} scale(2.5)`;
       });
 
-      // Phase 3 — shuffle after hold
-      const SCATTER_DELAY = 600 + 200;
-      const SCATTER_DUR   = 850;
-      const SCATTER_STAGGER = 55;
+      // Phase 3 — scatter via transform-only (no left/top animation = no layout per frame)
+      const SCATTER_DELAY  = 600 + 200;
+      const SCATTER_DUR    = 850;
+      const SCATTER_STAGGER = isMobile ? 35 : 55;
       const ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
       finals.forEach(({ el, leftPx, topPx, transform }, i) => {
+        const spreadPos = spread[i % spread.length];
+        const dx = parseFloat(leftPx)  - spreadPos.x * W;
+        const dy = parseFloat(topPx)   - spreadPos.y * H;
+        const rot = (transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
         setTimeout(() => {
-          el.style.transition = [
-            `left ${SCATTER_DUR}ms ${ease}`,
-            `top  ${SCATTER_DUR}ms ${ease}`,
-            `transform ${SCATTER_DUR}ms ${ease}`,
-          ].join(', ');
-          el.style.left  = leftPx;
-          el.style.right = '';
-          el.style.top   = topPx;
-          el.style.transform = transform;
+          el.style.transition = `transform ${SCATTER_DUR}ms ${ease}`;
+          el.style.transform  = `translate(${dx}px, ${dy}px) translate(-50%, -50%) ${rot} scale(1)`;
         }, SCATTER_DELAY + i * SCATTER_STAGGER);
       });
 
