@@ -1501,17 +1501,14 @@
       layer.style.zIndex = '';
 
       stickers.forEach((s, i) => {
-        s.style.transition = 'none';
-        s.style.left  = finals[i].leftPx;
-        s.style.right = '';
-        s.style.top   = finals[i].topPx;
-        s.style.transform = finals[i].transform;
-        s.style.opacity   = '1';
-        s.style.zIndex    = '';
-        if (finals[i].isStatic) {
-          s.style.left = finals[i].origLeft;
-          s.style.top  = finals[i].origTop;
-        }
+        s.style.transition  = 'none';
+        s.style.willChange  = '';
+        s.style.left        = finals[i].isStatic ? finals[i].origLeft : finals[i].leftPx;
+        s.style.right       = '';
+        s.style.top         = finals[i].isStatic ? finals[i].origTop  : finals[i].topPx;
+        s.style.transform   = finals[i].transform;
+        s.style.opacity     = '1';
+        s.style.zIndex      = '';
       });
 
       [...uiEls, ...projectCards].forEach(el => {
