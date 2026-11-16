@@ -1516,9 +1516,14 @@
 
       [...uiEls, ...projectCards].forEach(el => {
         el.classList.remove('intro-hidden');
-        el.style.transition = 'opacity 450ms ease';
+        el.style.transition = 'opacity 450ms ease, transform 450ms ease';
         el.style.opacity = '1';
-        setTimeout(() => { el.style.removeProperty('opacity'); el.style.removeProperty('transition'); }, 500);
+        el.style.transform = 'translateY(0)';
+        setTimeout(() => {
+          el.style.removeProperty('opacity');
+          el.style.removeProperty('transition');
+          el.style.removeProperty('transform');
+        }, 500);
       });
 
       document.body.classList.remove('intro-animating');
