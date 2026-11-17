@@ -2,6 +2,12 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // Hide the intro content before the first paint, including markup below the main script.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('intro-pending');
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Benny Unger | Senior Product Designer & Product Builder</title>
   <meta name="description" content="Portfolio of Benny Unger, a Senior Product Designer & Product Builder specializing in high-end UI/UX design, interactive systems, and digital product creation." />
@@ -136,14 +142,6 @@
     button, button * { cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8xNDA3XzExMjg2KSI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNDMuOTE0MiAyOC4xNDU4QzQ1LjMwMDcgMjguNDgwMyA0Ni40NzE4IDI5LjM2NzEgNDcuMTgxOCAzMC41NjAzQzQ3Ljc0OTYgMzAuMzQxOSA0OC4zNjYzIDMwLjIyMjIgNDkuMDExIDMwLjIyMjJDNTEuMzM3MyAzMC4yMjIyIDUzLjI5OTYgMzEuNzgwNyA1My45MTA3IDMzLjkxMDVDNTQuMjc3NyAzMy44MjM3IDU0LjY2MDQgMzMuNzc3OCA1NS4wNTM5IDMzLjc3NzhDNTcuNzg1NSAzMy43Nzc4IDU5Ljk5OTkgMzUuOTkyMiA1OS45OTk5IDM4LjcyMzhWNDIuNTU4N0M1OS45OTk5IDQ3LjcyNCA1Ny43NTM3IDUyLjYzMzkgNTMuODQ1NiA1Ni4wMTEzQzQ4LjAxNDEgNjEuMDUwOCAzOS41OTk4IDYxLjc1OTQgMzMuMDA3NiA1Ny43NjYxTDMxLjAzNzMgNTYuNTcyNUMyOC43MjU0IDU1LjE3MjEgMjYuODE5IDUzLjE5MjcgMjUuNTA2NCA1MC44Mjk5TDI0LjE4MzQgNDguNDQ4NkMyMi42MDkgNDUuNjE0NyAyMy4wNjI1IDQyLjA4NjEgMjUuMzAyMiAzOS43NDIzTDI1LjYwMzggMzkuNDI2OEMyNi4zMjY3IDM4LjY3MDIgMjcuMTY4NSAzOC4xODYyIDI4LjA0NDcgMzcuOTQwOEMyOC45OTQ1IDM3LjY3NDggMjkuOTg0NyAzNy42ODkyIDMwLjkwNzggMzcuOTQwOFYyNS4yNzE4QzMwLjkwNzggMjIuMzYwMiAzMy4yNjggMjAgMzYuMTc5NiAyMEMzOC42ODg1IDIwIDQwLjc4OCAyMS43NTI2IDQxLjMyMDcgMjQuMTAwM0M0MS40MDYyIDI0LjQ3NzEgNDEuNDUxMyAyNC44NjkxIDQxLjQ1MTMgMjUuMjcxOFYyOC4xNDU4QzQxLjg0NjIgMjguMDUwNSA0Mi4yNTg2IDI4IDQyLjY4MjcgMjhDNDMuMTA2OSAyOCA0My41MTkzIDI4LjA1MDUgNDMuOTE0MiAyOC4xNDU4Wk00NS40MTE4IDI0LjQxMDRDNDQuOTc3MyAxOS42OTM2IDQxLjAwOTggMTYgMzYuMTc5NiAxNkMzMS4wNTg5IDE2IDI2LjkwNzggMjAuMTUxMSAyNi45MDc4IDI1LjI3MThWMzQuMTA1MkMyNS4zOTYxIDM0LjUzNzYgMjMuOTQ1MyAzNS4zNzI1IDIyLjcxMTkgMzYuNjYzMkwyMi40MTAzIDM2Ljk3ODhDMTguOTYgNDAuNTg5NCAxOC4yNjE0IDQ2LjAyNTUgMjAuNjg2OCA1MC4zOTEyTDIyLjAwOTcgNTIuNzcyNUMyMy42NjA0IDU1Ljc0MzcgMjYuMDU3NyA1OC4yMzI3IDI4Ljk2NDggNTkuOTkzOEwzMC45MzUyIDYxLjE4NzNDMzkuMDEwMyA2Ni4wNzkgNDkuMzE3NiA2NS4yMTEgNTYuNDYxIDU5LjAzNzhDNjEuMjQ4MyA1NC45MDA2IDYzLjk5OTkgNDguODg2IDYzLjk5OTkgNDIuNTU4N1YzOC43MjM4QzYzLjk5OTkgMzQuMjAyMSA2MC42NDUzIDMwLjQ2NCA1Ni4yODkxIDI5Ljg2MjRDNTQuNjMwOSAyNy42NTMxIDUxLjk5MDcgMjYuMjIyMiA0OS4wMTEgMjYuMjIyMkM0OC45MDU2IDI2LjIyMjIgNDguODAwNiAyNi4yMjQgNDguNjk1OSAyNi4yMjc2QzQ3Ljc0OTUgMjUuNDE0NiA0Ni42MzU0IDI0Ljc4ODggNDUuNDExOCAyNC40MTA0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTM2LjE3OTUgMjRDMzUuNDc3MSAyNCAzNC45MDc3IDI0LjU2OTQgMzQuOTA3NyAyNS4yNzE4VjQ0LjQ0NDRIMzAuOTA3N1Y0My4xNTc1QzMwLjkwNzcgNDEuODk0OSAyOS4zNjc5IDQxLjI3NzQgMjguNDk1NiA0Mi4xOTAzTDI4LjE5NCA0Mi41MDU4QzI3LjE2NDkgNDMuNTgyNyAyNi45NTY2IDQ1LjIwNCAyNy42OCA0Ni41MDZMMjkuMDAyOSA0OC44ODczQzI5Ljk3NzYgNTAuNjQxNyAzMS4zOTMxIDUyLjExMTUgMzMuMTA5NyA1My4xNTEzTDM1LjA4IDU0LjM0NDlDNDAuMTg5MSA1Ny40Mzk4IDQ2LjcxMDUgNTYuODkwNiA1MS4yMyA1Mi45ODQ5QzU0LjI1ODkgNTAuMzY3MyA1NS45OTk4IDQ2LjU2MTkgNTUuOTk5OCA0Mi41NTg3VjM4LjcyMzhDNTUuOTk5OCAzOC4yMDEzIDU1LjU3NjMgMzcuNzc3OCA1NS4wNTM4IDM3Ljc3NzhDNTQuNTMxMyAzNy43Nzc4IDU0LjEwNzggMzguMjAxMyA1NC4xMDc4IDM4LjcyMzhWNDBINTAuMTA3OFYzNS4zMTkxQzUwLjEwNzggMzQuNzEzMyA0OS42MTY3IDM0LjIyMjIgNDkuMDEwOSAzNC4yMjIyQzQ4LjQwNTIgMzQuMjIyMiA0Ny45MTQxIDM0LjcxMzMgNDcuOTE0MSAzNS4zMTkxVjQwSDQzLjkxNDFWMzMuMjMxNEM0My45MTQxIDMyLjU1MTMgNDMuMzYyOCAzMiA0Mi42ODI3IDMyQzQyLjAwMjYgMzIgNDEuNDUxMiAzMi41NTEzIDQxLjQ1MTIgMzMuMjMxNFY0MEgzNy40NTEyVjI1LjI3MThDMzcuNDUxMiAyNC41Njk0IDM2Ljg4MTkgMjQgMzYuMTc5NSAyNFpNNDEuNDUxMiAyOC4xNDU4VjI1LjI3MThDNDEuNDUxMiAyMi4zNjAyIDM5LjA5MSAyMCAzNi4xNzk1IDIwQzMzLjI2OCAyMCAzMC45MDc3IDIyLjM2MDIgMzAuOTA3NyAyNS4yNzE4VjM3Ljk0MDhDMjkuMTMzMSAzNy40NTcgMjcuMTEwMyAzNy44NTAyIDI1LjYwMzcgMzkuNDI2OEwyNS4zMDIxIDM5Ljc0MjNDMjMuMDYyNCA0Mi4wODYxIDIyLjYwOSA0NS42MTQ3IDI0LjE4MzMgNDguNDQ4NkwyNS41MDYzIDUwLjgyOTlDMjYuODE4OSA1My4xOTI3IDI4LjcyNTQgNTUuMTcyMSAzMS4wMzcyIDU2LjU3MjVMMzMuMDA3NiA1Ny43NjYxQzM5LjU5OTcgNjEuNzU5NCA0OC4wMTQgNjEuMDUwOCA1My44NDU1IDU2LjAxMTNDNTcuNzUzNiA1Mi42MzM5IDU5Ljk5OTggNDcuNzI0IDU5Ljk5OTggNDIuNTU4N1YzOC43MjM4QzU5Ljk5OTggMzUuOTkyMiA1Ny43ODU0IDMzLjc3NzggNTUuMDUzOCAzMy43Nzc4QzU0LjY2MDMgMzMuNzc3OCA1NC4yNzc2IDMzLjgyMzcgNTMuOTEwNyAzMy45MTA1QzUzLjI5OTUgMzEuNzgwNyA1MS4zMzcyIDMwLjIyMjIgNDkuMDEwOSAzMC4yMjIyQzQ4LjM2NjIgMzAuMjIyMiA0Ny43NDk1IDMwLjM0MTkgNDcuMTgxNyAzMC41NjAzQzQ2LjI2OTYgMjkuMDI3MiA0NC41OTYxIDI4IDQyLjY4MjcgMjhDNDIuMjU4NSAyOCA0MS44NDYxIDI4LjA1MDUgNDEuNDUxMiAyOC4xNDU4WiIgZmlsbD0iI2U4NTYwYSIvPgo8cGF0aCBkPSJNMzQuOTA3NyAyNS4yNzE4QzM0LjkwNzcgMjQuNTY5NCAzNS40NzcxIDI0IDM2LjE3OTUgMjRDMzYuODgxOSAyNCAzNy40NTEyIDI0LjU2OTQgMzcuNDUxMiAyNS4yNzE4VjQwSDQxLjQ1MTJWMzMuMjMxNEM0MS40NTEyIDMyLjU1MTMgNDIuMDAyNiAzMiA0Mi42ODI3IDMyQzQzLjM2MjggMzIgNDMuOTE0MSAzMi41NTEzIDQzLjkxNDEgMzMuMjMxNFY0MEg0Ny45MTQxVjM1LjMxOTFDNDcuOTE0MSAzNC43MTMzIDQ4LjQwNTIgMzQuMjIyMiA0OS4wMTA5IDM0LjIyMjJDNDkuNjE2NyAzNC4yMjIyIDUwLjEwNzggMzQuNzEzMyA1MC4xMDc4IDM1LjMxOTFWNDBINTQuMTA3OFYzOC43MjM4QzU0LjEwNzggMzguMjAxMyA1NC41MzEzIDM3Ljc3NzggNTUuMDUzOCAzNy43Nzc4QzU1LjU3NjMgMzcuNzc3OCA1NS45OTk4IDM4LjIwMTMgNTUuOTk5OCAzOC43MjM4VjQyLjU1ODdDNTUuOTk5OCA0Ni41NjE5IDU0LjI1ODkgNTAuMzY3MyA1MS4yMyA1Mi45ODQ5QzQ2LjcxMDUgNTYuODkwNiA0MC4xODkxIDU3LjQzOTggMzUuMDggNTQuMzQ0OUwzMy4xMDk3IDUzLjE1MTNDMzEuMzkzMSA1Mi4xMTE1IDI5Ljk3NzYgNTAuNjQxNyAyOS4wMDI5IDQ4Ljg4NzNMMjcuNjggNDYuNTA2QzI2Ljk1NjYgNDUuMjA0IDI3LjE2NDkgNDMuNTgyNyAyOC4xOTQgNDIuNTA1OEwyOC40OTU2IDQyLjE5MDNDMjkuMzY3OSA0MS4yNzc0IDMwLjkwNzcgNDEuODk0OSAzMC45MDc3IDQzLjE1NzVWNDQuNDQ0NEgzNC45MDc3VjI1LjI3MThaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGZpbHRlciBpZD0iZmlsdGVyMF9kXzE0MDdfMTEyODYiIHg9IjExLjI1MiIgeT0iMTIiIHdpZHRoPSI1Ni43NDgiIGhlaWdodD0iNjAuMzM4OSIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVDb2xvck1hdHJpeCBpbj0iU291cmNlQWxwaGEiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIgcmVzdWx0PSJoYXJkQWxwaGEiLz4KPGZlT2Zmc2V0IGR4PSItMiIgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAuMTUgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18xNDA3XzExMjg2Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iZWZmZWN0MV9kcm9wU2hhZG93XzE0MDdfMTEyODYiIHJlc3VsdD0ic2hhcGUiLz4KPC9maWx0ZXI+CjwvZGVmcz4KPC9zdmc+Cg==") 10 6, auto !important; }
 
     /* Header — outside sticker-layer, unaffected by zoom */
-    @keyframes float-up-title {
-      from { opacity: 0; transform: translateX(-50%) rotate(-1deg) translateY(24px); }
-      to   { opacity: 1; transform: translateX(-50%) rotate(-1deg) translateY(0); }
-    }
-    @keyframes float-up-subtitle {
-      from { opacity: 0; transform: translateX(-50%) rotate(0.4deg) translateY(18px); }
-      to   { opacity: 1; transform: translateX(-50%) rotate(0.4deg) translateY(0); }
-    }
     .header-sticker {
       position: absolute;
       top: 3vh;
@@ -159,7 +157,6 @@
       cursor: inherit;
       text-align: center;
       line-height: 1.1;
-      animation: float-up-title 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .header-name {
@@ -217,7 +214,6 @@
       border-radius: 24px;
       border: 1px solid #e8e8e8;
       box-shadow: none;
-      animation: float-up-subtitle 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
     }
     .header-subtitle-card .hint-mobile { display: none; }
 
@@ -616,22 +612,18 @@
       }
     }
   /* ── intro animation ── */
-  .intro-hidden { opacity: 0 !important; transform: translateY(28px) !important; transition: none !important; }
-  .intro-animating .sticker { animation: none !important; }
-  #intro-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 998;
-    background: #fff;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+  .intro-pending :is(.header-sticker, .header-subtitle-card, #social-btns, #controls, #about-fab, .sticker[data-static]) {
+    opacity: 0;
+    visibility: hidden;
   }
-  #intro-overlay.done { opacity: 0; }
+  .intro-pending #sticker-layer { visibility: hidden; }
+  .intro-pending.intro-ready #sticker-layer { visibility: visible; }
+  .intro-pending .sticker-img { animation-play-state: paused !important; }
+  .intro-pending #canvas,
+  .intro-pending #fixed-sticker-layer .sticker { pointer-events: none; }
   </style>
 </head>
 <body>
-<div id="intro-overlay"></div>
 
 <a class="skip-link" href="#project-overlay">Skip to content</a>
 
@@ -1125,6 +1117,7 @@
   }
 
   function applyZoom(factor, cx, cy) {
+    if (animating) return;
     const newScale = Math.min(Math.max(targetScale * factor, 0.3), 3);
     const r = newScale / targetScale;
     targetTx = cx - (cx - targetTx) * r;
@@ -1150,8 +1143,9 @@
     const pos = {};
     document.querySelectorAll('.sticker').forEach(el => {
       if (el.dataset.static) return;
-      const l = parseFloat(el.style.left);
-      const t = parseFloat(el.style.top);
+      const position = getComputedStyle(el);
+      const l = parseFloat(position.left);
+      const t = parseFloat(position.top);
       if (!isNaN(l) && !isNaN(t)) {
         pos[el.id] = {
           left: (l / window.innerWidth  * 100).toFixed(2) + 'vw',
@@ -1391,161 +1385,109 @@
 
 
   // ── Intro animation ──
-  function runIntroAnimation() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  async function runIntroAnimation() {
+    const root = document.documentElement;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches) {
+      root.classList.remove('intro-pending');
+      return;
+    }
     animating = true;
+    const animations = [];
+    const stickers = [...layer.querySelectorAll('.sticker:not([data-static])')];
+    const uiCandidates = [...document.querySelectorAll(
+      '.header-sticker, .header-subtitle-card, #social-btns, #controls, #about-fab, .sticker[data-static]'
+    )].filter(el => getComputedStyle(el).display !== 'none');
+    // On mobile the social links live inside the controls: reveal their parent only.
+    const uiEls = uiCandidates.filter(el => !uiCandidates.some(parent => parent !== el && parent.contains(el)));
+    let finished = false;
+    let imageTimeout;
+    const startedAt = performance.now();
 
-    const stickers = [...document.querySelectorAll('.sticker:not([data-static])')]
-      .filter(s => s.style.display !== 'none');
-
-    function toPx(val, el, axis) {
-      if (!val || val === 'auto') {
-        const rect = el.getBoundingClientRect();
-        return (axis === 'left' ? rect.left : rect.top) + 'px';
-      }
-      if (val.endsWith('vw')) return (parseFloat(val) / 100 * window.innerWidth) + 'px';
-      if (val.endsWith('vh')) return (parseFloat(val) / 100 * window.innerHeight) + 'px';
-      return val;
+    function cleanup() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(imageTimeout);
+      animations.forEach(animation => animation.cancel());
+      root.classList.remove('intro-pending', 'intro-ready');
+      animating = false;
+      document.removeEventListener('click', skip, true);
+      document.removeEventListener('keydown', skip, true);
+      window.removeEventListener('resize', cleanup);
+      reducedMotion.removeEventListener('change', cleanup);
     }
 
-    const finals = stickers.map(s => ({
-      el: s,
-      leftPx:    toPx(s.style.left, s, 'left'),
-      topPx:     toPx(s.style.top,  s, 'top'),
-      transform: s.style.transform || '',
-      origLeft:  s.style.left,
-      origTop:   s.style.top,
-      isStatic:  !!s.dataset.static,
-    }));
+    function skip(event) {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (performance.now() - startedAt < 300) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      cleanup();
+    }
 
-    // Hide non-sticker UI + project cards
-    const uiEls = [...document.querySelectorAll(
-      '.header-sticker, .header-subtitle-card, #social-btns, #controls, #about-fab'
-    )];
-    const projectCards = [...document.querySelectorAll('.sticker[data-static]')]
-      .filter(s => s.style.display !== 'none');
-    uiEls.forEach(el => el.classList.add('intro-hidden'));
-    projectCards.forEach(el => el.classList.add('intro-hidden'));
-    document.body.classList.add('intro-animating');
-    layer.style.zIndex = '999';
+    document.addEventListener('click', skip, true);
+    document.addEventListener('keydown', skip, true);
+    window.addEventListener('resize', cleanup, { once: true });
+    reducedMotion.addEventListener('change', cleanup, { once: true });
 
-    // Phase 0 — stickers spread + overlapping, filling full viewport, invisible
-    // tight 3×3 so at scale(8) they heavily overlap and cover everything
-    const spread = [
-      {x: 0.20, y: 0.22}, {x: 0.50, y: 0.16}, {x: 0.80, y: 0.22},
-      {x: 0.16, y: 0.52}, {x: 0.50, y: 0.50}, {x: 0.84, y: 0.52},
-      {x: 0.20, y: 0.80}, {x: 0.50, y: 0.84}, {x: 0.80, y: 0.80},
-    ];
-    const W = window.innerWidth, H = window.innerHeight;
-    const overlay = document.getElementById('intro-overlay');
-    const isMobile = W < 768;
-    const BURST_SCALE = isMobile ? 5 : 8;
+    try {
+      // Decode the illustrations before scaling them up; a failed/slow image must not trap the page.
+      await Promise.race([
+        Promise.allSettled(stickers.map(el => el.querySelector('img').decode())),
+        new Promise(resolve => { imageTimeout = setTimeout(resolve, 2500); }),
+      ]);
+      clearTimeout(imageTimeout);
+      if (finished) return;
 
-    stickers.forEach((s, i) => {
-      const pos = spread[i % spread.length];
-      const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
-      s.style.transition = 'none';
-      s.style.willChange = 'transform';
-      s.style.left  = (pos.x * W) + 'px';
-      s.style.right = '';
-      s.style.top   = (pos.y * H) + 'px';
-      s.style.zIndex = String(1000 + i);
-      s.style.transform = `translate(0px, 0px) translate(-50%, -50%) ${rot} scale(${BURST_SCALE})`;
-      s.style.opacity = '1';
-    });
-
-    // Phase 1 — scale down (transform only, GPU composited)
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      stickers.forEach((s, i) => {
-        const rot = (finals[i].transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
-        s.style.transition = 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1)';
-        s.style.transform = `translate(0px, 0px) translate(-50%, -50%) ${rot} scale(2.5)`;
+      const W = window.innerWidth, H = window.innerHeight;
+      const spread = [
+        [0.18, 0.18], [0.50, 0.12], [0.82, 0.18],
+        [0.12, 0.50], [0.50, 0.50], [0.88, 0.50],
+        [0.18, 0.82], [0.50, 0.88], [0.82, 0.82],
+      ];
+      // Read every final position first. Keep those positions throughout the animation;
+      // only transforms change, so there is no layout work or position snap at the end.
+      const finals = stickers.map(el => {
+        const rect = el.getBoundingClientRect();
+        return { el, rect, transform: el.style.transform || 'rotate(0deg)' };
       });
-
-      // Phase 3 — scatter via transform-only (no left/top animation = no layout per frame)
-      const SCATTER_DELAY  = 600 + 200;
-      const SCATTER_DUR    = 850;
-      const SCATTER_STAGGER = isMobile ? 35 : 55;
-      const ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
-
-      finals.forEach(({ el, leftPx, topPx, transform }, i) => {
-        const spreadPos = spread[i % spread.length];
-        const dx = parseFloat(leftPx)  - spreadPos.x * W;
-        const dy = parseFloat(topPx)   - spreadPos.y * H;
-        const rot = (transform.match(/rotate\([^)]+\)/) || ['rotate(0deg)'])[0];
-        setTimeout(() => {
-          el.style.transition = `transform ${SCATTER_DUR}ms ${ease}`;
-          el.style.transform  = `translate(${dx}px, ${dy}px) translate(-50%, -50%) ${rot} scale(1)`;
-        }, SCATTER_DELAY + i * SCATTER_STAGGER);
-      });
-
-      // Phase 4 — scatter done: call finish immediately
-      const DONE_DELAY = SCATTER_DELAY + stickers.length * SCATTER_STAGGER + SCATTER_DUR + 80;
-      setTimeout(finish, DONE_DELAY);
-    }));
-
-    // Skip on click/tap (small grace period to avoid instant-skip on pageload click)
-    let skipEnabled = false;
-    setTimeout(() => { skipEnabled = true; }, 400);
-    function skipHandler() { if (skipEnabled) finish(); }
-    document.addEventListener('click',      skipHandler, { once: true });
-    document.addEventListener('touchstart', skipHandler, { once: true, passive: true });
-
-    function finish() {
-      document.removeEventListener('click',      skipHandler);
-      document.removeEventListener('touchstart', skipHandler);
-
-      // Snap stickers while overlay still opaque (hides any visual jump)
-      layer.style.zIndex = '';
-      stickers.forEach((s, i) => {
-        s.style.transition  = 'none';
-        s.style.willChange  = '';
-        s.style.left        = finals[i].isStatic ? finals[i].origLeft : finals[i].leftPx;
-        s.style.right       = '';
-        s.style.top         = finals[i].isStatic ? finals[i].origTop  : finals[i].topPx;
-        s.style.transform   = finals[i].transform;
-        s.style.opacity     = '1';
-        s.style.zIndex      = '';
-      });
-
-      // Fade out overlay
-      if (overlay) {
-        overlay.classList.add('done');
-        setTimeout(() => overlay.remove(), 600);
-      }
-
-      // Start UI fade-in while overlay is still fading (cross-dissolve, no dead pause)
-      setTimeout(() => {
-        document.body.classList.remove('intro-animating');
-        const all = [...uiEls, ...projectCards];
-        // Preserve each element's existing inline transform; compose translateY onto it
-        all.forEach(el => {
-          const base = el.style.transform || '';
-          el.dataset.introBase = base;
-          el.style.opacity    = '0';
-          el.style.transform  = base ? `${base} translateY(28px)` : 'translateY(28px)';
-          el.style.transition = 'none';
-          el.classList.remove('intro-hidden');
+      const flights = finals.map(({ el, rect, transform }, i) => {
+        const [x, y] = spread[i % spread.length];
+        const dx = x * W - (rect.left + rect.width / 2);
+        const dy = y * H - (rect.top + rect.height / 2);
+        const coverScale = Math.max(W * 0.85 / rect.width, H * 0.95 / rect.height, 3);
+        const animation = el.animate([
+          { transform: `translate(${dx}px, ${dy}px) scale(${coverScale}) ${transform}` },
+          { transform: `translate(0px, 0px) scale(1) ${transform}` },
+        ], {
+          duration: 1100,
+          delay: 180 + i * 24,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          fill: 'both',
         });
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          all.forEach((el, i) => {
-            const base = el.dataset.introBase || '';
-            el.style.transition = `opacity 420ms ease ${i * 30}ms, transform 420ms ease ${i * 30}ms`;
-            el.style.opacity    = '1';
-            el.style.transform  = base ? `${base} translateY(0px)` : 'translateY(0)';
-          });
-          setTimeout(() => {
-            all.forEach(el => {
-              const base = el.dataset.introBase;
-              el.style.removeProperty('opacity');
-              el.style.removeProperty('transition');
-              if (base) { el.style.transform = base; } else { el.style.removeProperty('transform'); }
-              delete el.dataset.introBase;
-            });
-            animating = false;
-          }, 420 + all.length * 30 + 50);
-        }));
-      }, 120);
+        animations.push(animation);
+        return animation;
+      });
+      root.classList.add('intro-ready');
+      await Promise.all(flights.map(animation => animation.finished));
+      if (finished) return;
+
+      // The UI starts on the very next paint. Individual translate preserves the CSS
+      // centering/rotation of titles and buttons (and the inline transforms of cards).
+      const reveals = uiEls.map(el => {
+        const animation = el.animate([
+          { opacity: 0, translate: '0 28px' },
+          { opacity: 1, translate: '0 0' },
+        ], { duration: 520, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'both' });
+        animations.push(animation);
+        return animation;
+      });
+      root.classList.remove('intro-pending', 'intro-ready');
+      await Promise.all(reveals.map(animation => animation.finished));
+    } catch (error) {
+      if (error.name !== 'AbortError') console.warn('Intro animation skipped:', error);
+    } finally {
+      cleanup();
     }
   }
 
@@ -1634,11 +1576,8 @@
   });
 
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    animating = false;
-  } else {
-    runIntroAnimation();
-  }
+  // Include the social buttons and About button, which are parsed below this script.
+  window.addEventListener('DOMContentLoaded', runIntroAnimation, { once: true });
 
 
   // ── Project Overlay ──
