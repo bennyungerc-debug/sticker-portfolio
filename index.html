@@ -1442,14 +1442,9 @@
     try {
       // Decode the illustrations before scaling them up; a failed/slow image must not trap the page.
       await Promise.race([
-        Promise.allSettled([
-          ...stickers.map(el => el.querySelector('img').decode()),
-          document.fonts ? document.fonts.ready : null,
-          // On a first (uncached) visit the main thread is still busy until load:
-          // starting earlier drops the first frames and the flight looks skipped.
-          document.readyState === 'complete' ? null : new Promise(resolve => window.addEventListener('load', resolve, { once: true })),
-        ]),
-        new Promise(resolve => { imageTimeout = setTimeout(resolve, 3000); }),
+        // Only the sticker images gate the start; waiting for fonts/load added a visible pause.
+        Promise.allSettled(stickers.map(el => el.querySelector('img').decode())),
+        new Promise(resolve => { imageTimeout = setTimeout(resolve, 2500); }),
       ]);
       clearTimeout(imageTimeout);
       if (finished) return;
