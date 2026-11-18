@@ -1425,18 +1425,49 @@
       cleanup();
     }
 
+    // Mobile browsers fire resize while loading (address bar settling, safe-area insets),
+    // so only a real width change (rotation, window resize) cancels the intro.
+    const startWidth = window.innerWidth;
+    function onResize() {
+      if (Math.abs(window.innerWidth - startWidth) > 2) cleanup();
+    }
+
     document.addEventListener('click', skip, true);
     document.addEventListener('keydown', skip, true);
-    window.addEventListener('resize', cleanup, { once: true });
+    window.addEventListener('resize', onResize);
     reducedMotion.addEventListener('change', cleanup, { once: true });
+
+    const nextFrame = () => new Promise(resolve => requestAnimationFrame(() => resolve()));
 
     try {
       // Decode the illustrations before scaling them up; a failed/slow image must not trap the page.
       await Promise.race([
-        Promise.allSettled(stickers.map(el => el.querySelector('img').decode())),
-        new Promise(resolve => { imageTimeout = setTimeout(resolve, 2500); }),
+        Promise.allSettled([
+          ...stickers.map(el => el.querySelector('img').decode()),
+          document.fonts ? document.fonts.ready : null,
+          // On a first (uncached) visit the main thread is still busy until load:
+          // starting earlier drops the first frames and the flight looks skipped.
+          document.readyState === 'complete' ? null : new Promise(resolve => window.addEventListener('load', resolve, { once: true })),
+        ]),
+        new Promise(resolve => { imageTimeout = setTimeout(resolve, 3000); }),
       ]);
       clearTimeout(imageTimeout);
+      if (finished) return;
+
+      // A page opened in a background tab would play the intro unseen.
+      if (document.visibilityState !== 'visible') {
+        await new Promise(resolve => {
+          const onVisible = () => {
+            if (document.visibilityState !== 'visible') return;
+            document.removeEventListener('visibilitychange', onVisible);
+            resolve();
+          };
+          document.addEventListener('visibilitychange', onVisible);
+        });
+      }
+      // Let the browser paint a settled frame before the flight starts.
+      await nextFrame();
+      await nextFrame();
       if (finished) return;
 
       const W = window.innerWidth, H = window.innerHeight;
