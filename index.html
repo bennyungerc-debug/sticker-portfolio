@@ -1486,7 +1486,11 @@
         const [x, y] = spread[i % spread.length];
         const dx = x * W - (rect.left + rect.width / 2);
         const dy = y * H - (rect.top + rect.height / 2);
-        const coverScale = Math.max(W * 0.85 / rect.width, H * 0.95 / rect.height, 3);
+        // On phones the tall viewport would push the scale to ~8x: nine layers that big
+        // exceed iOS Safari's compositing memory and the flight is dropped. Cap it there.
+        const coverScale = W <= MOBILE_MAX
+          ? Math.min(3.2, Math.max(W * 0.85 / rect.width, 2.4))
+          : Math.max(W * 0.85 / rect.width, H * 0.95 / rect.height, 3);
         const animation = el.animate([
           { transform: `translate(${dx}px, ${dy}px) scale(${coverScale}) ${transform}` },
           { transform: `translate(0px, 0px) scale(1) ${transform}` },
