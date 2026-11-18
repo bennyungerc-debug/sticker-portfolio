@@ -1413,7 +1413,7 @@
       animating = false;
       document.removeEventListener('click', skip, true);
       document.removeEventListener('keydown', skip, true);
-      window.removeEventListener('resize', cleanup);
+      window.removeEventListener('resize', onResize);
       reducedMotion.removeEventListener('change', cleanup);
     }
 
