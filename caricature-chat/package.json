@@ -1,0 +1,6 @@
+{
+  "name": "caricature-chat",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הקריקטורה שלי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Suez+One&display=swap">
+<style>
+/* Layout: one-column phone-style chat, sticky header, composer pinned at bottom */
+:root{
+  --bg:#eef0e6; --panel:#ffffff; --ink:#1f2419; --muted:#6a7160;
+  --olive:#4f5d2f; --olive-soft:#dfe5cc; --accent:#e0762b; --line:#d5d9c8;
+  --bubble-me:#4f5d2f; --bubble-me-ink:#fbfcf6;
+  --f-display:"Suez One","Heebo",system-ui,sans-serif;
+  --f-body:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#151812; --panel:#1f231b; --ink:#eef1e6; --muted:#9aa18d;
+  --olive:#a9bb73; --olive-soft:#2b3222; --accent:#f0914d; --line:#30362a;
+  --bubble-me:#5d6d36; --bubble-me-ink:#f6f8ef; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151812; --panel:#1f231b; --ink:#eef1e6; --muted:#9aa18d;
+  --olive:#a9bb73; --olive-soft:#2b3222; --accent:#f0914d; --line:#30362a;
+  --bubble-me:#5d6d36; --bubble-me-ink:#f6f8ef; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+a.btn{text-decoration:none}
+html,body{height:100%;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+.app{max-width:640px;margin:0 auto;height:100%;display:flex;flex-direction:column;background:var(--bg)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);border-bottom:1px solid var(--line);
+  padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:12px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--olive);color:var(--panel);display:grid;place-items:center;font-family:var(--f-display);font-size:20px;flex:none}
+header h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.2}
+header p{margin:0;font-size:13px;color:var(--muted)}
+.progress{margin-inline-start:auto;display:flex;gap:4px}
+.progress i{width:18px;height:6px;border-radius:3px;background:var(--line)}
+.progress i.on{background:var(--accent)}
+#log{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+  padding-block:18px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.msg{max-width:82%;padding:10px 14px;border-radius:18px;white-space:pre-wrap;overflow-wrap:anywhere;animation:pop .25s ease-out}
+.bot{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-start-start-radius:6px}
+.me{align-self:flex-end;background:var(--bubble-me);color:var(--bubble-me-ink);border-start-end-radius:6px}
+.qnum{display:block;font-size:12px;letter-spacing:.04em;color:var(--accent);font-weight:700;margin-bottom:2px}
+.me img{display:block;max-width:180px;border-radius:12px}
+.typing{display:inline-flex;gap:4px}
+.typing b{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing b:nth-child(2){animation-delay:.15s}.typing b:nth-child(3){animation-delay:.3s}
+.card{align-self:stretch;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.card img{width:100%;border-radius:14px;background:#fff}
+.card .row{display:flex;flex-wrap:wrap;gap:8px}
+.status{font-size:14px;color:var(--muted)}
+footer{background:var(--panel);border-top:1px solid var(--line);
+  padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+form{display:flex;gap:8px;align-items:flex-end}
+textarea{flex:1;min-width:0;resize:none;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:10px 16px;max-height:120px}
+textarea:focus-visible,button:focus-visible,label.btn:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+button,.btn{font:inherit;font-weight:700;border:0;border-radius:22px;padding:10px 18px;cursor:pointer;background:var(--accent);color:#fff;display:inline-flex;align-items:center;gap:6px}
+button.ghost{background:var(--olive-soft);color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+.selfie{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.selfie input{position:absolute;width:1px;height:1px;opacity:0}
+@keyframes pop{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.msg,.typing b{animation:none}}
+</style>
+</head>
+<body>
+<div class="app" dir="rtl" lang="he">
+  <header>
+    <div class="avatar" aria-hidden="true">ק</div>
+    <div>
+      <h1>הקריקטורה שלי</h1>
+      <p>5 שאלות, סלפי אחד, קריקטורה אחת</p>
+    </div>
+    <div class="progress" id="progress" aria-label="התקדמות"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </header>
+  <div id="log" aria-live="polite"></div>
+  <footer>
+    <form id="form">
+      <textarea id="input" rows="1" placeholder="כתוב/י תשובה…" aria-label="תשובה"></textarea>
+      <button id="send" type="submit">שליחה</button>
+    </form>
+    <div class="selfie" id="selfieBar" hidden>
+      <label class="btn" for="cam">📷 צלם/י סלפי<input id="cam" type="file" accept="image/*" capture="user"></label>
+      <label class="btn" for="gal" style="background:var(--olive)">בחירה מהגלריה<input id="gal" type="file" accept="image/jpeg,image/png,image/webp"></label>
+    </div>
+    <div class="selfie" id="doneBar" hidden>
+      <button class="ghost" id="restart" type="button">התחלה מחדש</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {key:"hobby",  q:"מה התחביב שלך?"},
+  {key:"friends",q:"מה אתה הכי אוהב לעשות עם חברים?"},
+  {key:"army",   q:"איפה אתה רוצה להיות בצבא?"},
+  {key:"rolemodel", q:"דמות בוגרת שאתה רואה בה דוגמה – תכתוב מה הוא בשבילך"},
+  {key:"place",  q:"מקום בארץ שאתה הכי אוהב?"},
+];
+const REACTIONS = ["מגניב! 😎","איזה כיף 🙌","יפה מאוד, שאפו 💪","ממש מרגש לשמוע ❤️","מקום מהמם! 🏞️"];
+
+const log = document.getElementById("log");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+const selfieBar = document.getElementById("selfieBar");
+const doneBar = document.getElementById("doneBar");
+const progress = [...document.querySelectorAll("#progress i")];
+
+let step = 0, answers = {}, selfie = null, busy = false;
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function scroll(){ log.scrollTop = log.scrollHeight; }
+function bubble(cls, text, label){
+  const d = document.createElement("div"); d.className = "msg " + cls;
+  if (label){ const s=document.createElement("span"); s.className="qnum"; s.textContent=label; d.append(s); }
+  if (text) d.append(document.createTextNode(text));
+  log.append(d); scroll(); return d;
+}
+async function botSay(text, label, delay=650){
+  const t = document.createElement("div"); t.className="msg bot";
+  t.innerHTML = '<span class="typing" aria-label="מקליד"><b></b><b></b><b></b></span>';
+  log.append(t); scroll();
+  await wait(delay); t.remove();
+  return bubble("bot", text, label);
+}
+function setProgress(n){ progress.forEach((p,i)=>p.classList.toggle("on", i<n)); }
+function setMode(mode){
+  form.hidden = mode!=="text"; selfieBar.hidden = mode!=="selfie"; doneBar.hidden = mode!=="done";
+  if (mode==="text") input.focus();
+}
+
+async function start(){
+  log.textContent=""; step=0; answers={}; selfie=null; setProgress(0);
+  setMode("none");
+  await botSay("היי! 👋 אני הבוט של הקריקטורות.", null, 400);
+  await botSay("אשאל אותך 5 שאלות קצרות, אחר כך תשלח/י לי סלפי, ואני אצייר לך קריקטורה אישית. מוכנ/ה?", null, 800);
+  await ask();
+}
+async function ask(){
+  const q = QUESTIONS[step];
+  await botSay(q.q, "שאלה " + (step+1) + " מתוך 5");
+  setMode("text");
+}
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = input.value.trim(); if (!v || busy) return;
+  busy = true; input.value=""; input.style.height="";
+  bubble("me", v);
+  answers[QUESTIONS[step].key] = v;
+  setMode("none");
+  await botSay(REACTIONS[step], null, 500);
+  step++; setProgress(step);
+  if (step < QUESTIONS.length){ await ask(); }
+  else {
+    await botSay("סיימנו את השאלות! 🎉\nעכשיו שלח/י לי סלפי – פנים ברורות, באור טוב, בלי פילטרים.");
+    setMode("selfie");
+  }
+  busy = false;
+});
+input.addEventListener("keydown", e => { if (e.key==="Enter" && !e.shiftKey){ e.preventDefault(); form.requestSubmit(); } });
+input.addEventListener("input", () => { input.style.height="auto"; input.style.height=Math.min(input.scrollHeight,120)+"px"; });
+
+for (const id of ["cam","gal"]) document.getElementById(id).addEventListener("change", async e => {
+  const f = e.target.files?.[0]; e.target.value = "";
+  if (!f) return;
+  selfie = await normalize(f);
+  const d = bubble("me", null); const img=document.createElement("img"); img.alt="הסלפי שלי";
+  img.src = URL.createObjectURL(selfie); d.append(img); scroll();
+  setMode("none"); setProgress(6);
+  await draw();
+});
+
+// Re-encode any photo (HEIC from iPhone galleries etc. where the browser can decode it) to JPEG
+async function normalize(file){
+  try{
+    const bmp = await createImageBitmap(file);
+    const s = Math.min(1, 1024/Math.max(bmp.width,bmp.height));
+    const c = document.createElement("canvas"); c.width=Math.round(bmp.width*s); c.height=Math.round(bmp.height*s);
+    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    return await new Promise(r=>c.toBlob(b=>r(b||file),"image/jpeg",.9));
+  }catch{ return file; }
+}
+
+
+const CODE = new URLSearchParams(location.search).get("code") || "";
+
+function blobToDataUrl(blob){
+  return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(blob); });
+}
+
+async function draw(){
+  await botSay("איזה סלפי! 📸 מתחיל לצייר… זה לוקח בדרך כלל בין 30 שניות לדקה וחצי.");
+  const card = document.createElement("div"); card.className="card";
+  const status = document.createElement("div"); status.className="status";
+  card.append(status); log.append(card); scroll();
+  const lines = ["✏️ מסתכל על הסלפי…","🎨 מערבב צבעים…","🪖 בוחר מדים מתאימים…","🏞️ מצייר את הרקע…","✨ מוסיף פרטים אחרונים…"];
+  let i = 0; status.textContent = lines[0];
+  const timer = setInterval(()=>{ i = Math.min(i+1, lines.length-1); status.textContent = lines[i]; }, 12000);
+  try{
+    const r = await fetch("/api/caricature", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ code: CODE, answers, selfie: await blobToDataUrl(selfie) }),
+    });
+    let data = {}; try{ data = await r.json(); }catch{}
+    if (!r.ok || !data.image) throw { code: data.error || "upstream_error" };
+    const img = document.createElement("img"); img.alt = "הקריקטורה שלך";
+    await new Promise((res,rej)=>{ img.onload=res; img.onerror=()=>rej({code:"upstream_error"}); img.src=data.image; });
+    clearInterval(timer);
+    status.textContent = "הנה הקריקטורה שלך! 🎨";
+    card.append(img);
+    const row = document.createElement("div"); row.className="row";
+    const dl = document.createElement("a"); dl.className="btn"; dl.href=data.image; dl.download="my-caricature.jpg"; dl.textContent="⬇️ שמירה";
+    row.append(dl);
+    if (navigator.canShare){
+      const file = new File([await (await fetch(data.image)).blob()], "my-caricature.jpg", {type:"image/jpeg"});
+      if (navigator.canShare({files:[file]})){
+        const sh = document.createElement("button"); sh.type="button"; sh.className="ghost"; sh.textContent="📤 שיתוף";
+        sh.onclick = () => navigator.share({files:[file], title:"הקריקטורה שלי"}).catch(()=>{});
+        row.append(sh);
+      }
+    }
+    const again = document.createElement("button"); again.type="button"; again.className="ghost"; again.textContent="🔄 ציור נוסף";
+    again.onclick = () => { row.remove(); draw(); };
+    row.append(again); card.append(row); scroll();
+  }catch(e){
+    clearInterval(timer); card.remove();
+    const msg = {
+      bad_code:"הקישור הזה לא תקין. בקשו מהמורה את הקישור המלא לצ׳אט.",
+      missing_api_key:"האתר עוד לא הוגדר עד הסוף (חסר מפתח OpenAI). פנו למורה.",
+      rate_limited:"יותר מדי בקשות כרגע. נסו שוב בעוד דקה.",
+      bad_image:"לא הצלחתי לקרוא את התמונה. נסו סלפי אחר.",
+      refused:"לא הצלחתי לצייר מהתמונה הזו. נסו סלפי אחר.",
+    }[e?.code] || "משהו השתבש בדרך. נסו שוב.";
+    await botSay(msg);
+    if (e?.code==="bad_image" || e?.code==="refused"){ setMode("selfie"); return; }
+    if (e?.code!=="bad_code" && e?.code!=="missing_api_key"){
+      const b = document.createElement("button"); b.type="button"; b.textContent="נסו שוב"; b.style.alignSelf="flex-start";
+      b.onclick = () => { b.remove(); draw(); }; log.append(b); scroll();
+    }
+  }
+  setMode("done");
+}
+
+document.getElementById("restart").onclick = start;
+start();
+</script>
+</body>
+</html>
